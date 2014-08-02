@@ -1,3 +1,9 @@
+<?php
+
+  require_once("config.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,7 +14,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>PvPstats</title>
+    <title><?= $server_name ?> PvPstats</title>
 
     <link href="css/bootstrap-cyborg.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -35,7 +41,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="visible-xs navbar-brand" href="#">PvPstats</a>
+          <a class="visible-xs navbar-brand" href="#"><?= $server_name ?> PvPstats</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-center">
@@ -56,9 +62,9 @@
     <div class="container main-box">
 
       <div class="main-title">
-        <h1>PvPstats</h1>
+        <h1><?= $server_name ?> PvPstats</h1>
         <p class="lead" style="margin-bottom: 5px">See who is winning!</p>
-        <p class="small" style="color: white;">The statistics count the amount of victories in all Battlegrounds.</p>
+        <p class="small" style="color: white;">The statistics count the amount of victories in all Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span></p>
       </div>
 
       <div class="row">
@@ -186,7 +192,7 @@
 
       <div id="footer">
         <hr>
-        <p class="h5 text-center">&#9679;&nbsp;<a target="_blank" href="https://github.com/ShinDarth/PvPstats"><strong>PvPstats</strong></a> for <a  target="_blank" href="http://www.trinitycore.org/">TrinityCore</a> is free software coded by <a target="_blank" href="http://shinworld.altervista.org/"><strong>ShinDarth</strong></a>&nbsp;&#9679;</p>
+        <p class="h5 text-center">&#9679;&nbsp;<a target="_blank" href="https://github.com/ShinDarth/PvPstats"><strong>PvPstats</strong></a> for <a  target="_blank" href="<?= $server_url ?>"><?= $server_name ?></a> is free software coded by <a target="_blank" href="http://shinworld.altervista.org/"><strong>ShinDarth</strong></a>&nbsp;&#9679;</p>
       </div>
 
     </div><!-- /.container -->
