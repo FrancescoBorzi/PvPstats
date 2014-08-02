@@ -57,7 +57,8 @@
 
       <div class="main-title">
         <h1>PvPstats</h1>
-        <p class="lead">BattleGrounds scores.</p>
+        <p class="lead" style="margin-bottom: 5px">See who is winning!</p>
+        <p class="small" style="color: white;">The statistics count the amount of victories in all Battlegrounds.</p>
       </div>
 
       <div class="row">
