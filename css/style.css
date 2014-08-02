@@ -1,0 +1,31 @@
+body {
+  padding-top: 50px;
+}
+
+.main-box {
+  /*border: 1px solid #F7F7F7;*/
+  padding-bottom: 100px;
+}
+
+@media (min-width: 768px) {
+  .navbar-center {
+    margin: 0 auto;
+    display: table;
+    table-layout: fixed;
+    float: none;
+  }
+}
+
+.main-title {
+  padding: 40px 15px 10px;
+  text-align: center;
+}
+
+.score-container {
+  max-width: 270px;
+  margin: auto;
+  margin-bottom: 40px;
+  height: 200px;
+  
+  border: 1px solid red;
+}
