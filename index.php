@@ -63,6 +63,9 @@
       <div class="row">
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3 text-center">Today</p>
+          <div class="score-faction-container text-center">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+          </div>
           <div class="score-container">
             <table class="table table-striped text-center">
               <tr>
@@ -90,6 +93,9 @@
         </div>
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3 text-center">Last 7 days</p>
+          <div class="score-faction-container text-center">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+          </div>
           <div class="score-container">
             <table class="table table-striped text-center">
               <tr>
@@ -117,6 +123,9 @@
         </div>
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3 text-center">This month</p>
+          <div class="score-faction-container text-center">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+          </div>
           <div class="score-container">
             <table class="table table-striped text-center">
               <tr>
@@ -144,6 +153,9 @@
         </div>
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3 text-center">Overall</p>
+          <div class="score-faction-container text-center">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+          </div>
           <div class="score-container">
             <table class="table table-striped text-center">
               <tr>

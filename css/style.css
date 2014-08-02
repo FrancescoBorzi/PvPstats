@@ -29,3 +29,10 @@ body {
   
   border: 1px solid red;
 }
+
+.score-faction-container {
+  max-width: 270px;
+  margin: auto;
+  margin-bottom: 5px;
+  height: 37px;
+}
