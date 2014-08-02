@@ -66,7 +66,7 @@
           <div class="score-faction-container text-center">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="score-container">
+          <div id="today-score-container" class="score-container">
             <table class="table table-striped text-center">
               <tr>
                 <th class="text-center">#</th>
@@ -96,7 +96,7 @@
           <div class="score-faction-container text-center">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="score-container">
+          <div id="last7-score-container" class="score-container">
             <table class="table table-striped text-center">
               <tr>
                 <th class="text-center">#</th>
@@ -126,7 +126,7 @@
           <div class="score-faction-container text-center">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="score-container">
+          <div id="month-score-container" class="score-container">
             <table class="table table-striped text-center">
               <tr>
                 <th class="text-center">#</th>
@@ -156,7 +156,7 @@
           <div class="score-faction-container text-center">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="score-container">
+          <div id="overall-score-container" class="score-container">
             <table class="table table-striped text-center">
               <tr>
                 <th class="text-center">#</th>
@@ -181,6 +181,11 @@
             </table>
           </div>
         </div>
+      </div>
+
+      <div id="footer">
+        <hr>
+        <p class="h5 text-center">&#9679;&nbsp;<a target="_blank" href="https://github.com/ShinDarth/PvPstats"><strong>PvPstats</strong></a> for <a  target="_blank" href="http://www.trinitycore.org/">TrinityCore</a> is free software coded by <a target="_blank" href="http://shinworld.altervista.org/"><strong>ShinDarth</strong></a>&nbsp;&#9679;</p>
       </div>
 
     </div><!-- /.container -->
