@@ -2,6 +2,16 @@
 
   require_once("config.php");
 
+  // just for testing
+  $alliance_today = 2;
+  $alliance_last7 = 8;
+  $alliance_month = 32;
+  $alliance_overall = 64;
+  $horde_today = 1;
+  $horde_last7 = 9;
+  $horde_month = 26;
+  $horde_overall = 64;
+
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +81,7 @@
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3 text-center">Today</p>
           <div class="score-faction-container text-center">
-            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_today ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_today ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
           <div id="today-score-container" class="score-container">
             <table class="table table-striped text-center">
@@ -101,7 +111,7 @@
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3 text-center">Last 7 days</p>
           <div class="score-faction-container text-center">
-            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_last7 ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_last7 ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
           <div id="last7-score-container" class="score-container">
             <table class="table table-striped text-center">
@@ -131,7 +141,7 @@
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3 text-center">This month</p>
           <div class="score-faction-container text-center">
-            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_month ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_month ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
           <div id="month-score-container" class="score-container">
             <table class="table table-striped text-center">
@@ -161,7 +171,7 @@
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3 text-center">Overall</p>
           <div class="score-faction-container text-center">
-            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;8&nbsp;&nbsp;  -&nbsp;&nbsp;9&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_overall ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_overall ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
           <div id="overall-score-container" class="score-container">
             <table class="table table-striped text-center">
@@ -200,5 +210,67 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
+      $(function () {
+        var alliance = "blue";
+        var horde = "red";
+        var none = "grey";
+
+        if (<?= $alliance_today ?> > <?= $horde_today ?>)
+        {
+          $('#today-score-container').css("border", "1px solid " + alliance);
+        }
+        else if (<?= $alliance_today ?> < <?= $horde_today ?>)
+        {
+          $('#today-score-container').css("border", "1px solid " + horde);
+        }
+        else
+        {
+          $('#today-score-container').css("border", "1px solid " + none);
+        }
+
+        if (<?= $alliance_last7 ?> > <?= $horde_last7 ?>)
+        {
+          $('#last7-score-container').css("border", "1px solid " + alliance);
+        }
+        else if (<?= $alliance_last7 ?> < <?= $horde_last7 ?>)
+        {
+          $('#last7-score-container').css("border", "1px solid " + horde);
+        }
+        else
+        {
+          $('#last7-score-container').css("border", "1px solid " + none);
+        }
+
+        if (<?= $alliance_month ?> > <?= $horde_month ?>)
+        {
+          $('#month-score-container').css("border", "1px solid " + alliance);
+        }
+        else if (<?= $alliance_month ?> < <?= $horde_month ?>)
+        {
+          $('#month-score-container').css("border", "1px solid " + horde);
+        }
+        else
+        {
+          $('#month-score-container').css("border", "1px solid " + none);
+        }
+
+        if (<?= $alliance_overall ?> > <?= $horde_overall ?>)
+        {
+          $('#overall-score-container').css("border", "1px solid " + alliance);
+        }
+        else if (<?= $alliance_overall ?> < <?= $horde_overall ?>)
+        {
+          $('#overall-score-container').css("border", "1px solid " + horde);
+        }
+        else
+        {
+          $('#overall-score-container').css("border", "1px solid " + none);
+        }
+
+
+      });
+
+    </script>
   </body>
 </html>
