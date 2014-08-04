@@ -652,7 +652,7 @@
           else
           {
             $('#month-score-container').css("max-height", "407px");
-            $('#toggle-today').html("More");
+            $('#toggle-month').html("More");
           }
         });
 
