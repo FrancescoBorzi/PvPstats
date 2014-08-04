@@ -77,14 +77,14 @@
         <p class="small" style="color: white;">The statistics count the amount of victories in all Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span></p>
       </div>
 
-      <div class="row">
+      <div class="row text-center">
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
-          <p class="h3 text-center">Today</p>
-          <div class="score-faction-container text-center">
+          <p class="h3">Today</p>
+          <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_today ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_today ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
           <div id="today-score-container" class="score-container">
-            <table class="table table-striped text-center">
+            <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
@@ -93,28 +93,114 @@
               <tr>
                 <td>1</td>
                 <td>Namename</td>
-                <td>12</td>
+                <td>22</td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>Namename</td>
-                <td>5</td>
+                <td>21</td>
               </tr>
               <tr>
                 <td>3</td>
                 <td>Namename</td>
-                <td>1</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Namename</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Namename</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Namename</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Namename</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Namename</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Namename</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Namename</td>
+                <td>13</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Namename</td>
+                <td>22</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Namename</td>
+                <td>21</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Namename</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>Namename</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>Namename</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>Namename</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>Namename</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>Namename</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>Namename</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>Namename</td>
+                <td>13</td>
               </tr>
             </table>
           </div>
+          <button id="toggle-today" type="button" class="btn btn-default btn-xs">More</button>
         </div>
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
-          <p class="h3 text-center">Last 7 days</p>
-          <div class="score-faction-container text-center">
+          <p class="h3">Last 7 days</p>
+          <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_last7 ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_last7 ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
           <div id="last7-score-container" class="score-container">
-            <table class="table table-striped text-center">
+            <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
@@ -123,28 +209,114 @@
               <tr>
                 <td>1</td>
                 <td>Namename</td>
-                <td>12</td>
+                <td>22</td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>Namename</td>
-                <td>5</td>
+                <td>21</td>
               </tr>
               <tr>
                 <td>3</td>
                 <td>Namename</td>
-                <td>1</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Namename</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Namename</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Namename</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Namename</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Namename</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Namename</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Namename</td>
+                <td>13</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Namename</td>
+                <td>22</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Namename</td>
+                <td>21</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Namename</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>Namename</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>Namename</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>Namename</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>Namename</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>Namename</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>Namename</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>Namename</td>
+                <td>13</td>
               </tr>
             </table>
           </div>
+          <button id="toggle-last7" type="button" class="btn btn-default btn-xs">More</button>
         </div>
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
-          <p class="h3 text-center">This month</p>
-          <div class="score-faction-container text-center">
+          <p class="h3">This month</p>
+          <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_month ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_month ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
           <div id="month-score-container" class="score-container">
-            <table class="table table-striped text-center">
+            <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
@@ -153,28 +325,114 @@
               <tr>
                 <td>1</td>
                 <td>Namename</td>
-                <td>12</td>
+                <td>22</td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>Namename</td>
-                <td>5</td>
+                <td>21</td>
               </tr>
               <tr>
                 <td>3</td>
                 <td>Namename</td>
-                <td>1</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Namename</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Namename</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Namename</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Namename</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Namename</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Namename</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Namename</td>
+                <td>13</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Namename</td>
+                <td>22</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Namename</td>
+                <td>21</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Namename</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>Namename</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>Namename</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>Namename</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>Namename</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>Namename</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>Namename</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>Namename</td>
+                <td>13</td>
               </tr>
             </table>
           </div>
+          <button id="toggle-month" type="button" class="btn btn-default btn-xs">More</button>
         </div>
         <div class="col-md-3 col-sm-6" style="padding: 0 10px;">
-          <p class="h3 text-center">Overall</p>
-          <div class="score-faction-container text-center">
+          <p class="h3">Overall</p>
+          <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_overall ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_overall ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
           <div id="overall-score-container" class="score-container">
-            <table class="table table-striped text-center">
+            <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
@@ -183,20 +441,106 @@
               <tr>
                 <td>1</td>
                 <td>Namename</td>
-                <td>12</td>
+                <td>22</td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>Namename</td>
-                <td>5</td>
+                <td>21</td>
               </tr>
               <tr>
                 <td>3</td>
                 <td>Namename</td>
-                <td>1</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Namename</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Namename</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Namename</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Namename</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Namename</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Namename</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Namename</td>
+                <td>13</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Namename</td>
+                <td>22</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Namename</td>
+                <td>21</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Namename</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>Namename</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>Namename</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>Namename</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>Namename</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>Namename</td>
+                <td>15</td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>Namename</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>Namename</td>
+                <td>13</td>
               </tr>
             </table>
           </div>
+          <button id="toggle-overall" type="button" class="btn btn-default btn-xs">More</button>
         </div>
       </div>
 
@@ -272,6 +616,58 @@
         {
           $('#overall-score-container').css("border", "1px solid " + none);
         }
+
+        $('#toggle-today').click(function () {
+          if ($('#toggle-today').html() == "More")
+          {
+            $('#today-score-container').css("max-height", "778px");
+            $('#toggle-today').html("Less");
+          }
+          else
+          {
+            $('#today-score-container').css("max-height", "407px");
+            $('#toggle-today').html("More");
+          }
+        });
+
+        $('#toggle-last7').click(function () {
+          if ($('#toggle-last7').html() == "More")
+          {
+            $('#last7-score-container').css("max-height", "778px");
+            $('#toggle-last7').html("Less");
+          }
+          else
+          {
+            $('#last7-score-container').css("max-height", "407px");
+            $('#toggle-last7').html("More");
+          }
+        });
+
+        $('#toggle-month').click(function () {
+          if ($('#toggle-month').html() == "More")
+          {
+            $('#month-score-container').css("max-height", "778px");
+            $('#toggle-month').html("Less");
+          }
+          else
+          {
+            $('#month-score-container').css("max-height", "407px");
+            $('#toggle-today').html("More");
+          }
+        });
+
+        $('#toggle-overall').click(function () {
+          if ($('#toggle-overall').html() == "More")
+          {
+            $('#overall-score-container').css("max-height", "778px");
+            $('#toggle-overall').html("Less");
+          }
+          else
+          {
+            $('#overall-score-container').css("max-height", "407px");
+            $('#toggle-overall').html("More");
+          }
+        });
 
 
       });

@@ -1,5 +1,5 @@
 body {
-  padding-top: 50px;
+  padding-top: 30px;
 }
 
 .nav li a {
@@ -26,16 +26,40 @@ body {
   text-align: center;
 }
 
-.score-container {
-  max-width: 270px;
-  margin: auto;
-  margin-bottom: 40px;
-  height: 200px;
-}
-
 .score-faction-container {
   max-width: 270px;
   margin: auto;
   margin-bottom: 5px;
   height: 37px;
+}
+
+.score-container {
+  overflow: hidden;
+
+  max-width: 270px;
+  max-height: 407px;
+
+  margin: auto;
+
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.btn-xs {
+  margin-top: 5px;
+}
+
+#footer {
+  margin-top: 40px;
 }
