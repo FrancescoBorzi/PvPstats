@@ -2,6 +2,9 @@
 
   require_once("config.php");
 
+  $alliance_color = "#1a67f4";
+  $horde_color = "#fb0005";
+
   // query variables
 
   $ALLIANCE = 469;

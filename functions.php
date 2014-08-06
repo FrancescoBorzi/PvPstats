@@ -10,6 +10,34 @@ function getPlayerName($guid)
   return $row['name'];
 }
 
+function getPlayerColor($guid)
+{
+  global $db, $alliance_color, $horde_color;
+
+  $query = sprintf("SELECT race FROM characters WHERE guid = %s", $guid);
+  $row = $db->query($query)->fetch_row();
+
+  switch ($row[0])
+  {
+    case 1:
+    case 3:
+    case 4:
+    case 7:
+    case 11:
+      $color = $alliance_color;
+      break;
+    case 2:
+    case 5:
+    case 6:
+    case 8:
+    case 10:
+      $color = $horde_color;
+      break;
+  }
+
+  return $color;
+}
+
 function getFactionScores($time_cond, $level_cond)
 {
   global $db, $ALLIANCE, $HORDE;
@@ -69,8 +97,9 @@ function getPlayersScores($time_cond, $level_cond)
 
   $position = 1;
 
-  printf("<tr><td>%d</td><td><a target=\"_blank\" href=\"%s%s\">%s</a></td><td>%d</td></tr>",
+  printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\">%s</a></td><td>%d</td></tr>",
            $position,
+           getPlayerColor($row[0]),
            $amory_url,
            getPlayerName($row[0]),
            getPlayerName($row[0]),
@@ -84,8 +113,9 @@ function getPlayersScores($time_cond, $level_cond)
     if ($prev_score != $row[1])
       $position++;
 
-    printf("<tr><td>%d</td><td><a target=\"_blank\" href=\"%s%s\">%s</a></td><td>%d</td></tr>",
+    printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\">%s</a></td><td>%d</td></tr>",
            $position,
+           getPlayerColor($row[0]),
            $amory_url,
            getPlayerName($row[0]),
            getPlayerName($row[0]),
@@ -93,4 +123,6 @@ function getPlayersScores($time_cond, $level_cond)
 
     $prev_score = $row[1];
   }
-}?>
+}
+
+?>
