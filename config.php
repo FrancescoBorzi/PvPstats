@@ -10,8 +10,10 @@
   $online_from = "01/08/2014";
 
   # Connection to the database of characters (address, username, password, database)
-  $connection = mysqli_connect("localhost","trinitycore","trinitycore","characters");
+  $db = new mysqli("localhost","trinitycore","trinitycore","characters");
 
-  //if (mysqli_connect_errno($connection))
-    //echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  if (mysqli_connect_error())
+    die('Connect Error (' . mysqli_connect_errno() . ') '
+        . mysqli_connect_error());
+
 ?>
