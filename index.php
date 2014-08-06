@@ -95,6 +95,9 @@
 
     $row = $result->fetch_row();
 
+    if ($row == null)
+      return;
+
     $position = 1;
 
     printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
