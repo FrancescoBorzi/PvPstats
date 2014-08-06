@@ -2,8 +2,14 @@
 
   require_once("config.php");
 
+
+  // query variables
+
   $ALLIANCE = 469;
   $HORDE = 67;
+  $limit = "LIMIT 0,20";
+  $players_group_and_order = "GROUP BY character_guid ORDER BY count(character_guid) DESC";
+
 
   // query conditions
 
@@ -21,6 +27,9 @@
     $level_condition = "";
     $level = "all";
   }
+
+
+  // query functions
 
   function getPlayerName($guid)
   {
@@ -61,6 +70,30 @@
 
     return $score;
   }
+
+  function getPlayersScores($time_cond, $level_cond)
+  {
+    global $db, $limit, $players_group_and_order;
+
+
+    if ($time_cond == "" && $level_cond == "")
+      $where = "";
+    else
+      $where = "WHERE";
+
+    if ($time_cond != "" && $level_cond != "")
+      $level_cond = "AND " . $level_cond;
+
+    $query = sprintf("SELECT character_guid, count(character_guid) FROM pvpstats_players %s %s %s %s %s",
+                     $where,
+                     $time_cond,
+                     $level_cond,
+                     $players_group_and_order,
+                     $limit);
+
+    return $query;
+  }
+
 
   // just for testing
 
