@@ -2,15 +2,8 @@
 
   require_once("config.php");
 
-  // just for testing
-  $alliance_today = 2;
-  $alliance_last7 = 8;
-  $alliance_month = 32;
-  $alliance_overall = 64;
-  $horde_today = 1;
-  $horde_last7 = 9;
-  $horde_month = 26;
-  $horde_overall = 64;
+  $ALLIANCE = 469;
+  $HORDE = 67;
 
   // query conditions
 
@@ -23,12 +16,60 @@
   else
     $level_condition = "";
 
-  function getPlayerName($database, $guid)
+  function getPlayerName($guid)
   {
+    global $db;
+
     $query = sprintf("SELECT name FROM characters WHERE guid = %d;", $guid);
-    $row = $database->query($query)->fetch_array();
+    $row = $db->query($query)->fetch_array();
+
     return $row['name'];
   }
+
+  function getFactionScores($time_cond, $level_cond)
+  {
+    global $db, $ALLIANCE, $HORDE;
+
+    $score[2];
+
+    if ($time_cond != "")
+      $time_cond = "AND " . $time_cond;
+
+    if ($level_cond != "")
+      $level_cond = "AND " . $level_cond;
+
+    $query = sprintf("SELECT COUNT(*) FROM pvpstats_faction WHERE faction = %d %s %s UNION SELECT COUNT(*) FROM pvpstats_faction WHERE faction = %d %s %s;",
+                     $ALLIANCE, $time_cond, $level_cond, $HORDE, $time_cond, $level_cond);
+
+    $result = $db->query($query);
+
+    $row = $result->fetch_row();
+    $score[0] = $row[0];
+
+    $row = $result->fetch_row();
+
+    if ($row != null)
+      $score[1] = $row[0];
+    else
+      $score[1] = 0;
+
+    return $score;
+  }
+
+  // just for testing
+
+  $alliance_today = 2;
+  $horde_today = 1;
+
+  $alliance_last7 = 8;
+  $horde_last7 = 9;
+
+  $alliance_month = 32;
+  $horde_month = 26;
+
+  $alliance_overall = 64;
+  $horde_overall = 64;
+
 ?>
 
 <!DOCTYPE html>
@@ -89,8 +130,7 @@
     <div class="container main-box">
 
       <div class="main-title">
-        <?php $test = getPlayerName($db, 8); ?>
-        <h1><?= $server_name ?> PvPstats <?= $test ?></h1>
+        <h1><?= $server_name ?> PvPstats</h1>
         <p class="lead" style="margin-bottom: 5px">See who is winning!</p>
         <p class="small" style="color: white;">The statistics count the amount of victories in all Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span></p>
       </div>
@@ -693,3 +733,5 @@
     </script>
   </body>
 </html>
+
+<?php $db->close(); ?>
