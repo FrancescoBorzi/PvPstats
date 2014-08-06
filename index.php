@@ -12,9 +12,15 @@
   $month_condition = "MONTH(date) = MONTH(NOW())";
 
   if (isset($_GET['level']) && $_GET['level'] < 9 && $_GET['level'] > 0)
+  {
     $level_condition = "level = " . $_GET['level'];
+    $level = $_GET['level'];
+  }
   else
+  {
     $level_condition = "";
+    $level = "all";
+  }
 
   function getPlayerName($guid)
   {
@@ -113,15 +119,15 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-center">
-            <li class="active"><a href="#">All levels</a></li>
-            <li><a href="">80</a></li>
-            <li><a href="">70-79</a></li>
-            <li><a href="">60-69</a></li>
-            <li><a href="">50-59</a></li>
-            <li><a href="">40-49</a></li>
-            <li><a href="">30-39</a></li>
-            <li><a href="">20-29</a></li>
-            <li><a href="">10-19</a></li>
+            <li id="link-all"><a href="index.php">All levels</a></li>
+            <li id="link-8"><a href="index.php?level=8">80</a></li>
+            <li id="link-7"><a href="index.php?level=7">70-79</a></li>
+            <li id="link-6"><a href="index.php?level=6">60-69</a></li>
+            <li id="link-5"><a href="index.php?level=5">50-59</a></li>
+            <li id="link-4"><a href="index.php?level=4">40-49</a></li>
+            <li id="link-3"><a href="index.php?level=3">30-39</a></li>
+            <li id="link-2"><a href="index.php?level=2">20-29</a></li>
+            <li id="link-1"><a href="index.php?level=1">10-19</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -619,6 +625,11 @@
     <script src="js/bootstrap.min.js"></script>
     <script>
       $(function () {
+
+        var level = "<?= $level ?>";
+
+        $('#link-' + level).addClass("active");
+
         var alliance = "blue";
         var horde = "red";
         var none = "grey";
