@@ -42,7 +42,7 @@ function getFactionScores($time_cond, $level_cond)
 
 function getPlayersScores($time_cond, $level_cond)
 {
-  global $db, $limit, $players_group_and_order;
+  global $db, $limit, $players_group_and_order, $amory_url;
 
 
   if ($time_cond == "" && $level_cond == "")
@@ -69,10 +69,12 @@ function getPlayersScores($time_cond, $level_cond)
 
   $position = 1;
 
-  printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
-         $position,
-         getPlayerName($row[0]),
-         $row[1]);
+  printf("<tr><td>%d</td><td><a target=\"_blank\" href=\"%s%s\">%s</a></td><td>%d</td></tr>",
+           $position,
+           $amory_url,
+           getPlayerName($row[0]),
+           getPlayerName($row[0]),
+           $row[1]);
 
   $prev_score = $row[1];
 
@@ -82,8 +84,10 @@ function getPlayersScores($time_cond, $level_cond)
     if ($prev_score != $row[1])
       $position++;
 
-    printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+    printf("<tr><td>%d</td><td><a href=\"%s%s\">%s</a></td><td>%d</td></tr>",
            $position,
+           $amory_url,
+           getPlayerName($row[0]),
            getPlayerName($row[0]),
            $row[1]);
 

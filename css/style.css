@@ -56,6 +56,11 @@ body {
   margin-bottom: 0;
 }
 
+table a:not(.btn), .table a:not(.btn) {
+    color: #FFF;
+    text-decoration: none;
+}
+
 .btn-xs {
   margin-top: 5px;
 }
