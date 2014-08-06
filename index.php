@@ -14,17 +14,21 @@
 
   // query conditions
 
-  $today = "DAY(date) = DAY(NOW())";
-  $last7 = "DATEDIFF(NOW(), date) < 7";
-  $month = "MONTH(date) = MONTH(NOW())";
+  $today_condition = "DAY(date) = DAY(NOW())";
+  $last7_condition = "DATEDIFF(NOW(), date) < 7";
+  $month_condition = "MONTH(date) = MONTH(NOW())";
 
   if (isset($_GET['level']) && $_GET['level'] < 9 && $_GET['level'] > 0)
-    $level = "level = " . $_GET['level'];
+    $level_condition = "level = " . $_GET['level'];
   else
-    $level = "";
+    $level_condition = "";
 
-
-
+  function getPlayerName($database, $guid)
+  {
+    $query = sprintf("SELECT name FROM characters WHERE guid = %d;", $guid);
+    $row = $database->query($query)->fetch_array();
+    return $row['name'];
+  }
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +89,8 @@
     <div class="container main-box">
 
       <div class="main-title">
-        <h1><?= $server_name ?> PvPstats</h1>
+        <?php $test = getPlayerName($db, 8); ?>
+        <h1><?= $server_name ?> PvPstats <?= $test ?></h1>
         <p class="lead" style="margin-bottom: 5px">See who is winning!</p>
         <p class="small" style="color: white;">The statistics count the amount of victories in all Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span></p>
       </div>
