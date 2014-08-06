@@ -97,7 +97,7 @@ function getPlayersScores($time_cond, $level_cond)
 
   $position = 1;
 
-  printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\">%s</a></td><td>%d</td></tr>",
+  printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
            $position,
            getPlayerColor($row[0]),
            $amory_url,
@@ -113,7 +113,7 @@ function getPlayersScores($time_cond, $level_cond)
     if ($prev_score != $row[1])
       $position++;
 
-    printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\">%s</a></td><td>%d</td></tr>",
+    printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
            $position,
            getPlayerColor($row[0]),
            $amory_url,
