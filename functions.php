@@ -84,7 +84,7 @@ function getPlayersScores($time_cond, $level_cond)
     if ($prev_score != $row[1])
       $position++;
 
-    printf("<tr><td>%d</td><td><a href=\"%s%s\">%s</a></td><td>%d</td></tr>",
+    printf("<tr><td>%d</td><td><a target=\"_blank\" href=\"%s%s\">%s</a></td><td>%d</td></tr>",
            $position,
            $amory_url,
            getPlayerName($row[0]),
