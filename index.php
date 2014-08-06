@@ -12,6 +12,19 @@
   $horde_month = 26;
   $horde_overall = 64;
 
+  // query conditions
+
+  $today = "DAY(date) = DAY(NOW())";
+  $last7 = "DATEDIFF(NOW(), date) < 7";
+  $month = "MONTH(date) = MONTH(NOW())";
+
+  if (isset($_GET['level']) && $_GET['level'] < 9 && $_GET['level'] > 0)
+    $level = "level = " . $_GET['level'];
+  else
+    $level = "";
+
+
+
 ?>
 
 <!DOCTYPE html>
