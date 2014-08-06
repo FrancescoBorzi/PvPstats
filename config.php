@@ -6,6 +6,9 @@
   # Your server url
   $server_url = "http://www.trinitycore.org/";
 
+  # Your server armory url including character name param
+  $amory_url = "http://www.truewow.org/armory/character.php?n=";
+
   # The date PvPstats system is online from
   $online_from = "01/08/2014";
 
