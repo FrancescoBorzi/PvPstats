@@ -91,23 +91,52 @@
                      $players_group_and_order,
                      $limit);
 
-    return $query;
+    $result = $db->query($query);
+
+    $row = $result->fetch_row();
+
+    $position = 1;
+
+    printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+          $position,
+          getPlayerName($row[0]),
+          $row[1]);
+
+    $prev_score = $row[1];
+
+
+    while (($row = $result->fetch_row()) != null)
+    {
+      if ($prev_score != $row[1])
+        $position++;
+
+      printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+            $position,
+            getPlayerName($row[0]),
+            $row[1]);
+
+      $prev_score = $row[1];
+    }
   }
 
 
-  // just for testing
+  // faction scores
 
-  $alliance_today = 2;
-  $horde_today = 1;
+  $score_today = getFactionScores($today_condition, $level_condition);
+  $alliance_today = $score_today[0];
+  $horde_today = $score_today[1];
 
-  $alliance_last7 = 8;
-  $horde_last7 = 9;
+  $score_last7 = getFactionScores($last7_condition, $level_condition);
+  $alliance_last7 = $score_last7[0];
+  $horde_last7 = $score_last7[1];
 
-  $alliance_month = 32;
-  $horde_month = 26;
+  $score_month = getFactionScores($month_condition, $level_condition);
+  $alliance_month = $score_month[0];
+  $horde_month = $score_month[1];
 
-  $alliance_overall = 64;
-  $horde_overall = 64;
+  $score_overall = getFactionScores("", $level_condition);
+  $alliance_overall = $score_overall[0];
+  $horde_overall = $score_overall[1];
 
 ?>
 
@@ -187,106 +216,7 @@
                 <th class="text-center">Character</th>
                 <th class="text-center">Victories</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Namename</td>
-                <td>22</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Namename</td>
-                <td>21</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Namename</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Namename</td>
-                <td>19</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Namename</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Namename</td>
-                <td>17</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Namename</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Namename</td>
-                <td>15</td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td>Namename</td>
-                <td>14</td>
-              </tr>
-              <tr>
-                <td>10</td>
-                <td>Namename</td>
-                <td>13</td>
-              </tr>
-              <tr>
-                <td>11</td>
-                <td>Namename</td>
-                <td>22</td>
-              </tr>
-              <tr>
-                <td>12</td>
-                <td>Namename</td>
-                <td>21</td>
-              </tr>
-              <tr>
-                <td>13</td>
-                <td>Namename</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>14</td>
-                <td>Namename</td>
-                <td>19</td>
-              </tr>
-              <tr>
-                <td>15</td>
-                <td>Namename</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>16</td>
-                <td>Namename</td>
-                <td>17</td>
-              </tr>
-              <tr>
-                <td>17</td>
-                <td>Namename</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td>18</td>
-                <td>Namename</td>
-                <td>15</td>
-              </tr>
-              <tr>
-                <td>19</td>
-                <td>Namename</td>
-                <td>14</td>
-              </tr>
-              <tr>
-                <td>20</td>
-                <td>Namename</td>
-                <td>13</td>
-              </tr>
+              <?php getPlayersScores($today_condition, $level_condition) ?>
             </table>
           </div>
           <button id="toggle-today" type="button" class="btn btn-default btn-xs">More</button>
@@ -303,106 +233,7 @@
                 <th class="text-center">Character</th>
                 <th class="text-center">Victories</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Namename</td>
-                <td>22</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Namename</td>
-                <td>21</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Namename</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Namename</td>
-                <td>19</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Namename</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Namename</td>
-                <td>17</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Namename</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Namename</td>
-                <td>15</td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td>Namename</td>
-                <td>14</td>
-              </tr>
-              <tr>
-                <td>10</td>
-                <td>Namename</td>
-                <td>13</td>
-              </tr>
-              <tr>
-                <td>11</td>
-                <td>Namename</td>
-                <td>22</td>
-              </tr>
-              <tr>
-                <td>12</td>
-                <td>Namename</td>
-                <td>21</td>
-              </tr>
-              <tr>
-                <td>13</td>
-                <td>Namename</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>14</td>
-                <td>Namename</td>
-                <td>19</td>
-              </tr>
-              <tr>
-                <td>15</td>
-                <td>Namename</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>16</td>
-                <td>Namename</td>
-                <td>17</td>
-              </tr>
-              <tr>
-                <td>17</td>
-                <td>Namename</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td>18</td>
-                <td>Namename</td>
-                <td>15</td>
-              </tr>
-              <tr>
-                <td>19</td>
-                <td>Namename</td>
-                <td>14</td>
-              </tr>
-              <tr>
-                <td>20</td>
-                <td>Namename</td>
-                <td>13</td>
-              </tr>
+              <?php getPlayersScores($last7_condition, $level_condition) ?>
             </table>
           </div>
           <button id="toggle-last7" type="button" class="btn btn-default btn-xs">More</button>
@@ -419,106 +250,7 @@
                 <th class="text-center">Character</th>
                 <th class="text-center">Victories</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Namename</td>
-                <td>22</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Namename</td>
-                <td>21</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Namename</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Namename</td>
-                <td>19</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Namename</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Namename</td>
-                <td>17</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Namename</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Namename</td>
-                <td>15</td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td>Namename</td>
-                <td>14</td>
-              </tr>
-              <tr>
-                <td>10</td>
-                <td>Namename</td>
-                <td>13</td>
-              </tr>
-              <tr>
-                <td>11</td>
-                <td>Namename</td>
-                <td>22</td>
-              </tr>
-              <tr>
-                <td>12</td>
-                <td>Namename</td>
-                <td>21</td>
-              </tr>
-              <tr>
-                <td>13</td>
-                <td>Namename</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>14</td>
-                <td>Namename</td>
-                <td>19</td>
-              </tr>
-              <tr>
-                <td>15</td>
-                <td>Namename</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>16</td>
-                <td>Namename</td>
-                <td>17</td>
-              </tr>
-              <tr>
-                <td>17</td>
-                <td>Namename</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td>18</td>
-                <td>Namename</td>
-                <td>15</td>
-              </tr>
-              <tr>
-                <td>19</td>
-                <td>Namename</td>
-                <td>14</td>
-              </tr>
-              <tr>
-                <td>20</td>
-                <td>Namename</td>
-                <td>13</td>
-              </tr>
+              <?php getPlayersScores($month_condition, $level_condition) ?>
             </table>
           </div>
           <button id="toggle-month" type="button" class="btn btn-default btn-xs">More</button>
@@ -535,106 +267,7 @@
                 <th class="text-center">Character</th>
                 <th class="text-center">Victories</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Namename</td>
-                <td>22</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Namename</td>
-                <td>21</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Namename</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Namename</td>
-                <td>19</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Namename</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Namename</td>
-                <td>17</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Namename</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Namename</td>
-                <td>15</td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td>Namename</td>
-                <td>14</td>
-              </tr>
-              <tr>
-                <td>10</td>
-                <td>Namename</td>
-                <td>13</td>
-              </tr>
-              <tr>
-                <td>11</td>
-                <td>Namename</td>
-                <td>22</td>
-              </tr>
-              <tr>
-                <td>12</td>
-                <td>Namename</td>
-                <td>21</td>
-              </tr>
-              <tr>
-                <td>13</td>
-                <td>Namename</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>14</td>
-                <td>Namename</td>
-                <td>19</td>
-              </tr>
-              <tr>
-                <td>15</td>
-                <td>Namename</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>16</td>
-                <td>Namename</td>
-                <td>17</td>
-              </tr>
-              <tr>
-                <td>17</td>
-                <td>Namename</td>
-                <td>16</td>
-              </tr>
-              <tr>
-                <td>18</td>
-                <td>Namename</td>
-                <td>15</td>
-              </tr>
-              <tr>
-                <td>19</td>
-                <td>Namename</td>
-                <td>14</td>
-              </tr>
-              <tr>
-                <td>20</td>
-                <td>Namename</td>
-                <td>13</td>
-              </tr>
+              <?php getPlayersScores("", $level_condition) ?>
             </table>
           </div>
           <button id="toggle-overall" type="button" class="btn btn-default btn-xs">More</button>
