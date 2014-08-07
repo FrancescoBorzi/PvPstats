@@ -56,9 +56,26 @@ body {
   margin-bottom: 0;
 }
 
+.table td {
+  max-width: 115px;
+  overflow: hidden
+}
+
+@media (min-width: 992px) {
+  .table td {
+    max-width: 85px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .table td {
+    max-width: 115px;
+  }
+}
+
 table a:not(.btn), .table a:not(.btn) {
-    color: #FFF;
-    text-decoration: none;
+  color: #FFF;
+  text-decoration: none;
 }
 
 .btn-xs {
