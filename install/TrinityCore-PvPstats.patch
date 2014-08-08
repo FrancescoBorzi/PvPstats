@@ -1,14 +1,14 @@
-From fd0d3a5af09ba72ef81ea9c235dd59e051fcfba9 Mon Sep 17 00:00:00 2001
+From d96acb8f5658cbb68cee951a9c3fac34492751d2 Mon Sep 17 00:00:00 2001
 From: ShinDarth <borzifrancesco@gmail.com>
-Date: Thu, 7 Aug 2014 14:59:25 +0200
+Date: Fri, 8 Aug 2014 12:26:21 +0200
 Subject: [PATCH] PvPstats system
 
 ---
- src/server/game/Battlegrounds/Battleground.cpp | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ src/server/game/Battlegrounds/Battleground.cpp | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
 diff --git a/src/server/game/Battlegrounds/Battleground.cpp b/src/server/game/Battlegrounds/Battleground.cpp
-index 86236cd..403a672 100644
+index 86236cd..3952b18 100644
 --- a/src/server/game/Battlegrounds/Battleground.cpp
 +++ b/src/server/game/Battlegrounds/Battleground.cpp
 @@ -711,6 +711,8 @@ void Battleground::EndBattleground(uint32 winner)
@@ -20,30 +20,33 @@ index 86236cd..403a672 100644
  
      if (winner == ALLIANCE)
      {
-@@ -719,6 +721,8 @@ void Battleground::EndBattleground(uint32 winner)
+@@ -719,6 +721,9 @@ void Battleground::EndBattleground(uint32 winner)
          PlaySoundToAll(SOUND_ALLIANCE_WINS);                // alliance wins sound
  
          SetWinner(BG_TEAM_ALLIANCE);
 +        
-+        CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (469, %d, NOW());", level);
++        if (isBattleground())
++            CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (469, %d, NOW());", level);
      }
      else if (winner == HORDE)
      {
-@@ -727,6 +731,8 @@ void Battleground::EndBattleground(uint32 winner)
+@@ -727,6 +732,9 @@ void Battleground::EndBattleground(uint32 winner)
          PlaySoundToAll(SOUND_HORDE_WINS);                   // horde wins sound
  
          SetWinner(BG_TEAM_HORDE);
 +        
-+        CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (67, %d, NOW());", level);
++        if (isBattleground())
++            CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (67, %d, NOW());", level);
      }
      else
      {
-@@ -783,6 +789,8 @@ void Battleground::EndBattleground(uint32 winner)
+@@ -783,6 +791,9 @@ void Battleground::EndBattleground(uint32 winner)
              }
  
              player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_WIN_BG, 1);
 +            
-+            CharacterDatabase.PQuery("INSERT INTO pvpstats_players (character_guid, level, date) VALUES (%d, %d, NOW());", player->GetGUID(), level);
++            if (isBattleground())
++                CharacterDatabase.PQuery("INSERT INTO pvpstats_players (character_guid, level, date) VALUES (%d, %d, NOW());", player->GetGUID(), level);
          }
          else
          {
