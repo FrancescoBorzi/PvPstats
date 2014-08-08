@@ -63,7 +63,7 @@ function getFactionScores($time_cond, $level_cond)
   if ($row != null)
     $score[1] = $row[0];
   else
-    $score[1] = 0;
+    $score[1] = $score[0];
 
   return $score;
 }
