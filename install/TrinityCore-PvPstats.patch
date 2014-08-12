@@ -15,7 +15,7 @@ index 86236cd..3952b18 100644
      RemoveFromBGFreeSlotQueue();
  
      int32 winmsg_id = 0;
-+    
++
 +    int32 level = GetMaxLevel() / 10;
  
      if (winner == ALLIANCE)
@@ -24,7 +24,7 @@ index 86236cd..3952b18 100644
          PlaySoundToAll(SOUND_ALLIANCE_WINS);                // alliance wins sound
  
          SetWinner(BG_TEAM_ALLIANCE);
-+        
++
 +        if (isBattleground())
 +            CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (469, %d, NOW());", level);
      }
@@ -34,7 +34,7 @@ index 86236cd..3952b18 100644
          PlaySoundToAll(SOUND_HORDE_WINS);                   // horde wins sound
  
          SetWinner(BG_TEAM_HORDE);
-+        
++
 +        if (isBattleground())
 +            CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (67, %d, NOW());", level);
      }
@@ -44,7 +44,7 @@ index 86236cd..3952b18 100644
              }
  
              player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_WIN_BG, 1);
-+            
++
 +            if (isBattleground())
 +                CharacterDatabase.PQuery("INSERT INTO pvpstats_players (character_guid, level, date) VALUES (%d, %d, NOW());", player->GetGUID(), level);
          }
