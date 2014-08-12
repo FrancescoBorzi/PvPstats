@@ -14,9 +14,9 @@
 
   // query conditions
 
-  $today_condition = "DAY(date) = DAY(NOW())";
+  $today_condition = "DATE(date) = DATE(NOW())";
   $last7_condition = "DATEDIFF(NOW(), date) < 7";
-  $month_condition = "MONTH(date) = MONTH(NOW())";
+  $month_condition = "MONTH(date) = MONTH(NOW()) AND YEAR(date) = YEAR(NOW())";
 
   if (isset($_GET['level']) && $_GET['level'] < 9 && $_GET['level'] > 0)
   {
