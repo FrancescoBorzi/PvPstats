@@ -1,23 +1,23 @@
-From 8c6bce34dd70a94119984d5cf26dc823c6c7048b Mon Sep 17 00:00:00 2001
+From 842b4b5d995f23dfe404f550bd4df73ff304270a Mon Sep 17 00:00:00 2001
 From: ShinDarth <borzifrancesco@gmail.com>
 Date: Fri, 8 Aug 2014 12:50:40 +0200
 Subject: [PATCH] PvPstats system
 
+Signed-off-by: ShinDarth <borzifrancesco@gmail.com>
 ---
  src/game/BattleGround/BattleGround.cpp | 11 +++++++++++
  1 file changed, 11 insertions(+)
 
 diff --git a/src/game/BattleGround/BattleGround.cpp b/src/game/BattleGround/BattleGround.cpp
-index 80cfbd4..32b24de 100644
+index 80cfbd4..8cfbd3b 100644
 --- a/src/game/BattleGround/BattleGround.cpp
 +++ b/src/game/BattleGround/BattleGround.cpp
-@@ -628,18 +628,26 @@ void BattleGround::EndBattleGround(Team winner)
-     uint32 winner_rating = 0;
+@@ -629,17 +629,25 @@ void BattleGround::EndBattleGround(Team winner)
      WorldPacket data;
      int32 winmsg_id = 0;
-+
-+    int32 level = GetMaxLevel() / 10;
  
++    int32 level = GetMaxLevel() / 10;
++
      if (winner == ALLIANCE)
      {
          winmsg_id = isBattleGround() ? LANG_BG_A_WINS : LANG_ARENA_GOLD_WINS;
