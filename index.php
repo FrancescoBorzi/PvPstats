@@ -127,7 +127,7 @@
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
-                <th class="text-center">#</th>
+                <th class="text-center">&#9679;</th>
                 <th class="text-center">Victories</th>
               </tr>
               <?php getPlayersScores($today_condition, $level_condition) ?>
@@ -145,7 +145,7 @@
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
-                <th class="text-center">#</th>
+                <th class="text-center">&#9679;</th>
                 <th class="text-center">Victories</th>
               </tr>
               <?php getPlayersScores($last7_condition, $level_condition) ?>
@@ -163,7 +163,7 @@
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
-                <th class="text-center">#</th>
+                <th class="text-center">&#9679;</th>
                 <th class="text-center">Victories</th>
               </tr>
               <?php getPlayersScores($month_condition, $level_condition) ?>
@@ -181,7 +181,7 @@
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
-                <th class="text-center">#</th>
+                <th class="text-center">&#9679;</th>
                 <th class="text-center">Victories</th>
               </tr>
               <?php getPlayersScores("", $level_condition) ?>
