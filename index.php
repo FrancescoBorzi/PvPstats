@@ -127,6 +127,7 @@
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
+                <th class="text-center">#</th>
                 <th class="text-center">Victories</th>
               </tr>
               <?php getPlayersScores($today_condition, $level_condition) ?>
@@ -144,6 +145,7 @@
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
+                <th class="text-center">#</th>
                 <th class="text-center">Victories</th>
               </tr>
               <?php getPlayersScores($last7_condition, $level_condition) ?>
@@ -161,6 +163,7 @@
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
+                <th class="text-center">#</th>
                 <th class="text-center">Victories</th>
               </tr>
               <?php getPlayersScores($month_condition, $level_condition) ?>
@@ -178,6 +181,7 @@
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Character</th>
+                <th class="text-center">#</th>
                 <th class="text-center">Victories</th>
               </tr>
               <?php getPlayersScores("", $level_condition) ?>
@@ -268,12 +272,12 @@
         $('#toggle-today').click(function () {
           if ($('#toggle-today').html() == "More")
           {
-            $('#today-score-container').css("max-height", "778px");
+            $('#today-score-container').css("max-height", "798px");
             $('#toggle-today').html("Less");
           }
           else
           {
-            $('#today-score-container').css("max-height", "407px");
+            $('#today-score-container').css("max-height", "417px");
             $('#toggle-today').html("More");
           }
         });
@@ -281,12 +285,12 @@
         $('#toggle-last7').click(function () {
           if ($('#toggle-last7').html() == "More")
           {
-            $('#last7-score-container').css("max-height", "778px");
+            $('#last7-score-container').css("max-height", "798px");
             $('#toggle-last7').html("Less");
           }
           else
           {
-            $('#last7-score-container').css("max-height", "407px");
+            $('#last7-score-container').css("max-height", "417px");
             $('#toggle-last7').html("More");
           }
         });
@@ -294,12 +298,12 @@
         $('#toggle-month').click(function () {
           if ($('#toggle-month').html() == "More")
           {
-            $('#month-score-container').css("max-height", "778px");
+            $('#month-score-container').css("max-height", "798px");
             $('#toggle-month').html("Less");
           }
           else
           {
-            $('#month-score-container').css("max-height", "407px");
+            $('#month-score-container').css("max-height", "417px");
             $('#toggle-month').html("More");
           }
         });
@@ -307,12 +311,12 @@
         $('#toggle-overall').click(function () {
           if ($('#toggle-overall').html() == "More")
           {
-            $('#overall-score-container').css("max-height", "778px");
+            $('#overall-score-container').css("max-height", "798px");
             $('#toggle-overall').html("Less");
           }
           else
           {
-            $('#overall-score-container').css("max-height", "407px");
+            $('#overall-score-container').css("max-height", "417px");
             $('#toggle-overall').html("More");
           }
         });
