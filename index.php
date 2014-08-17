@@ -102,7 +102,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_today ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_today ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div id="today-score-container" class="score-container">
+          <div class="today-score-container score-container">
             <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
@@ -120,7 +120,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_last7 ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_last7 ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div id="last7-score-container" class="score-container">
+          <div class="last7-score-container score-container">
             <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
@@ -138,7 +138,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_month ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_month ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div id="month-score-container" class="score-container">
+          <div class="month-score-container score-container">
             <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
@@ -156,7 +156,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_overall ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_overall ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div id="overall-score-container" class="score-container">
+          <div class="overall-score-container score-container">
             <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
@@ -195,54 +195,54 @@
 
         if (<?= $alliance_today ?> > <?= $horde_today ?>)
         {
-          $('#today-score-container').css("border", "1px solid " + alliance);
+          $('.today-score-container').css("border", "1px solid " + alliance);
         }
         else if (<?= $alliance_today ?> < <?= $horde_today ?>)
         {
-          $('#today-score-container').css("border", "1px solid " + horde);
+          $('.today-score-container').css("border", "1px solid " + horde);
         }
         else
         {
-          $('#today-score-container').css("border", "1px solid " + none);
+          $('.today-score-container').css("border", "1px solid " + none);
         }
 
         if (<?= $alliance_last7 ?> > <?= $horde_last7 ?>)
         {
-          $('#last7-score-container').css("border", "1px solid " + alliance);
+          $('.last7-score-container').css("border", "1px solid " + alliance);
         }
         else if (<?= $alliance_last7 ?> < <?= $horde_last7 ?>)
         {
-          $('#last7-score-container').css("border", "1px solid " + horde);
+          $('.last7-score-container').css("border", "1px solid " + horde);
         }
         else
         {
-          $('#last7-score-container').css("border", "1px solid " + none);
+          $('.last7-score-container').css("border", "1px solid " + none);
         }
 
         if (<?= $alliance_month ?> > <?= $horde_month ?>)
         {
-          $('#month-score-container').css("border", "1px solid " + alliance);
+          $('.month-score-container').css("border", "1px solid " + alliance);
         }
         else if (<?= $alliance_month ?> < <?= $horde_month ?>)
         {
-          $('#month-score-container').css("border", "1px solid " + horde);
+          $('.month-score-container').css("border", "1px solid " + horde);
         }
         else
         {
-          $('#month-score-container').css("border", "1px solid " + none);
+          $('.month-score-container').css("border", "1px solid " + none);
         }
 
         if (<?= $alliance_overall ?> > <?= $horde_overall ?>)
         {
-          $('#overall-score-container').css("border", "1px solid " + alliance);
+          $('.overall-score-container').css("border", "1px solid " + alliance);
         }
         else if (<?= $alliance_overall ?> < <?= $horde_overall ?>)
         {
-          $('#overall-score-container').css("border", "1px solid " + horde);
+          $('.overall-score-container').css("border", "1px solid " + horde);
         }
         else
         {
-          $('#overall-score-container').css("border", "1px solid " + none);
+          $('.overall-score-container').css("border", "1px solid " + none);
         }
 
         $('#toggle-today').click(function () {
