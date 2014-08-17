@@ -171,6 +171,61 @@
         </div>
       </div>
 
+      <div class="row text-center">
+        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+          <p class="h4" style="margin-top: 32px">Guilds Today</p>
+          <div class="today-score-container score-container">
+            <table class="table table-striped">
+              <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Guild</th>
+                <th class="text-center">Victories</th>
+              </tr>
+              <?php //getPlayersScores($today_condition, $level_condition) ?>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+          <p class="h4" style="margin-top: 32px">Guilds Last 7 days</p>
+          <div class="last7-score-container score-container">
+            <table class="table table-striped">
+              <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Guild</th>
+                <th class="text-center">Victories</th>
+              </tr>
+              <?php //getPlayersScores($last7_condition, $level_condition) ?>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+          <p class="h4" style="margin-top: 32px">Guilds This month</p>
+          <div class="month-score-container score-container">
+            <table class="table table-striped">
+              <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Guild</th>
+                <th class="text-center">Victories</th>
+              </tr>
+              <?php //getPlayersScores($month_condition, $level_condition) ?>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+          <p class="h4" style="margin-top: 32px">Guilds Overall</p>
+          <div class="overall-score-container score-container">
+            <table class="table table-striped">
+              <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Guild</th>
+                <th class="text-center">Victories</th>
+              </tr>
+              <?php //getPlayersScores("", $level_condition) ?>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <div id="footer">
         <hr>
         <p class="h5 text-center">&#9679;&nbsp;<a target="_blank" href="https://github.com/ShinDarth/PvPstats"><strong>PvPstats</strong></a> for <a  target="_blank" href="<?= $server_url ?>"><?= $server_name ?></a> is free software coded by <a target="_blank" href="http://shinworld.altervista.org/"><strong>ShinDarth</strong></a>&nbsp;&#9679;</p>
