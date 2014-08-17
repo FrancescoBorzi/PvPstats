@@ -12,11 +12,20 @@
   # The date PvPstats system is online from
   $online_from = "01/08/2014";
 
+  # Your server expansion
+  #   0 = Classic
+  #   1 = The Burning Crusade
+  #   2 = Wrath of The Lich King
+  $expansion = 2;
+
   # Connection to the database of characters (address, username, password, database)
-  $db = new mysqli("localhost","trinitycore","trinitycore","characters");
+  $db = new mysqli("localhost","root","password","characters");
 
   if (mysqli_connect_error())
     die('Connect Error (' . mysqli_connect_errno() . ') '
         . mysqli_connect_error());
+
+  if ($expansion < 0 || $expansion > 2)
+    die("Wrong value provided for expansion parameter. Please config your expansion.");
 
 ?>

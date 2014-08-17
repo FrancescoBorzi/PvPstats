@@ -49,9 +49,36 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-center">
             <li id="link-all"><a href="index.php">All levels</a></li>
+            <?php
+
+            switch ($expansion)
+            {
+              case 0: // Classic only
+                ?>
+
+            <li id="link-6"><a href="index.php?level=6">60</a></li>
+
+                <?php
+                break;
+
+              case 1: // TBC only
+                ?>
+            <li id="link-7"><a href="index.php?level=7">70</a></li>
+            <li id="link-6"><a href="index.php?level=6">60-69</a></li>
+                <?php
+                break;
+
+              case 2: // WOTLK only
+                ?>
             <li id="link-8"><a href="index.php?level=8">80</a></li>
             <li id="link-7"><a href="index.php?level=7">70-79</a></li>
             <li id="link-6"><a href="index.php?level=6">60-69</a></li>
+                <?php
+                break;
+            }
+
+            ?>
+
             <li id="link-5"><a href="index.php?level=5">50-59</a></li>
             <li id="link-4"><a href="index.php?level=4">40-49</a></li>
             <li id="link-3"><a href="index.php?level=3">30-39</a></li>
