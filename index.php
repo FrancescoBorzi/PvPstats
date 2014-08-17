@@ -102,7 +102,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_today ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_today ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="today-score-container score-container">
+          <div id="today-score-container" class="today-score-container score-container">
             <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
@@ -120,7 +120,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_last7 ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_last7 ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="last7-score-container score-container">
+          <div id="last7-score-container" class="last7-score-container score-container">
             <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
@@ -138,7 +138,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_month ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_month ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="month-score-container score-container">
+          <div id="month-score-container" class="month-score-container score-container">
             <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
@@ -156,7 +156,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_overall ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_overall ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="overall-score-container score-container">
+          <div id="overall-score-container" class="overall-score-container score-container">
             <table class="table table-striped">
               <tr>
                 <th class="text-center">#</th>
