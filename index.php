@@ -78,7 +78,6 @@
             }
 
             ?>
-
             <li id="link-5"><a href="index.php?level=5">50-59</a></li>
             <li id="link-4"><a href="index.php?level=4">40-49</a></li>
             <li id="link-3"><a href="index.php?level=3">30-39</a></li>
