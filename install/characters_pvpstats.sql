@@ -1,21 +1,14 @@
 CREATE TABLE `pvpstats_faction` (
-	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-	`faction` INT(11) NOT NULL,
-	`level` INT(11) NOT NULL,
-	`date` DATETIME NOT NULL,
-	PRIMARY KEY (`id`)
-)
-COLLATE='latin1_swedish_ci'
-ENGINE=InnoDB
-AUTO_INCREMENT=12;
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `faction` TINYINT UNSIGNED NOT NULL,
+  `level` TINYINT UNSIGNED NOT NULL,
+  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
 
 CREATE TABLE `pvpstats_players` (
-	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-	`character_guid` INT(11) NOT NULL,
-	`level` INT(11) NOT NULL,
-	`date` DATETIME NOT NULL,
-	PRIMARY KEY (`id`)
-)
-COLLATE='latin1_swedish_ci'
-ENGINE=InnoDB
-AUTO_INCREMENT=14;
+  `character_guid` INT UNSIGNED NOT NULL,
+  `level` TINYINT UNSIGNED NOT NULL,
+  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`character_guid`,`date`)
+) ENGINE=InnoDB;
