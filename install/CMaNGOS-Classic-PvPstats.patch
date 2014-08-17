@@ -1,0 +1,51 @@
+From b41cc810361e7fbc6ff78d48bfcc0db6ab65df3c Mon Sep 17 00:00:00 2001
+From: ShinDarth <borzifrancesco@gmail.com>
+Date: Sun, 17 Aug 2014 20:22:02 +0200
+Subject: [PATCH] PvPstats system
+
+Signed-off-by: ShinDarth <borzifrancesco@gmail.com>
+---
+ src/game/BattleGround/BattleGround.cpp | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/src/game/BattleGround/BattleGround.cpp b/src/game/BattleGround/BattleGround.cpp
+index 6d948c0..81383c1 100644
+--- a/src/game/BattleGround/BattleGround.cpp
++++ b/src/game/BattleGround/BattleGround.cpp
+@@ -586,18 +586,24 @@ void BattleGround::EndBattleGround(Team winner)
+     uint32 winner_rating = 0;
+     WorldPacket data;
+     int32 winmsg_id = 0;
++
++    int32 level = GetMaxLevel() / 10;
+
+     if (winner == ALLIANCE)
+     {
+         winmsg_id = LANG_BG_A_WINS;
+
+         PlaySoundToAll(SOUND_ALLIANCE_WINS);                // alliance wins sound
++
++        CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (469, %d, NOW());", level);
+     }
+     else if (winner == HORDE)
+     {
+         winmsg_id = LANG_BG_H_WINS;
+
+         PlaySoundToAll(SOUND_HORDE_WINS);                   // horde wins sound
++
++        CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (67, %d, NOW());", level);
+     }
+
+     SetWinner(winner);
+@@ -643,6 +649,8 @@ void BattleGround::EndBattleGround(Team winner)
+         {
+             RewardMark(plr, ITEM_WINNER_COUNT);
+             RewardQuestComplete(plr);
++
++            CharacterDatabase.PQuery("INSERT INTO pvpstats_players (character_guid, level, date) VALUES (%d, %d, NOW());", plr->GetUInt64Value(0), level);
+         }
+         else
+             RewardMark(plr, ITEM_LOSER_COUNT);
+--
+1.9.1
+
