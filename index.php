@@ -171,6 +171,8 @@
         </div>
       </div>
 
+      <?php if ($show_guilds > 0) { ?>
+
       <div class="row text-center">
         <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
           <p class="h4" style="margin-top: 32px">Guilds Today</p>
@@ -225,6 +227,8 @@
           </div>
         </div>
       </div>
+
+      <?php } ?>
 
       <div id="footer">
         <hr>

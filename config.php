@@ -12,6 +12,11 @@
   # The date PvPstats system is online from
   $online_from = "01/08/2014";
 
+  # Show guilds
+  # 0 = don't show
+  # 1 = show
+  $show_guilds = 1;
+
   # Your server expansion
   #   0 = Classic
   #   1 = The Burning Crusade
