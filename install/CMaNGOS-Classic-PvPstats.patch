@@ -25,7 +25,7 @@ index 6d948c0..81383c1 100644
 
          PlaySoundToAll(SOUND_ALLIANCE_WINS);                // alliance wins sound
 +
-+        CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (469, %d, NOW());", level);
++        CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (0, %d, NOW());", level);
      }
      else if (winner == HORDE)
      {
@@ -33,7 +33,7 @@ index 6d948c0..81383c1 100644
 
          PlaySoundToAll(SOUND_HORDE_WINS);                   // horde wins sound
 +
-+        CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (67, %d, NOW());", level);
++        CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (1, %d, NOW());", level);
      }
 
      SetWinner(winner);
