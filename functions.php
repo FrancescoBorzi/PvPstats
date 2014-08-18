@@ -128,15 +128,15 @@ function getPlayersScores($time_cond, $level_cond)
   $position = 1;
 
   printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
-           $position,
-           getPlayerColor($row[0]),
-           $amory_url,
-           getPlayerName($row[0]),
-           getPlayerName($row[0]),
-           getPlayerClass($row[0]),
-           getPlayerRace($row[0]),
-           getPlayerGender($row[0]),
-           $row[1]);
+         $position,
+         getPlayerColor($row[0]),
+         $amory_url,
+         getPlayerName($row[0]),
+         getPlayerName($row[0]),
+         getPlayerClass($row[0]),
+         getPlayerRace($row[0]),
+         getPlayerGender($row[0]),
+         $row[1]);
 
   $prev_score = $row[1];
 
