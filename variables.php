@@ -9,8 +9,12 @@ $horde_color = "#cd0a0e";
 
 $ALLIANCE = 0;
 $HORDE = 1;
+
 $limit = "LIMIT 0,20";
 $players_group_and_order = "GROUP BY character_guid ORDER BY count(character_guid) DESC";
+
+$limit_guilds = "LIMIT 0,5";
+$guilds_group_and_order = "GROUP BY guild.name ORDER BY COUNT(guild.name) DESC";
 
 // query conditions
 

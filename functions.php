@@ -44,7 +44,7 @@ function getPlayerColor($guid)
 {
   global $db, $alliance_color, $horde_color;
 
-  $query = sprintf("SELECT race FROM characters WHERE guid = %s", $guid);
+  $query = sprintf("SELECT race FROM characters WHERE guid = %d", $guid);
   $row = $db->query($query)->fetch_row();
 
   switch ($row[0])
@@ -66,6 +66,16 @@ function getPlayerColor($guid)
   }
 
   return $color;
+}
+
+function getGuildColor($guildid)
+{
+  global $db;
+
+  $query = sprintf("SELECT leaderguid FROM guild WHERE guildid = %d", $guildid);
+  $row = $db->query($query)->fetch_row();//*/
+
+  return getPlayerColor($row[0]);
 }
 
 function getFactionScores($time_cond, $level_cond)
@@ -155,6 +165,63 @@ function getPlayersScores($time_cond, $level_cond)
            getPlayerClass($row[0]),
            getPlayerRace($row[0]),
            getPlayerGender($row[0]),
+           $row[1]);
+
+    $prev_score = $row[1];
+  }
+}
+
+function getGuildsScores($time_cond, $level_cond)
+{
+  global $db, $limit, $guilds_group_and_order, $guild_amory_url;
+
+
+  if ($time_cond == "" && $level_cond == "")
+    $where = "";
+  else
+    $where = "WHERE";
+
+  if ($time_cond != "" && $level_cond != "")
+    $level_cond = "AND " . $level_cond;
+
+  $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid %s %s %s %s %s",
+                   $where,
+                   $time_cond,
+                   $level_cond,
+                   $guilds_group_and_order,
+                   $limit_guilds);
+
+  $result = $db->query($query);
+
+  $row = $result->fetch_row();
+
+  if ($row == null)
+    return;
+
+  $position = 1;
+
+  printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
+         $position,
+         getGuildColor($row[2]),
+         $guild_amory_url,
+         $row[0],
+         $row[0],
+         $row[1]);
+
+  $prev_score = $row[1];
+
+
+  while (($row = $result->fetch_row()) != null)
+  {
+    if ($prev_score != $row[1])
+      $position++;
+
+    printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
+           $position,
+           getGuildColor($row[2]),
+           $guild_amory_url,
+           $row[0],
+           $row[0],
            $row[1]);
 
     $prev_score = $row[1];

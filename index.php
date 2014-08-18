@@ -183,7 +183,7 @@
                 <th class="text-center">Guild</th>
                 <th class="text-center">Victories</th>
               </tr>
-              <?php //getPlayersScores($today_condition, $level_condition) ?>
+              <?php getGuildsScores($today_condition, $level_condition) ?>
             </table>
           </div>
         </div>
@@ -196,7 +196,7 @@
                 <th class="text-center">Guild</th>
                 <th class="text-center">Victories</th>
               </tr>
-              <?php //getPlayersScores($last7_condition, $level_condition) ?>
+              <?php getGuildsScores($last7_condition, $level_condition) ?>
             </table>
           </div>
         </div>
@@ -209,7 +209,7 @@
                 <th class="text-center">Guild</th>
                 <th class="text-center">Victories</th>
               </tr>
-              <?php //getPlayersScores($month_condition, $level_condition) ?>
+              <?php getGuildsScores($month_condition, $level_condition) ?>
             </table>
           </div>
         </div>
@@ -222,7 +222,7 @@
                 <th class="text-center">Guild</th>
                 <th class="text-center">Victories</th>
               </tr>
-              <?php //getPlayersScores("", $level_condition) ?>
+              <?php getGuildsScores("", $level_condition) ?>
             </table>
           </div>
         </div>
