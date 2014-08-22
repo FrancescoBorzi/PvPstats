@@ -104,13 +104,17 @@
           </div>
           <div id="today-score-container" class="today-score-container score-container">
             <table class="table table-striped">
-              <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Character</th>
-                <th class="text-center">&#9679;</th>
-                <th class="text-center">Victories</th>
-              </tr>
-              <?php getPlayersScores($today_condition, $level_condition) ?>
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Character</th>
+                  <th class="text-center">&#9679;</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getPlayersScores($today_condition, $level_condition) ?>
+              </tbody>
             </table>
           </div>
           <button id="toggle-today" type="button" class="btn btn-default btn-xs">More</button>
@@ -122,13 +126,17 @@
           </div>
           <div id="last7-score-container" class="last7-score-container score-container">
             <table class="table table-striped">
-              <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Character</th>
-                <th class="text-center">&#9679;</th>
-                <th class="text-center">Victories</th>
-              </tr>
-              <?php getPlayersScores($last7_condition, $level_condition) ?>
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Character</th>
+                  <th class="text-center">&#9679;</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getPlayersScores($last7_condition, $level_condition) ?>
+              </tbody>
             </table>
           </div>
           <button id="toggle-last7" type="button" class="btn btn-default btn-xs">More</button>
@@ -140,13 +148,17 @@
           </div>
           <div id="month-score-container" class="month-score-container score-container">
             <table class="table table-striped">
-              <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Character</th>
-                <th class="text-center">&#9679;</th>
-                <th class="text-center">Victories</th>
-              </tr>
-              <?php getPlayersScores($month_condition, $level_condition) ?>
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Character</th>
+                  <th class="text-center">&#9679;</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getPlayersScores($month_condition, $level_condition) ?>
+              </tbody>
             </table>
           </div>
           <button id="toggle-month" type="button" class="btn btn-default btn-xs">More</button>
@@ -158,13 +170,17 @@
           </div>
           <div id="overall-score-container" class="overall-score-container score-container">
             <table class="table table-striped">
-              <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Character</th>
-                <th class="text-center">&#9679;</th>
-                <th class="text-center">Victories</th>
-              </tr>
-              <?php getPlayersScores("", $level_condition) ?>
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Character</th>
+                  <th class="text-center">&#9679;</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getPlayersScores("", $level_condition) ?>
+              </tbody>
             </table>
           </div>
           <button id="toggle-overall" type="button" class="btn btn-default btn-xs">More</button>
@@ -178,12 +194,16 @@
           <p class="h4" style="margin-top: 32px">Guilds Today</p>
           <div class="today-score-container score-container">
             <table class="table table-striped">
-              <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Guild</th>
-                <th class="text-center">Victories</th>
-              </tr>
-              <?php getGuildsScores($today_condition, $level_condition) ?>
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Guild</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getGuildsScores($today_condition, $level_condition) ?>
+              </tbody>
             </table>
           </div>
         </div>
@@ -191,6 +211,7 @@
           <p class="h4" style="margin-top: 32px">Guilds Last 7 days</p>
           <div class="last7-score-container score-container">
             <table class="table table-striped">
+              <thead>
               <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Guild</th>
@@ -204,12 +225,16 @@
           <p class="h4" style="margin-top: 32px">Guilds This month</p>
           <div class="month-score-container score-container">
             <table class="table table-striped">
-              <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Guild</th>
-                <th class="text-center">Victories</th>
-              </tr>
-              <?php getGuildsScores($month_condition, $level_condition) ?>
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Guild</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getGuildsScores($month_condition, $level_condition) ?>
+              </tbody>
             </table>
           </div>
         </div>
@@ -217,12 +242,16 @@
           <p class="h4" style="margin-top: 32px">Guilds Overall</p>
           <div class="overall-score-container score-container">
             <table class="table table-striped">
-              <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Guild</th>
-                <th class="text-center">Victories</th>
-              </tr>
-              <?php getGuildsScores("", $level_condition) ?>
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Guild</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getGuildsScores("", $level_condition) ?>
+              </tbody>
             </table>
           </div>
         </div>
