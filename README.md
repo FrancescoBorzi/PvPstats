@@ -3,12 +3,12 @@ PvPstats
 
 This software **is still under development and testing phase** but feel free to use it.
 
-This is a **very rough** graphical preview, to just let understand what this software is about: http://shinworld.altervista.org/pvpstats/
+This is a **very rough** graphical preview, to just let understand what this software is about: http://shinworld.altervista.org/pvpstats/.
 
 
 ## Introduction
 
-PvPstats is an utility for **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a (small) core modification and a web application written in PHP.
+PvPstats is an utility for **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a (small) core modification and a web application written in PHP. It's released under the [GNU GPL v3 License](https://github.com/ShinDarth/PvPstats/blob/master/LICENSE).
 
 Each time a Battleground ends, PvPstats stores in the database who won: players, faction, level range and datetime.
 
@@ -38,4 +38,4 @@ Screenshots will come soon!
 
 ## Install
 
-See [How to install PvPstats system](https://github.com/ShinDarth/PvPstats/blob/master/INSTALL.md)
+See [How to install PvPstats system](https://github.com/ShinDarth/PvPstats/blob/master/INSTALL.md).
