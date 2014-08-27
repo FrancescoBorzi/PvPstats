@@ -91,12 +91,14 @@
     <div class="container main-box">
 
       <div class="main-title">
-        <h1><?= $server_name ?> PvPstats</h1>
-        <p class="lead" style="margin-bottom: 5px">See who is winning!</p>
-        <p class="small" style="color: white;">The statistics count the amount of victories in all Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span></p>
+        <p class="text-center h3"><?= $server_name ?> PvP statistics</p>
+        <div id="logo">
+          <img id="logo_img" class="img-responsive" alt="PvPstats logo" src="<?= $server_logo ?>">
+        </div>
       </div>
 
       <div class="row text-center">
+        <p class="small" style="margin-top: 5px; color: white;">The statistics count the amount of victories in all Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span></p>
         <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3">Today</p>
           <div class="score-faction-container">

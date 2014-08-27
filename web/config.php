@@ -6,6 +6,9 @@
   # Your server url
   $server_url = "http://www.trinitycore.org/";
 
+  # Your server logo img url (optional)
+  $server_logo = "img/PvPstats.png";
+
   # Your server armory url including character name param
   $amory_url = "http://www.truewow.org/armory/character.php?n=";
 

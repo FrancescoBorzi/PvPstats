@@ -22,8 +22,18 @@ body {
 }
 
 .main-title {
-  padding: 40px 15px 10px;
+  padding: 20px 15px 10px;
   text-align: center;
+}
+
+#logo {
+  margin: auto;
+  max-height: 200px;
+}
+
+#logo_img {
+  margin: auto;
+  height: 200px;
 }
 
 .score-faction-container {
