@@ -97,7 +97,7 @@
       </div>
 
       <div class="row text-center">
-        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3">Today</p>
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_today ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_today ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
@@ -119,7 +119,7 @@
           </div>
           <button id="toggle-today" type="button" class="btn btn-default btn-xs">More</button>
         </div>
-        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3">Last 7 days</p>
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_last7 ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_last7 ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
@@ -141,7 +141,7 @@
           </div>
           <button id="toggle-last7" type="button" class="btn btn-default btn-xs">More</button>
         </div>
-        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3">This month</p>
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_month ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_month ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
@@ -163,7 +163,7 @@
           </div>
           <button id="toggle-month" type="button" class="btn btn-default btn-xs">More</button>
         </div>
-        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3">Overall</p>
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_overall ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_overall ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
@@ -190,7 +190,7 @@
       <?php if ($show_guilds > 0) { ?>
 
       <div class="row text-center">
-        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h4" style="margin-top: 32px">Guilds Today</p>
           <div class="today-score-container score-container">
             <table class="table table-striped">
@@ -207,7 +207,7 @@
             </table>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h4" style="margin-top: 32px">Guilds Last 7 days</p>
           <div class="last7-score-container score-container">
             <table class="table table-striped">
@@ -221,7 +221,7 @@
             </table>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h4" style="margin-top: 32px">Guilds This month</p>
           <div class="month-score-container score-container">
             <table class="table table-striped">
@@ -238,7 +238,7 @@
             </table>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6" style="padding: 0 10px;">
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h4" style="margin-top: 32px">Guilds Overall</p>
           <div class="overall-score-container score-container">
             <table class="table table-striped">
