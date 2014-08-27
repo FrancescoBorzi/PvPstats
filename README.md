@@ -1,5 +1,6 @@
 PvPstats
 ========
+# ![logo](https://raw.githubusercontent.com/ShinDarth/PvPstats/master/logo/PvPstats.png)
 
 This software **is still under development and testing phase** but feel free to use it.
 
