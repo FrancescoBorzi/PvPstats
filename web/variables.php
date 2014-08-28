@@ -7,8 +7,8 @@ $horde_color = "#cd0a0e";
 
 // query variables
 
-$ALLIANCE = 0;
-$HORDE = 1;
+$HORDE = 0;
+$ALLIANCE = 1;
 
 $limit = "LIMIT 0,20";
 $players_group_and_order = "GROUP BY character_guid ORDER BY count(character_guid) DESC";

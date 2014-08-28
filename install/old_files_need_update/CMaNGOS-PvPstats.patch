@@ -15,13 +15,13 @@ index 80cfbd4..8cfbd3b 100644
 @@ -629,17 +629,25 @@ void BattleGround::EndBattleGround(Team winner)
      WorldPacket data;
      int32 winmsg_id = 0;
- 
+
 +    int32 level = GetMaxLevel() / 10;
 +
      if (winner == ALLIANCE)
      {
          winmsg_id = isBattleGround() ? LANG_BG_A_WINS : LANG_ARENA_GOLD_WINS;
- 
+
          PlaySoundToAll(SOUND_ALLIANCE_WINS);                // alliance wins sound
 +
 +        if (isBattleGround())
@@ -30,13 +30,13 @@ index 80cfbd4..8cfbd3b 100644
      else if (winner == HORDE)
      {
          winmsg_id = isBattleGround() ? LANG_BG_H_WINS : LANG_ARENA_GREEN_WINS;
- 
+
          PlaySoundToAll(SOUND_HORDE_WINS);                   // horde wins sound
 +
 +        if (isBattleGround())
 +            CharacterDatabase.PQuery("INSERT INTO pvpstats_faction (faction, level, date) VALUES (1, %d, NOW());", level);
      }
- 
+
      SetWinner(winner);
 @@ -745,6 +753,9 @@ void BattleGround::EndBattleGround(Team winner)
              RewardMark(plr, ITEM_WINNER_COUNT);
@@ -48,6 +48,6 @@ index 80cfbd4..8cfbd3b 100644
          }
          else
              RewardMark(plr, ITEM_LOSER_COUNT);
--- 
+--
 1.9.1
 

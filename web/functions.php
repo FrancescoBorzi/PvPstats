@@ -90,7 +90,7 @@ function getFactionScores($time_cond, $level_cond)
   if ($level_cond != "")
     $level_cond = "AND " . $level_cond;
 
-  $query = sprintf("SELECT COUNT(*) FROM pvpstats_faction WHERE faction = %d %s %s UNION SELECT COUNT(*) FROM pvpstats_faction WHERE faction = %d %s %s;",
+  $query = sprintf("SELECT COUNT(*) FROM pvpstats_battlegrounds WHERE winner_faction = %d %s %s UNION SELECT COUNT(*) FROM pvpstats_battlegrounds WHERE winner_faction = %d %s %s;",
                    $ALLIANCE, $time_cond, $level_cond, $HORDE, $time_cond, $level_cond);
 
   $result = $db->query($query);
@@ -121,7 +121,7 @@ function getPlayersScores($time_cond, $level_cond)
   if ($time_cond != "" && $level_cond != "")
     $level_cond = "AND " . $level_cond;
 
-  $query = sprintf("SELECT character_guid, count(character_guid) FROM pvpstats_players %s %s %s %s %s",
+  $query = sprintf("SELECT character_guid, count(character_guid) FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id %s %s %s %s %s",
                    $where,
                    $time_cond,
                    $level_cond,
@@ -184,7 +184,7 @@ function getGuildsScores($time_cond, $level_cond)
   if ($time_cond != "" && $level_cond != "")
     $level_cond = "AND " . $level_cond;
 
-  $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid %s %s %s %s %s",
+  $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid %s %s %s %s %s",
                    $where,
                    $time_cond,
                    $level_cond,

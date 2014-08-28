@@ -13,16 +13,16 @@ index 86236cd..3952b18 100644
 +++ b/src/server/game/Battlegrounds/Battleground.cpp
 @@ -711,6 +711,8 @@ void Battleground::EndBattleground(uint32 winner)
      RemoveFromBGFreeSlotQueue();
- 
+
      int32 winmsg_id = 0;
 +
 +    int32 level = GetMaxLevel() / 10;
- 
+
      if (winner == ALLIANCE)
      {
 @@ -719,6 +721,9 @@ void Battleground::EndBattleground(uint32 winner)
          PlaySoundToAll(SOUND_ALLIANCE_WINS);                // alliance wins sound
- 
+
          SetWinner(BG_TEAM_ALLIANCE);
 +
 +        if (isBattleground())
@@ -32,7 +32,7 @@ index 86236cd..3952b18 100644
      {
 @@ -727,6 +732,9 @@ void Battleground::EndBattleground(uint32 winner)
          PlaySoundToAll(SOUND_HORDE_WINS);                   // horde wins sound
- 
+
          SetWinner(BG_TEAM_HORDE);
 +
 +        if (isBattleground())
@@ -42,7 +42,7 @@ index 86236cd..3952b18 100644
      {
 @@ -783,6 +791,9 @@ void Battleground::EndBattleground(uint32 winner)
              }
- 
+
              player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_WIN_BG, 1);
 +
 +            if (isBattleground())
@@ -50,6 +50,6 @@ index 86236cd..3952b18 100644
          }
          else
          {
--- 
+--
 1.9.1
 

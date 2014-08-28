@@ -9,20 +9,37 @@ This is a **very rough** graphical preview, to just let understand what this sof
 
 ## Introduction
 
-PvPstats is an utility for **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a (small) core modification and a web application written in **PHP**. It's released under the [GNU GPL v3 License](https://github.com/ShinDarth/PvPstats/blob/master/LICENSE).
+PvPstats is an utility for **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a core modification and a web application written in **PHP**. It's released under the [GNU GPL v3 License](https://github.com/ShinDarth/PvPstats/blob/master/LICENSE).
 
-Each time a Battleground ends, PvPstats stores in the database who won: players, faction, level range and datetime.
+Each time a Battleground ends, PvPstats stores in the database all Battlegrounds:
+
+- Date & time
+- Winner faction
+- Type (which BattleGround is)
+- Bracket level range
+
+For each Battleground it also stores player:
+
+- Killing blows
+- Deaths
+- Honorable Kills
+- Bonus Honor
+- Score damage done
+- and the other various data (like Warsong Gulch capped/returned flags, Arathi Basin assaulted/defended bases, EoS capped flags, etc...)
+
+In a nutshell, **it saves all datas you can see when the BattleGround ends in the score window**.
+
 
 It currently supports:
 
 - [TrinityCore with WOTLK (3.x.x game version)](https://github.com/TrinityCore/TrinityCore)
-- [CMaNGOS with WOTLK (3.x.x game version)](https://github.com/CMaNGOS/mangos-wotlk)
-- [CMaNGOS with TBC     (2.x.x game version)](https://github.com/CMaNGOS/mangos-tbc)
-- [CMaNGOS with Classic   (1.x.x game version)](https://github.com/CMaNGOS/mangos-classic)
+- [CMaNGOS with WOTLK (3.x.x game version)](https://github.com/CMaNGOS/mangos-wotlk) (**NEED TO BE UPDATED**)
+- [CMaNGOS with TBC     (2.x.x game version)](https://github.com/CMaNGOS/mangos-tbc) (**NEED TO BE UPDATED**)
+- [CMaNGOS with Classic   (1.x.x game version)](https://github.com/CMaNGOS/mangos-classic) (**NEED TO BE UPDATED**)
 
 But since this is a free and open source project, you are more than welcome to fork it and adapt to different emulator or game version.
 
-The web application displays the amount of **victories** of **factions** and **top 20 players** of:
+The web application currently displays the amount of **victories** of **factions**, **top 20 players** and **top 5 guilds** of:
 
 - **Current day**
 - **Last 7 days**
@@ -30,6 +47,8 @@ The web application displays the amount of **victories** of **factions** and **t
 - **Overall**
 
 both **for all levels** and **for every level range (10-19, ... , 70-79, 80)**.
+
+*** **New features for the web application will be implemented soon!** ***
 
 The web applications uses the framework [Bootstrap](https://github.com/twbs/bootstrap) which makes it fully **responsive**, supporting **different window and screen sizes** (e.g. desktop, tablet, mobile, etc..). It also uses the [jQuery](https://github.com/jquery/jquery) JavaScript Library.
 
@@ -39,4 +58,6 @@ Screenshots will come soon!
 
 ## Install
 
-See [How to install PvPstats system](https://github.com/ShinDarth/PvPstats/blob/master/INSTALL.md).
+- [How to install PvPstats system in TrinityCore](https://github.com/ShinDarth/PvPstats/blob/master/INSTALL-TrinityCore.md)
+
+- [How to install PvPstats system in CMaNGOS](https://github.com/ShinDarth/PvPstats/blob/master/INSTALL-CMaNGOS.md)
