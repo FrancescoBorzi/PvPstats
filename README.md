@@ -33,7 +33,7 @@ In a nutshell, **it saves all datas you can see when the BattleGround ends in th
 It currently supports:
 
 - [TrinityCore with WOTLK (3.x.x game version)](https://github.com/TrinityCore/TrinityCore)
-- [CMaNGOS with WOTLK (3.x.x game version)](https://github.com/CMaNGOS/mangos-wotlk) (**NEED TO BE UPDATED**)
+- [CMaNGOS with WOTLK (3.x.x game version)](https://github.com/CMaNGOS/mangos-wotlk)
 - [CMaNGOS with TBC     (2.x.x game version)](https://github.com/CMaNGOS/mangos-tbc) (**NEED TO BE UPDATED**)
 - [CMaNGOS with Classic   (1.x.x game version)](https://github.com/CMaNGOS/mangos-classic) (**NEED TO BE UPDATED**)
 
