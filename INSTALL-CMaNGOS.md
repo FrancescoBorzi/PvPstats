@@ -1,4 +1,36 @@
 How to install PvPstats system in CMaNGOS
 ========
 
-Will be available soon!
+1) Clone the repository:
+```
+git clone https://github.com/ShinDarth/PvPstats.git
+```
+
+2) Apply install/character_pvpstats.sql file to your characters database.
+
+3) Go in the git source folder of your core and apply the patch located in /path/to/PvPstats/install/
+
+if you are using CMaNGOS with **WOTLK** (game version **3.x.x**) type:
+```
+git am --signoff < /path/to/PvPstats/install/CMaNGOS-WOTLK-PvPstats.patch
+```
+
+**TBC** and **Classic** patches will come soon!
+
+if one of these patches returns any error, it probably means I have to update it to fit with latest core version, in such case please  [fill a bug report](https://github.com/ShinDarth/PvPstats/issues)
+
+4) Rebuild your core
+
+5) Open your **worldserver.conf** file and set:
+```
+Battleground.StoreStatistics.Enable = 1
+```
+
+6) Open the "**web**" folder of PvPstats and copy all contents into a new folder of your web server (e.g. /var/www/PvPstats)
+
+7) Open the file **config.php** and edit it properly (it's quite commented).
+
+Do not forget to set the parameters for database connections and your expansion.
+
+
+Please report any bug at: https://github.com/ShinDarth/PvPstats/issues
