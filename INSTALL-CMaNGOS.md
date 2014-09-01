@@ -15,7 +15,16 @@ git clone https://github.com/ShinDarth/PvPstats.git
 git am --signoff < /path/to/PvPstats/install/CMaNGOS-WOTLK-PvPstats.patch
 ```
 
-- **TBC** and **Classic** patches will come soon!
+- if you are using CMaNGOS with **TBC** (game version **2.x.x**) type:
+```
+git am --signoff < /path/to/PvPstats/install/CMaNGOS-TBC-PvPstats.patch
+```
+
+- if you are using CMaNGOS with **Classic** (game version **1.x.x**) type:
+```
+git am --signoff < /path/to/PvPstats/install/CMaNGOS-Classic-PvPstats.patch
+```
+
 
 If one of these patches returns an error, it probably means I have to update it to fit with latest core version, in such case please  [fill a bug report](https://github.com/ShinDarth/PvPstats/issues).
 
