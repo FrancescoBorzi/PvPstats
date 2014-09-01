@@ -34,8 +34,8 @@ It currently supports:
 
 - [TrinityCore with WOTLK (3.x.x game version)](https://github.com/TrinityCore/TrinityCore)
 - [CMaNGOS with WOTLK (3.x.x game version)](https://github.com/CMaNGOS/mangos-wotlk)
-- [CMaNGOS with TBC     (2.x.x game version)](https://github.com/CMaNGOS/mangos-tbc) (**NEED TO BE UPDATED**)
-- [CMaNGOS with Classic   (1.x.x game version)](https://github.com/CMaNGOS/mangos-classic) (**NEED TO BE UPDATED**)
+- [CMaNGOS with TBC     (2.x.x game version)](https://github.com/CMaNGOS/mangos-tbc)
+- [CMaNGOS with Classic   (1.x.x game version)](https://github.com/CMaNGOS/mangos-classic)
 
 But since this is a free and open source project, you are more than welcome to fork it and adapt to different emulator or game version.
 
