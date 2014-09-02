@@ -78,11 +78,11 @@ function getGuildColor($guildid)
   return getPlayerColor($row[0]);
 }
 
-function getFactionScores($time_cond, $level_cond)
+function getFactionScores($time_cond, $level_cond, $type_cond)
 {
   global $db, $ALLIANCE, $HORDE;
 
-  $score[2];
+  $score = array();
 
   if ($time_cond != "")
     $time_cond = "AND " . $time_cond;
@@ -90,8 +90,18 @@ function getFactionScores($time_cond, $level_cond)
   if ($level_cond != "")
     $level_cond = "AND " . $level_cond;
 
-  $query = sprintf("SELECT COUNT(*) FROM pvpstats_battlegrounds WHERE winner_faction = %d %s %s UNION SELECT COUNT(*) FROM pvpstats_battlegrounds WHERE winner_faction = %d %s %s;",
-                   $ALLIANCE, $time_cond, $level_cond, $HORDE, $time_cond, $level_cond);
+  if ($type_cond != "")
+    $type_cond = "AND " . $type_cond;
+
+  $query = sprintf("SELECT COUNT(*) FROM pvpstats_battlegrounds WHERE winner_faction = %d %s %s %s UNION SELECT COUNT(*) FROM pvpstats_battlegrounds WHERE winner_faction = %d %s %s %s;",
+                   $ALLIANCE,
+                   $time_cond,
+                   $level_cond,
+                   $type_cond,
+                   $HORDE,
+                   $time_cond,
+                   $level_cond,
+                   $type_cond);
 
   $result = $db->query($query);
 
@@ -108,12 +118,12 @@ function getFactionScores($time_cond, $level_cond)
   return $score;
 }
 
-function getPlayersScores($time_cond, $level_cond)
+function getPlayersScores($time_cond, $level_cond, $type_cond)
 {
   global $db, $limit, $players_group_and_order, $amory_url;
 
 
-  if ($time_cond == "" && $level_cond == "")
+  if ($time_cond == "" && $level_cond == "" && $type_cond == "")
     $where = "";
   else
     $where = "WHERE";
@@ -121,10 +131,14 @@ function getPlayersScores($time_cond, $level_cond)
   if ($time_cond != "" && $level_cond != "")
     $level_cond = "AND " . $level_cond;
 
-  $query = sprintf("SELECT character_guid, count(character_guid) FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id %s %s %s %s %s",
+  if (($time_cond != "" || $level_cond != "") && $type_cond != "")
+    $type_cond = "AND " . $type_cond;
+
+  $query = sprintf("SELECT character_guid, count(character_guid) FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id %s %s %s %s %s %s",
                    $where,
                    $time_cond,
                    $level_cond,
+                   $type_cond,
                    $players_group_and_order,
                    $limit);
 
@@ -171,12 +185,12 @@ function getPlayersScores($time_cond, $level_cond)
   }
 }
 
-function getGuildsScores($time_cond, $level_cond)
+function getGuildsScores($time_cond, $level_cond, $type_cond)
 {
-  global $db, $limit, $guilds_group_and_order, $guild_amory_url;
+  global $db, $limit, $limit_guilds, $guilds_group_and_order, $guild_amory_url;
 
 
-  if ($time_cond == "" && $level_cond == "")
+  if ($time_cond == "" && $level_cond == "" && $type_cond == "")
     $where = "";
   else
     $where = "WHERE";
@@ -184,10 +198,14 @@ function getGuildsScores($time_cond, $level_cond)
   if ($time_cond != "" && $level_cond != "")
     $level_cond = "AND " . $level_cond;
 
-  $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid %s %s %s %s %s",
+  if (($time_cond != "" || $level_cond != "") && $type_cond != "")
+    $type_cond = "AND " . $type_cond;
+
+  $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid %s %s %s %s %s %s",
                    $where,
                    $time_cond,
                    $level_cond,
+                   $type_cond,
                    $guilds_group_and_order,
                    $limit_guilds);
 

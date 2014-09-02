@@ -115,7 +115,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php getPlayersScores($today_condition, $level_condition) ?>
+                <?php getPlayersScores($today_condition, $level_condition, $type_condition) ?>
               </tbody>
             </table>
           </div>
@@ -137,7 +137,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php getPlayersScores($last7_condition, $level_condition) ?>
+                <?php getPlayersScores($last7_condition, $level_condition, $type_condition) ?>
               </tbody>
             </table>
           </div>
@@ -159,7 +159,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php getPlayersScores($month_condition, $level_condition) ?>
+                <?php getPlayersScores($month_condition, $level_condition, $type_condition) ?>
               </tbody>
             </table>
           </div>
@@ -181,7 +181,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php getPlayersScores("", $level_condition) ?>
+                <?php getPlayersScores("", $level_condition, $type_condition) ?>
               </tbody>
             </table>
           </div>
@@ -204,7 +204,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php getGuildsScores($today_condition, $level_condition) ?>
+                <?php getGuildsScores($today_condition, $level_condition, $type_condition) ?>
               </tbody>
             </table>
           </div>
@@ -219,7 +219,7 @@
                 <th class="text-center">Guild</th>
                 <th class="text-center">Victories</th>
               </tr>
-              <?php getGuildsScores($last7_condition, $level_condition) ?>
+              <?php getGuildsScores($last7_condition, $level_condition, $type_condition) ?>
             </table>
           </div>
         </div>
@@ -235,7 +235,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php getGuildsScores($month_condition, $level_condition) ?>
+                <?php getGuildsScores($month_condition, $level_condition, $type_condition) ?>
               </tbody>
             </table>
           </div>
@@ -252,7 +252,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php getGuildsScores("", $level_condition) ?>
+                <?php getGuildsScores("", $level_condition, $type_condition) ?>
               </tbody>
             </table>
           </div>
