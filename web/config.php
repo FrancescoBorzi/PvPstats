@@ -32,11 +32,23 @@
   # Connection to the database of characters (address, username, password, database)
   $db = new mysqli("localhost","root","password","characters");
 
+  # Debug
+  #   0 = Debug mode disabled
+  #   1 = Debug mode enabled
+  $debug = 0;
+
   if (mysqli_connect_error())
     die('Connect Error (' . mysqli_connect_errno() . ') '
         . mysqli_connect_error());
 
   if ($expansion < 0 || $expansion > 2)
     die("Wrong value provided for expansion parameter. Please config your expansion.");
+
+  if ($debug != 0)
+  {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(-1);
+  }
 
 ?>
