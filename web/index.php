@@ -48,7 +48,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-center">
-            <li id="link-all"><a href="index.php">All levels</a></li>
+            <li id="link-all"><a href="index.php<?= $type_link_all ?>">All levels</a></li>
             <?php
 
             switch ($expansion)
@@ -56,33 +56,33 @@
               case 0: // Classic only
                 ?>
 
-            <li id="link-6"><a href="index.php?level=6">60</a></li>
+            <li id="link-6"><a href="index.php?level=6<?= $type_link ?>">60</a></li>
 
                 <?php
                 break;
 
               case 1: // TBC only
                 ?>
-            <li id="link-7"><a href="index.php?level=7">70</a></li>
-            <li id="link-6"><a href="index.php?level=6">60-69</a></li>
+            <li id="link-7"><a href="index.php?level=7<?= $type_link ?>">70</a></li>
+            <li id="link-6"><a href="index.php?level=6<?= $type_link ?>">60-69</a></li>
                 <?php
                 break;
 
               case 2: // WOTLK only
                 ?>
-            <li id="link-8"><a href="index.php?level=8">80</a></li>
-            <li id="link-7"><a href="index.php?level=7">70-79</a></li>
-            <li id="link-6"><a href="index.php?level=6">60-69</a></li>
+            <li id="link-8"><a href="index.php?level=8<?= $type_link ?>">80</a></li>
+            <li id="link-7"><a href="index.php?level=7<?= $type_link ?>">70-79</a></li>
+            <li id="link-6"><a href="index.php?level=6<?= $type_link ?>">60-69</a></li>
                 <?php
                 break;
             }
 
             ?>
-            <li id="link-5"><a href="index.php?level=5">50-59</a></li>
-            <li id="link-4"><a href="index.php?level=4">40-49</a></li>
-            <li id="link-3"><a href="index.php?level=3">30-39</a></li>
-            <li id="link-2"><a href="index.php?level=2">20-29</a></li>
-            <li id="link-1"><a href="index.php?level=1">10-19</a></li>
+            <li id="link-5"><a href="index.php?level=5<?= $type_link ?>">50-59</a></li>
+            <li id="link-4"><a href="index.php?level=4<?= $type_link ?>">40-49</a></li>
+            <li id="link-3"><a href="index.php?level=3<?= $type_link ?>">30-39</a></li>
+            <li id="link-2"><a href="index.php?level=2<?= $type_link ?>">20-29</a></li>
+            <li id="link-1"><a href="index.php?level=1<?= $type_link ?>">10-19</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -98,7 +98,7 @@
       </div>
 
       <div class="row text-center">
-        <p class="small" style="margin-top: 5px; color: white;">The statistics count the amount of victories in all Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span></p>
+        <p class="" style="margin-top: 5px; color: white;">The statistics count the amount of victories in all Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span></p>
         <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3">Today</p>
           <div class="score-faction-container">

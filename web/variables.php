@@ -69,8 +69,11 @@ if (isset($_GET['type']))
     default:
       $type_condition = "";
   }
+
+  $type_link      = "&type=" . $_GET['type'];
+  $type_link_all  = "?type=" . $_GET['type'];
 }
 else
-    $type_condition = "";
+    $type_link_all = $type_link = $type_condition = "";
 
 ?>
