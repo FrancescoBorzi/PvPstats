@@ -120,22 +120,21 @@ function getFactionScores($time_cond, $level_cond, $type_cond)
 
 function getPlayersScores($time_cond, $level_cond, $type_cond)
 {
-  global $db, $limit, $players_group_and_order, $amory_url;
+  global $db, $limit, $players_group_and_order, $amory_url, $ALLIANCE, $HORDE;
 
+  if ($time_cond != "")
+    $time_cond = "AND " . $time_cond;
 
-  if ($time_cond == "" && $level_cond == "" && $type_cond == "")
-    $where = "";
-  else
-    $where = "WHERE";
-
-  if ($time_cond != "" && $level_cond != "")
+  if ($level_cond != "")
     $level_cond = "AND " . $level_cond;
 
-  if (($time_cond != "" || $level_cond != "") && $type_cond != "")
+  if ($type_cond != "")
     $type_cond = "AND " . $type_cond;
 
-  $query = sprintf("SELECT character_guid, count(character_guid) FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id %s %s %s %s %s %s",
-                   $where,
+
+  $query = sprintf("SELECT character_guid, count(character_guid) FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE ((characters.race IN (1, 3, 4, 7, 11) AND pvpstats_battlegrounds.winner_faction = %d ) OR (characters.race IN (2, 5, 6, 8, 10) AND pvpstats_battlegrounds.winner_faction = %d )) %s %s %s %s %s",
+                   $ALLIANCE,
+                   $HORDE,
                    $time_cond,
                    $level_cond,
                    $type_cond,
