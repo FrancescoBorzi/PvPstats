@@ -4,7 +4,7 @@ PvPstats
 
 This software **is still under development and testing phase** but feel free to use it.
 
-This is a **very rough** graphical preview, to just let understand what this software is about: http://shinworld.altervista.org/pvpstats/.
+[Here](http://www.wowtrilogy.com/pvp/) there is a demo.
 
 
 ## Introduction
