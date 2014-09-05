@@ -114,7 +114,7 @@
       </div>
     </div>
 
-    <div class="container main-box">
+    <div class="container">
 
       <div class="main-title">
         <p class="text-center h3"><?= $server_name ?> PvP statistics</p>
