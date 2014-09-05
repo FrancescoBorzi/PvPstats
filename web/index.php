@@ -77,6 +77,33 @@
                 break;
             }
 
+            $BATTLEGROUND_AV_sel = $BATTLEGROUND_WS_sel = $BATTLEGROUND_AB_sel = $BATTLEGROUND_EY_sel = $BATTLEGROUND_SA_sel = $BATTLEGROUND_IC_sel = "";
+
+            if (isset($_GET['type']))
+            {
+              switch ($_GET['type'])
+              {
+                case $BATTLEGROUND_AV:
+                  $BATTLEGROUND_AV_sel = "selected";
+                  break;
+                case $BATTLEGROUND_WS:
+                  $BATTLEGROUND_WS_sel = "selected";
+                  break;
+                case $BATTLEGROUND_AB:
+                  $BATTLEGROUND_AB_sel = "selected";
+                  break;
+                case $BATTLEGROUND_EY:
+                  $BATTLEGROUND_EY_sel = "selected";
+                  break;
+                case $BATTLEGROUND_SA:
+                  $BATTLEGROUND_SA_sel = "selected";
+                  break;
+                case $BATTLEGROUND_IC:
+                  $BATTLEGROUND_IC_sel = "selected";
+                  break;
+              }
+            }
+
             ?>
             <li id="link-5"><a href="index.php?level=5<?= $type_link ?>">50-59</a></li>
             <li id="link-4"><a href="index.php?level=4<?= $type_link ?>">40-49</a></li>
@@ -98,7 +125,25 @@
       </div>
 
       <div class="row text-center">
-        <p class="" style="margin-top: 5px; color: white;">The statistics count the amount of victories in all Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span></p>
+        <div id="stats_info">
+          The statistics count the amount of victories in &nbsp;
+          <form method="GET">
+            <?php if (isset($_GET['level'])) { ?>
+            <input type="hidden" name="level" value="<?= $_GET['level'] ?>">
+            <?php } ?>
+            <select name="type" onChange='this.form.submit()'>
+              <option value="0">All</option>
+              <option value="<?= $BATTLEGROUND_AV ?>" <?= $BATTLEGROUND_AV_sel ?>>Alterac Valley</option>
+              <option value="<?= $BATTLEGROUND_WS ?>" <?= $BATTLEGROUND_WS_sel ?>>Warsong Gulch</option>
+              <option value="<?= $BATTLEGROUND_AB ?>" <?= $BATTLEGROUND_AB_sel ?>>Arathi Basin</option>
+              <option value="<?= $BATTLEGROUND_EY ?>" <?= $BATTLEGROUND_EY_sel ?>>Eye of the Storm</option>
+              <option value="<?= $BATTLEGROUND_SA ?>" <?= $BATTLEGROUND_SA_sel ?>>Strand of the Ancients</option>
+              <option value="<?= $BATTLEGROUND_IC ?>" <?= $BATTLEGROUND_IC_sel ?>>Isle of Conquest</option>
+            </select>
+            <noscript><input type="submit" value="Submit"></noscript>
+          </form>
+         &nbsp; Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span>
+        </div>
         <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3">Today</p>
           <div class="score-faction-container">

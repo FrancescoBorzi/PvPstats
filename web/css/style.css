@@ -36,6 +36,20 @@ body {
   height: 200px;
 }
 
+#stats_info {
+  margin: 5px auto auto;
+  color: white;
+}
+
+#stats_info form {
+  display: inline;
+  color: black;
+}
+
+#stats_info form select {
+  text-align: center;
+}
+
 .score-faction-container {
   max-width: 270px;
   margin: auto;
