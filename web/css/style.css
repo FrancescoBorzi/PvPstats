@@ -89,6 +89,10 @@ table a:not(.btn), .table a:not(.btn) {
   margin-top: 5px;
 }
 
+#bg-table th {
+  cursor: pointer;
+}
+
 #footer {
   margin-top: 40px;
 }

@@ -53,70 +53,113 @@
 
   <body>
 
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="visible-xs navbar-brand" href="#"><?= $server_name ?> PvPstats</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-center">
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
     <div class="container">
+
+      <div class="main-title"></div>
 
       <?php if (!isset($id)) { ?>
 
       <?php } else { ?>
 
-      <table class="table">
-        <tr>
-          <th>Character</th>
-          <th>&#9679;</th>
+      <table id="bg-table" class="table" data-sortable>
+        <thead>
+          <tr>
+            <th id="character" class="th-elem" onClick="thfocus(this)">Character</th>
+            <th id="class" class="th-elem" onClick="thfocus(this)">&#9679;</th>
 
-          <th>Killing Blows</th>
-          <th>Deaths</th>
-          <th>Honorable Kills</th>
-          <th>Bonus Honor</th>
-          <th>Damage Done</th>
-          <th>Healing Done</th>
+            <th id="killing-blows" class="th-elem" onClick="thfocus(this)">Killing Blows</th>
+            <th id="deaths" class="th-elem" onClick="thfocus(this)">Deaths</th>
+            <th id="honorable-kills" class="th-elem" onClick="thfocus(this)">Honorable Kills</th>
+            <th id="bonus-honor" class="th-elem" onClick="thfocus(this)">Bonus Honor</th>
+            <th id="damage-done" class="th-elem" onClick="thfocus(this)">Damage Done</th>
+            <th id="healing" class="th-elem" onClick="thfocus(this)">Healing Done</th>
 
-          <th>Attr1</th>
-          <th>Attr2</th>
-          <th>Attr3</th>
-          <th>Attr4</th>
-          <th>Attr5</th>
-        </tr>
+            <th id="attr1" class="th-elem" onClick="thfocus(this)">Attr1</th>
+            <th id="attr2" class="th-elem" onClick="thfocus(this)">Attr2</th>
+            <th id="attr3" class="th-elem" onClick="thfocus(this)">Attr3</th>
+            <th id="attr4" class="th-elem" onClick="thfocus(this)">Attr4</th>
+            <th id="attr5" class="th-elem" onClick="thfocus(this)">Attr5</th>
+          </tr>
+        </thead>
 
-        <?php
+        <tbody>
 
-          $query = sprintf("SELECT * FROM pvpstats_players WHERE battleground_id = %d",
-                     $id);
+          <?php
 
-          $result = $db->query($query);
+            $query = sprintf("SELECT * FROM pvpstats_players WHERE battleground_id = %d",
+                       $id);
 
-          if (!$result)
-            die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_players table.");
+            $result = $db->query($query);
 
-          while (($row = $result->fetch_array()) != null)
-          {
-            printf("<tr>");
+            if (!$result)
+              die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_players table.");
 
-            printf("<td>%s</td>", $row['battleground_id']);
-            printf("<td>%s</td>", $row['character_guid']);
+            while (($row = $result->fetch_array()) != null)
+            {
+              printf("<tr>");
 
-            printf("<td>%s</td>", $row['score_killing_blows']);
-            printf("<td>%s</td>", $row['score_deaths']);
-            printf("<td>%s</td>", $row['score_honorable_kills']);
-            printf("<td>%s</td>", $row['score_bonus_honor']);
-            printf("<td>%s</td>", $row['score_damage_done']);
-            printf("<td>%s</td>", $row['score_healing_done']);
+              printf("<td>%s</td>", $row['battleground_id']);
+              printf("<td>%s</td>", $row['character_guid']);
 
-            printf("<td>%s</td>", $row['attr_1']);
-            printf("<td>%s</td>", $row['attr_2']);
-            printf("<td>%s</td>", $row['attr_3']);
-            printf("<td>%s</td>", $row['attr_4']);
-            printf("<td>%s</td>", $row['attr_5']);
+              printf("<td>%s</td>", $row['score_killing_blows']);
+              printf("<td>%s</td>", $row['score_deaths']);
+              printf("<td>%s</td>", $row['score_honorable_kills']);
+              printf("<td>%s</td>", $row['score_bonus_honor']);
+              printf("<td>%s</td>", $row['score_damage_done']);
+              printf("<td>%s</td>", $row['score_healing_done']);
 
-            printf("</tr>");
-          }
-        ?>
+              printf("<td>%s</td>", $row['attr_1']);
+              printf("<td>%s</td>", $row['attr_2']);
+              printf("<td>%s</td>", $row['attr_3']);
+              printf("<td>%s</td>", $row['attr_4']);
+              printf("<td>%s</td>", $row['attr_5']);
+
+              printf("</tr>");
+            }
+          ?>
+
+        </tbody>
 
       </table>
 
       <?php } ?>
 
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/sortable.min.js"></script>
+    <script>
+    $(document).ready(function () {
+      $('#killing-blows').click();
+    });
+    function thfocus(element)
+    {
+      $('.th-elem').each(function() {
+        $( this ).css("color", "#FFF");
+      });
+
+      $(element).css("color", "yellow");
+    }
+    </script>
 
   </body>
 </html>
