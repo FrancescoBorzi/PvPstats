@@ -10,6 +10,9 @@ $horde_color = "#cd0a0e";
 $HORDE = 0;
 $ALLIANCE = 1;
 
+$HORDE_RACES = "2, 5, 6, 8, 10";
+$ALLIANCE_RACES = "1, 3, 4, 7, 11";
+
 $BATTLEGROUND_AV = 1;  // Alterac Valley
 $BATTLEGROUND_WS = 2;  // Warsong Gulch
 $BATTLEGROUND_AB = 3;  // Arathi Basin
