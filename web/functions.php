@@ -105,6 +105,9 @@ function getFactionScores($time_cond, $level_cond, $type_cond)
 
   $result = $db->query($query);
 
+  if (!$result)
+    die("Error querying: " . $query);
+
   $row = $result->fetch_row();
   $score[0] = $row[0];
 
@@ -142,6 +145,9 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
                    $limit);
 
   $result = $db->query($query);
+
+  if (!$result)
+    die("Error querying: " . $query);
 
   $row = $result->fetch_row();
 
@@ -209,6 +215,9 @@ function getGuildsScores($time_cond, $level_cond, $type_cond)
                    $limit_guilds);
 
   $result = $db->query($query);
+
+  if (!$result)
+    die("Error querying: " . $query);
 
   $row = $result->fetch_row();
 
