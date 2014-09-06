@@ -37,7 +37,7 @@ Battleground.StoreStatistics.Enable = 1
 
 6) Open the "**web**" folder of PvPstats and copy all contents into a new folder of your web server (e.g. /var/www/PvPstats)
 
-7) Open the file **config.php** and edit it properly (it's quite commented).
+7) Copy the file **config.php.dist** and rename the copy to **config.php**, then open and edit it properly (it's quite commented).
 
 Do not forget to set the parameters for database connections and your expansion.
 
