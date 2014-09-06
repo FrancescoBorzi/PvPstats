@@ -301,8 +301,9 @@
             </table>
           </div>
         </div>
-        <p>The victories of guilds are the amount of victories of each current guild member.</p>
       </div>
+
+      <p class="text-center" style="margin-top: 5px">The victories of guilds are the amount of victories of each current guild member.</p>
 
       <?php } ?>
 
