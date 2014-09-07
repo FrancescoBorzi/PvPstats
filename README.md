@@ -2,7 +2,7 @@ PvPstats
 ========
 # ![logo](https://raw.githubusercontent.com/ShinDarth/PvPstats/master/logo/PvPstats.png)
 
-This software **is still under development and testing phase** but feel free to use it.
+This software **is still under development and testing phase** but feel free to use it (**keep it updated!**).
 
 [Here](http://www.wowtrilogy.com/pvp/) there is a demo.
 
