@@ -77,6 +77,8 @@
 
       <?php if (!isset($id)) { ?>
 
+      <p class="lead text-center">Script under working!</p>
+
       <?php } else { ?>
 
       <table id="bg-table" class="table" data-sortable>
@@ -92,11 +94,55 @@
             <th id="damage-done" class="th-elem" onClick="thfocus(this)">Damage Done</th>
             <th id="healing" class="th-elem" onClick="thfocus(this)">Healing Done</th>
 
-            <th id="attr1" class="th-elem" onClick="thfocus(this)">Attr1</th>
-            <th id="attr2" class="th-elem" onClick="thfocus(this)">Attr2</th>
-            <th id="attr3" class="th-elem" onClick="thfocus(this)">Attr3</th>
-            <th id="attr4" class="th-elem" onClick="thfocus(this)">Attr4</th>
-            <th id="attr5" class="th-elem" onClick="thfocus(this)">Attr5</th>
+            <?php
+
+            switch($type)
+            {
+              case $BATTLEGROUND_AV:
+                $attrs = '<th id="attr1" class="th-elem" onClick="thfocus(this)">Graveyards Assaulted</th>'
+                       . '<th id="attr2" class="th-elem" onClick="thfocus(this)">Graveyards Defended</th>'
+                       . '<th id="attr3" class="th-elem" onClick="thfocus(this)">Towers Assaulted</th>'
+                       . '<th id="attr4" class="th-elem" onClick="thfocus(this)">Towers Defended</th>'
+                       . '<th id="attr5" class="th-elem" onClick="thfocus(this)">Mines Captured</th>';
+                $attr_count = 5;
+                break;
+
+              case $BATTLEGROUND_WS:
+                $attrs = '<th id="attr1" class="th-elem" onClick="thfocus(this)">Flags Captured</th>'
+                       . '<th id="attr2" class="th-elem" onClick="thfocus(this)">Flags Returned</th>';
+                $attr_count = 2;
+                break;
+
+              case $BATTLEGROUND_AB:
+              case $BATTLEGROUND_IC:
+                $attrs = '<th id="attr1" class="th-elem" onClick="thfocus(this)">Bases Assaulted</th>'
+                       . '<th id="attr2" class="th-elem" onClick="thfocus(this)">Bases Defended</th>';
+                $attr_count = 2;
+                break;
+
+              case $BATTLEGROUND_EY
+                       . '<th id="attr1" class="th-elem" onClick="thfocus(this)">Flags Captured</th>';
+                $attr_count = 1;
+                break;
+
+              case $BATTLEGROUND_SA:
+                $attrs = '<th id="attr1" class="th-elem" onClick="thfocus(this)">Demolishers Destroyed</th>'
+                       . '<th id="attr2" class="th-elem" onClick="thfocus(this)">Gates Destroyed</th>';
+                $attr_count = 2;
+                break;
+
+              default:
+                $attrs = '<th id="attr1" class="th-elem" onClick="thfocus(this)">Attr1</th>'
+                       . '<th id="attr2" class="th-elem" onClick="thfocus(this)">Attr2</th>'
+                       . '<th id="attr3" class="th-elem" onClick="thfocus(this)">Attr3</th>'
+                       . '<th id="attr4" class="th-elem" onClick="thfocus(this)">Attr4</th>'
+                       . '<th id="attr5" class="th-elem" onClick="thfocus(this)">Attr5</th>';
+                $attr_count = 5;
+            }
+
+            echo $attrs;
+
+            ?>
           </tr>
         </thead>
 
@@ -127,10 +173,25 @@
               printf("<td>%s</td>", $row['score_healing_done']);
 
               printf("<td>%s</td>", $row['attr_1']);
-              printf("<td>%s</td>", $row['attr_2']);
-              printf("<td>%s</td>", $row['attr_3']);
-              printf("<td>%s</td>", $row['attr_4']);
-              printf("<td>%s</td>", $row['attr_5']);
+
+              if ($attr_count > 1)
+              {
+                printf("<td>%s</td>", $row['attr_2']);
+
+                if ($attr_count > 2)
+                {
+                  printf("<td>%s</td>", $row['attr_3']);
+
+                  if ($attr_count > 3)
+                  {
+                    printf("<td>%s</td>", $row['attr_4']);
+
+                    if ($attr_count > 4)
+                      printf("<td>%s</td>", $row['attr_5']);
+                  }
+                }
+
+              }
 
               printf("</tr>");
             }
