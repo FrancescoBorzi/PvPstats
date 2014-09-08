@@ -7,6 +7,10 @@ body {
   font-weight: 900;
 }
 
+.dropdown-menu > li > a {
+  color: #888;
+}
+
 @media (min-width: 768px) {
   .navbar-center {
     margin: 0 auto;

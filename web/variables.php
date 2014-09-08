@@ -37,17 +37,20 @@ $month_condition = "MONTH(date) = MONTH(NOW()) AND YEAR(date) = YEAR(NOW())";
 switch ($expansion)
 {
   case 0:
-    $MAX_LEVEL = 6;
+    $MAX_BRACKET_ID = 6;
     break;
   case 1:
-    $MAX_LEVEL = 7;
+    $MAX_BRACKET_ID = 7;
     break;
   case 2:
-    $MAX_LEVEL = 8;
+    $MAX_BRACKET_ID = 8;
+    break;
+  case 3:
+    $MAX_BRACKET_ID = 16;
     break;
 }
 
-if (isset($_GET['level']) && $_GET['level'] <= $MAX_LEVEL && $_GET['level'] > 0)
+if (isset($_GET['level']) && $_GET['level'] <= $MAX_BRACKET_ID && $_GET['level'] > 0)
 {
   $level_condition = "bracket_id = " . $_GET['level'];
   $level = $_GET['level'];

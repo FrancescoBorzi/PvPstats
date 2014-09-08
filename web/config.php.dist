@@ -27,6 +27,7 @@
   #   0 = Classic
   #   1 = The Burning Crusade
   #   2 = Wrath of The Lich King
+  #   3 = Cataclysm
   $expansion = 2;
 
   # Connection to the database of characters (address, username, password, database)
