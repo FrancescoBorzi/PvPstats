@@ -10,15 +10,17 @@ $horde_color = "#cd0a0e";
 $HORDE = 0;
 $ALLIANCE = 1;
 
-$HORDE_RACES = "2, 5, 6, 8, 10";
-$ALLIANCE_RACES = "1, 3, 4, 7, 11";
+$HORDE_RACES = "2, 5, 6, 8, 9, 10";
+$ALLIANCE_RACES = "1, 3, 4, 7, 11, 22";
 
-$BATTLEGROUND_AV = 1;  // Alterac Valley
-$BATTLEGROUND_WS = 2;  // Warsong Gulch
-$BATTLEGROUND_AB = 3;  // Arathi Basin
-$BATTLEGROUND_EY = 7;  // Eye of the Storm
-$BATTLEGROUND_SA = 9;  // Strand of the Ancients
-$BATTLEGROUND_IC = 30; // Isle of Conquest
+$BATTLEGROUND_AV = 1;   // Alterac Valley
+$BATTLEGROUND_WS = 2;   // Warsong Gulch
+$BATTLEGROUND_AB = 3;   // Arathi Basin
+$BATTLEGROUND_EY = 7;   // Eye of the Storm
+$BATTLEGROUND_SA = 9;   // Strand of the Ancients
+$BATTLEGROUND_IC = 30;  // Isle of Conquest
+$BATTLEGROUND_TP  = 108; // Twin Peaks
+$BATTLEGROUND_BFG = 120; // Battle For Gilneas
 
 $limit = "LIMIT 0,20";
 $players_group_and_order = "GROUP BY character_guid ORDER BY count(character_guid) DESC";

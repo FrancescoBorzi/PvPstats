@@ -108,6 +108,7 @@
                 break;
 
               case $BATTLEGROUND_WS:
+              case $BATTLEGROUND_TP:
                 $attrs = '<th id="attr1" class="th-elem" onClick="thfocus(this)">Flags Captured</th>'
                        . '<th id="attr2" class="th-elem" onClick="thfocus(this)">Flags Returned</th>';
                 $attr_count = 2;
@@ -115,6 +116,7 @@
 
               case $BATTLEGROUND_AB:
               case $BATTLEGROUND_IC:
+              case $BATTLEGROUND_BFG:
                 $attrs = '<th id="attr1" class="th-elem" onClick="thfocus(this)">Bases Assaulted</th>'
                        . '<th id="attr2" class="th-elem" onClick="thfocus(this)">Bases Defended</th>';
                 $attr_count = 2;
