@@ -84,11 +84,6 @@ body {
   overflow: hidden;
 }
 
-.table > tbody > tr > td {
-  padding-left: 1px;
-  padding-right: 1px;
-}
-
 table a:not(.btn), .table a:not(.btn) {
   color: #FFF;
   text-decoration: none;

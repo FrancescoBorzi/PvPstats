@@ -20,6 +20,7 @@
 
     <link href="css/bootstrap-cyborg.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/index-style.css" rel="stylesheet">
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
