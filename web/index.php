@@ -197,7 +197,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_today ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_today ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div id="today-score-container" class="today-score-container score-container">
+          <div class="today-score-container score-container">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -219,7 +219,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_last7 ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_last7 ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div id="last7-score-container" class="last7-score-container score-container">
+          <div class="last7-score-container score-container">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -241,7 +241,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_month ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_month ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div id="month-score-container" class="month-score-container score-container">
+          <div class="month-score-container score-container">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -263,7 +263,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_overall ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_overall ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div id="overall-score-container" class="overall-score-container score-container">
+          <div class="overall-score-container score-container">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -433,12 +433,12 @@
         $('#toggle-today').click(function () {
           if ($('#toggle-today').html() == "More")
           {
-            $('#today-score-container').css("max-height", "798px");
+            $('.today-score-container').css("max-height", "798px");
             $('#toggle-today').html("Less");
           }
           else
           {
-            $('#today-score-container').css("max-height", "417px");
+            $('.today-score-container').css("max-height", "417px");
             $('#toggle-today').html("More");
           }
         });
@@ -446,12 +446,12 @@
         $('#toggle-last7').click(function () {
           if ($('#toggle-last7').html() == "More")
           {
-            $('#last7-score-container').css("max-height", "798px");
+            $('.last7-score-container').css("max-height", "798px");
             $('#toggle-last7').html("Less");
           }
           else
           {
-            $('#last7-score-container').css("max-height", "417px");
+            $('.last7-score-container').css("max-height", "417px");
             $('#toggle-last7').html("More");
           }
         });
@@ -459,12 +459,12 @@
         $('#toggle-month').click(function () {
           if ($('#toggle-month').html() == "More")
           {
-            $('#month-score-container').css("max-height", "798px");
+            $('.month-score-container').css("max-height", "798px");
             $('#toggle-month').html("Less");
           }
           else
           {
-            $('#month-score-container').css("max-height", "417px");
+            $('.month-score-container').css("max-height", "417px");
             $('#toggle-month').html("More");
           }
         });
@@ -472,12 +472,12 @@
         $('#toggle-overall').click(function () {
           if ($('#toggle-overall').html() == "More")
           {
-            $('#overall-score-container').css("max-height", "798px");
+            $('.overall-score-container').css("max-height", "798px");
             $('#toggle-overall').html("Less");
           }
           else
           {
-            $('#overall-score-container').css("max-height", "417px");
+            $('.overall-score-container').css("max-height", "417px");
             $('#toggle-overall').html("More");
           }
         });
