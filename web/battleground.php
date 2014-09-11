@@ -85,7 +85,7 @@
 
       <?php } else { ?>
 
-      <div id="bg-table-container">
+      <div id="bg-table-container" class="table-responsive">
         <table id="bg-table" class="table text-center" data-sortable>
           <thead>
             <tr>
