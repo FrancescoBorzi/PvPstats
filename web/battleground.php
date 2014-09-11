@@ -22,7 +22,21 @@
 
     $type = $row['type'];
     $winner_faction = $row['winner_faction'];
+    $bracket_id = $row['bracket_id'];
     $datetime = $row['date'];
+
+    switch($winner_faction)
+    {
+      case $ALLIANCE:
+        $winner_text = "<span style=\"color: " . $alliance_color . "\">The Alliance Won</span>";
+        break;
+      case $HORDE:
+        $winner_text = "<span style=\"color: " . $horde_color . "\">The Horde Won</span>";
+        break;
+      case $NONE:
+        $winner_text = "Draw";
+        break;
+    }
   }
 
 ?>
@@ -84,6 +98,18 @@
       <p class="lead text-center">BattleGround having id <strong><?= $id ?></strong> not found.</p>
 
       <?php } else { ?>
+
+      <div class="row">
+        <div class="col-xs-4">
+          <p class="lead text-left" style="color: white"><?= getLevelRangeByBracketId($bracket_id) ?></p>
+        </div>
+        <div class="col-xs-4">
+          <p class="lead text-center"><?= $winner_text ?></p>
+        </div>
+        <div class="col-xs-4">
+          <p class="lead text-right" style="color: white"><?= $datetime ?></p>
+        </div>
+      </div>
 
       <div id="bg-table-container" class="table-responsive">
         <table id="bg-table" class="table text-center" data-sortable>

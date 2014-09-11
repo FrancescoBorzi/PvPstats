@@ -256,4 +256,72 @@ function getGuildsScores($time_cond, $level_cond, $type_cond)
   }
 }
 
+function getLevelRangeByBracketId($bracket_id)
+{
+  global $expansion;
+
+  if ($expansion < 3)
+  {
+    switch ($bracket_id)
+    {
+      case 1:
+        return "10-19";
+      case 2:
+        return "20-29";
+      case 3:
+        return "30-39";
+      case 4:
+        return "40-49";
+      case 5:
+        return "50-59";
+      case 6:
+        if ($expansion > 0) return "60-69";
+        return "60";
+      case 7:
+        if ($expansion > 1) return "70-79";
+        return "70";
+      case 8:
+        return "80";
+    }
+  }
+  else
+  {
+    switch ($bracket_id)
+    {
+      case 1:
+        return "10-14";
+      case 2:
+        return "15-19";
+      case 3:
+        return "20-24";
+      case 4:
+        return "25-29";
+      case 5:
+        return "30-34";
+      case 6:
+        return "35-39";
+      case 7:
+        return "40-44";
+      case 8:
+        return "45-49";
+      case 9:
+        return "50-54";
+      case 10:
+        return "55-59";
+      case 11:
+        return "60-64";
+      case 12:
+        return "65-69";
+      case 13:
+        return "70-74";
+      case 14:
+        return "75-79";
+      case 15:
+        return "80-84";
+      case 16:
+        return "85";
+    }
+  }
+}
+
 ?>
