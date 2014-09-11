@@ -153,8 +153,8 @@
                   $attr_count = 2;
                   break;
 
-                case $BATTLEGROUND_EY
-                         . '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>';
+                case $BATTLEGROUND_EY:
+                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>';
                   $attr_count = 1;
                   break;
 
