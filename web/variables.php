@@ -9,6 +9,7 @@ $horde_color = "#cd0a0e";
 
 $HORDE = 0;
 $ALLIANCE = 1;
+$NONE = 2;
 
 $HORDE_RACES = "2, 5, 6, 8, 9, 10";
 $ALLIANCE_RACES = "1, 3, 4, 7, 11, 22";

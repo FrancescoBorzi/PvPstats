@@ -85,134 +85,136 @@
 
       <?php } else { ?>
 
-      <table id="bg-table" class="table text-center" data-sortable>
-        <thead>
-          <tr>
-            <th id="character" class="th-elem text-center" onClick="thfocus(this)">Character</th>
-            <th id="class" class="th-elem text-center" onClick="thfocus(this)">&#9679;</th>
+      <div id="bg-table-container">
+        <table id="bg-table" class="table text-center" data-sortable>
+          <thead>
+            <tr>
+              <th id="character" class="th-elem text-center" onClick="thfocus(this)">Character</th>
+              <th id="class" class="th-elem text-center" onClick="thfocus(this)">&#9679;</th>
 
-            <th id="killing-blows" class="th-elem text-center" onClick="thfocus(this)">Killing Blows</th>
-            <th id="deaths" class="th-elem text-center" onClick="thfocus(this)">Deaths</th>
-            <th id="honorable-kills" class="th-elem text-center" onClick="thfocus(this)">Honorable Kills</th>
-            <th id="bonus-honor" class="th-elem text-center" onClick="thfocus(this)">Bonus Honor</th>
-            <th id="damage-done" class="th-elem text-center" onClick="thfocus(this)">Damage Done</th>
-            <th id="healing" class="th-elem text-center" onClick="thfocus(this)">Healing Done</th>
+              <th id="killing-blows" class="th-elem text-center" onClick="thfocus(this)">Killing Blows</th>
+              <th id="deaths" class="th-elem text-center" onClick="thfocus(this)">Deaths</th>
+              <th id="honorable-kills" class="th-elem text-center" onClick="thfocus(this)">Honorable Kills</th>
+              <th id="bonus-honor" class="th-elem text-center" onClick="thfocus(this)">Bonus Honor</th>
+              <th id="damage-done" class="th-elem text-center" onClick="thfocus(this)">Damage Done</th>
+              <th id="healing" class="th-elem text-center" onClick="thfocus(this)">Healing Done</th>
+
+              <?php
+
+              switch($type)
+              {
+                case $BATTLEGROUND_AV:
+                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Graveyards Assaulted</th>'
+                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Graveyards Defended</th>'
+                         . '<th id="attr3" class="th-elem text-center" onClick="thfocus(this)">Towers Assaulted</th>'
+                         . '<th id="attr4" class="th-elem text-center" onClick="thfocus(this)">Towers Defended</th>'
+                         . '<th id="attr5" class="th-elem text-center" onClick="thfocus(this)">Mines Captured</th>';
+                  $attr_count = 5;
+                  break;
+
+                case $BATTLEGROUND_WS:
+                case $BATTLEGROUND_TP:
+                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>'
+                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Flags Returned</th>';
+                  $attr_count = 2;
+                  break;
+
+                case $BATTLEGROUND_AB:
+                case $BATTLEGROUND_IC:
+                case $BATTLEGROUND_BFG:
+                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Bases Assaulted</th>'
+                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Bases Defended</th>';
+                  $attr_count = 2;
+                  break;
+
+                case $BATTLEGROUND_EY
+                         . '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>';
+                  $attr_count = 1;
+                  break;
+
+                case $BATTLEGROUND_SA:
+                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Demolishers Destroyed</th>'
+                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Gates Destroyed</th>';
+                  $attr_count = 2;
+                  break;
+
+                default:
+                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Attr1</th>'
+                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Attr2</th>'
+                         . '<th id="attr3" class="th-elem text-center" onClick="thfocus(this)">Attr3</th>'
+                         . '<th id="attr4" class="th-elem text-center" onClick="thfocus(this)">Attr4</th>'
+                         . '<th id="attr5" class="th-elem text-center" onClick="thfocus(this)">Attr5</th>';
+                  $attr_count = 5;
+              }
+
+              echo $attrs;
+
+              ?>
+            </tr>
+          </thead>
+
+          <tbody>
 
             <?php
 
-            switch($type)
-            {
-              case $BATTLEGROUND_AV:
-                $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Graveyards Assaulted</th>'
-                       . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Graveyards Defended</th>'
-                       . '<th id="attr3" class="th-elem text-center" onClick="thfocus(this)">Towers Assaulted</th>'
-                       . '<th id="attr4" class="th-elem text-center" onClick="thfocus(this)">Towers Defended</th>'
-                       . '<th id="attr5" class="th-elem text-center" onClick="thfocus(this)">Mines Captured</th>';
-                $attr_count = 5;
-                break;
+              $query = sprintf("SELECT * FROM pvpstats_players WHERE battleground_id = %d",
+                         $id);
 
-              case $BATTLEGROUND_WS:
-              case $BATTLEGROUND_TP:
-                $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>'
-                       . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Flags Returned</th>';
-                $attr_count = 2;
-                break;
+              $result = $db->query($query);
 
-              case $BATTLEGROUND_AB:
-              case $BATTLEGROUND_IC:
-              case $BATTLEGROUND_BFG:
-                $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Bases Assaulted</th>'
-                       . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Bases Defended</th>';
-                $attr_count = 2;
-                break;
+              if (!$result)
+                die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_players table.");
 
-              case $BATTLEGROUND_EY
-                       . '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>';
-                $attr_count = 1;
-                break;
-
-              case $BATTLEGROUND_SA:
-                $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Demolishers Destroyed</th>'
-                       . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Gates Destroyed</th>';
-                $attr_count = 2;
-                break;
-
-              default:
-                $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Attr1</th>'
-                       . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Attr2</th>'
-                       . '<th id="attr3" class="th-elem text-center" onClick="thfocus(this)">Attr3</th>'
-                       . '<th id="attr4" class="th-elem text-center" onClick="thfocus(this)">Attr4</th>'
-                       . '<th id="attr5" class="th-elem text-center" onClick="thfocus(this)">Attr5</th>';
-                $attr_count = 5;
-            }
-
-            echo $attrs;
-
-            ?>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          <?php
-
-            $query = sprintf("SELECT * FROM pvpstats_players WHERE battleground_id = %d",
-                       $id);
-
-            $result = $db->query($query);
-
-            if (!$result)
-              die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_players table.");
-
-            while (($row = $result->fetch_array()) != null)
-            {
-              printf("<tr>");
-
-              printf("<td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td>",
-                     getPlayerColor($row['character_guid']),
-                     $armory_url,
-                     getPlayerName($row['character_guid']),
-                     getPlayerName($row['character_guid']));
-              printf("<td style=\"padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
-                     getPlayerClass($row['character_guid']),
-                     getPlayerRace($row['character_guid']),
-                     getPlayerGender($row['character_guid']));
-
-              printf("<td>%s</td>", $row['score_killing_blows']);
-              printf("<td>%s</td>", $row['score_deaths']);
-              printf("<td>%s</td>", $row['score_honorable_kills']);
-              printf("<td>%s</td>", $row['score_bonus_honor']);
-              printf("<td>%s</td>", $row['score_damage_done']);
-              printf("<td>%s</td>", $row['score_healing_done']);
-
-              printf("<td>%s</td>", $row['attr_1']);
-
-              if ($attr_count > 1)
+              while (($row = $result->fetch_array()) != null)
               {
-                printf("<td>%s</td>", $row['attr_2']);
+                printf("<tr>");
 
-                if ($attr_count > 2)
+                printf("<td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td>",
+                       getPlayerColor($row['character_guid']),
+                       $armory_url,
+                       getPlayerName($row['character_guid']),
+                       getPlayerName($row['character_guid']));
+                printf("<td style=\"padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
+                       getPlayerClass($row['character_guid']),
+                       getPlayerRace($row['character_guid']),
+                       getPlayerGender($row['character_guid']));
+
+                printf("<td>%s</td>", $row['score_killing_blows']);
+                printf("<td>%s</td>", $row['score_deaths']);
+                printf("<td>%s</td>", $row['score_honorable_kills']);
+                printf("<td>%s</td>", $row['score_bonus_honor']);
+                printf("<td>%s</td>", $row['score_damage_done']);
+                printf("<td>%s</td>", $row['score_healing_done']);
+
+                printf("<td>%s</td>", $row['attr_1']);
+
+                if ($attr_count > 1)
                 {
-                  printf("<td>%s</td>", $row['attr_3']);
+                  printf("<td>%s</td>", $row['attr_2']);
 
-                  if ($attr_count > 3)
+                  if ($attr_count > 2)
                   {
-                    printf("<td>%s</td>", $row['attr_4']);
+                    printf("<td>%s</td>", $row['attr_3']);
 
-                    if ($attr_count > 4)
-                      printf("<td>%s</td>", $row['attr_5']);
+                    if ($attr_count > 3)
+                    {
+                      printf("<td>%s</td>", $row['attr_4']);
+
+                      if ($attr_count > 4)
+                        printf("<td>%s</td>", $row['attr_5']);
+                    }
                   }
+
                 }
 
+                printf("</tr>");
               }
+            ?>
 
-              printf("</tr>");
-            }
-          ?>
+          </tbody>
 
-        </tbody>
-
-      </table>
+        </table>
+      </div>
 
       <?php } ?>
 
@@ -230,7 +232,27 @@
     <script>
     $(document).ready(function () {
       $('#killing-blows').click();
+
+      var winner_faction = <?= $winner_faction ?>;
+      var alliance = "blue";
+      var horde = "red";
+      var none = "grey";
+
+      switch (winner_faction)
+      {
+          case <?= $ALLIANCE ?>:
+            $('#bg-table-container').css("border", "1px solid " + alliance);
+            break;
+          case <?= $HORDE ?>:
+             $('#bg-table-container').css("border", "1px solid " + horde);
+             break;
+          case <?= $NONE ?>:
+             $('#bg-table-container').css("border", "1px solid " + none);
+             break;
+      }
+
     });
+
     function thfocus(element)
     {
       $('.th-elem').each(function() {
