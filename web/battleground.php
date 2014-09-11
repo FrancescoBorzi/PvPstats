@@ -16,7 +16,7 @@
     $result = $db->query($query);
 
     if (!$result)
-      die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_battlegrounds table");
+      die("Error querying: " . $query);
 
     $row = $result->fetch_array();
 
@@ -78,6 +78,10 @@
       <?php if (!isset($id)) { ?>
 
       <p class="lead text-center">Script under working!</p>
+
+      <?php } else if ($result->num_rows == 0) { ?>
+
+      <p class="lead text-center">BattleGround having id <strong><?= $id ?></strong> not found.</p>
 
       <?php } else { ?>
 
