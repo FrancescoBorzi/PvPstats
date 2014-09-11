@@ -123,7 +123,7 @@ function getFactionScores($time_cond, $level_cond, $type_cond)
 
 function getPlayersScores($time_cond, $level_cond, $type_cond)
 {
-  global $db, $limit, $players_group_and_order, $amory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
+  global $db, $limit, $players_group_and_order, $armory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
 
   if ($time_cond != "")
     $time_cond = "AND " . $time_cond;
@@ -161,7 +161,7 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
   printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
          $position,
          getPlayerColor($row[0]),
-         $amory_url,
+         $armory_url,
          getPlayerName($row[0]),
          getPlayerName($row[0]),
          getPlayerClass($row[0]),
@@ -180,7 +180,7 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
     printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
            $position,
            getPlayerColor($row[0]),
-           $amory_url,
+           $armory_url,
            getPlayerName($row[0]),
            getPlayerName($row[0]),
            getPlayerClass($row[0]),
