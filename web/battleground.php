@@ -168,7 +168,11 @@
             {
               printf("<tr>");
 
-              printf("<td>%s</td>", $row['battleground_id']);
+              printf("<td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td>",
+                     getPlayerColor($row['character_guid']),
+                     $amory_url,
+                     getPlayerName($row['character_guid']),
+                     getPlayerName($row['character_guid']));
               printf("<td>%s</td>", $row['character_guid']);
 
               printf("<td>%s</td>", $row['score_killing_blows']);
