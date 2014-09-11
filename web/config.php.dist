@@ -33,6 +33,17 @@
   # Connection to the database of characters (address, username, password, database)
   $db = new mysqli("localhost","root","password","characters");
 
+  # Dates and times format
+  # Reference: http://php.net/manual/en/function.date.php
+  $date_format = "Y-m-d";
+  $time_format = "H:i:s";
+
+  # Show additional statistics in battleground.php page
+  # (guild members amount, day scores, month scores, other battlegrounds of day)
+  #   0 = don't show
+  #   1 = show
+  $additional_statistics = 1;
+
   # Debug
   #   0 = Debug mode disabled
   #   1 = Debug mode enabled

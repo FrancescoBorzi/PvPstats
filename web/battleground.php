@@ -23,15 +23,41 @@
     $type = $row['type'];
     $winner_faction = $row['winner_faction'];
     $bracket_id = $row['bracket_id'];
-    $datetime = $row['date'];
+    $datetime = new DateTime($row['date']);
+
+    $bracket_level_range = getLevelRangeByBracketId($bracket_id);
+
+    $date = $datetime->format($date_format);
+    $time = $datetime->format($time_format);
+
+    $month = $datetime->format('M');
+    $year = $datetime->format('Y');
+
+    $month_and_year = $month . " " . $year;
+
+    $this_day_condition = "DATE(date) = DATE('" . $row['date'] . "')";
+    $this_month_condition = "MONTH(date) = MONTH('" . $row['date'] . "') AND YEAR(date) = YEAR('" . $row['date'] . "')";
+    $this_level_condition = "bracket_id = " . $bracket_id;
+
+    $score_this_day = getFactionScores($this_day_condition, $this_level_condition, "");
+    $score_this_month = getFactionScores($this_month_condition, $this_level_condition, "");
+
+    $alliance_today = $score_today[0];
+    $horde_today = $score_today[1];
+
+    $alliance_this_day = $score_this_day[0];
+    $horde_this_day = $score_this_day[1];
+
+    $alliance_this_month = $score_this_month[0];
+    $horde_this_month = $score_this_month[1];
 
     switch($winner_faction)
     {
       case $ALLIANCE:
-        $winner_text = "<span style=\"color: " . $alliance_color . "\">The Alliance Won</span>";
+        $winner_text = "<span style=\"color: " . $alliance_color . "\">Alliance Wins</span>";
         break;
       case $HORDE:
-        $winner_text = "<span style=\"color: " . $horde_color . "\">The Horde Won</span>";
+        $winner_text = "<span style=\"color: " . $horde_color . "\">Horde Wins</span>";
         break;
       case $NONE:
         $winner_text = "Draw";
@@ -101,18 +127,18 @@
 
       <div class="row">
         <div class="col-xs-4">
-          <p class="lead text-left" style="color: white"><?= getLevelRangeByBracketId($bracket_id) ?></p>
+          <p class="lead text-left" style="color: white"><?= $bracket_level_range ?></p>
         </div>
         <div class="col-xs-4">
           <p class="lead text-center"><?= $winner_text ?></p>
         </div>
         <div class="col-xs-4">
-          <p class="lead text-right" style="color: white"><?= $datetime ?></p>
+          <p class="lead text-right" style="color: white"><?= $date ?> <?= $time ?></p>
         </div>
       </div>
 
       <div id="bg-table-container" class="table-responsive">
-        <table id="bg-table" class="table text-center" data-sortable>
+        <table id="bg-table" class="table table-hover text-center" data-sortable>
           <thead>
             <tr>
               <th id="character" class="th-elem text-center" onClick="thfocus(this)">Character</th>
@@ -242,6 +268,100 @@
         </table>
       </div>
 
+      <?php if ($additional_statistics != 0) { ?>
+      <br>
+
+      <div class="row text-center">
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
+          <p class="h4">Guild Members</p>
+          <div class="score-faction-container">
+            Amount of members joined this BG
+          </div>
+          <div class="guild-members-container score-container" style="border: 1px solid grey">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Guild</th>
+                  <th class="text-center">Members</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php // TODO ?>
+              </tbody>
+            </table>
+          </div>
+          <button id="toggle-guild-members" type="button" class="btn btn-default btn-xs">More</button>
+        </div>
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
+          <p class="h4"><?= $date ?> (<?= $bracket_level_range ?>)</p>
+          <div class="score-faction-container">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_this_day ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_this_day ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+          </div>
+          <div class="this-day-score-container score-container">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Character</th>
+                  <th class="text-center">&#9679;</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getPlayersScores($this_day_condition, $this_level_condition, "") ?>
+              </tbody>
+            </table>
+          </div>
+          <button id="toggle-this-day" type="button" class="btn btn-default btn-xs">More</button>
+        </div>
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
+          <p class="h4"><?= $month_and_year ?> (<?= $bracket_level_range ?>)</p>
+          <div class="score-faction-container">
+            <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_this_month ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_this_month ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
+          </div>
+          <div class="this-month-score-container score-container">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Character</th>
+                  <th class="text-center">&#9679;</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getPlayersScores($this_month_condition, $this_level_condition, $type_condition) ?>
+              </tbody>
+            </table>
+          </div>
+          <button id="toggle-this-month" type="button" class="btn btn-default btn-xs">More</button>
+        </div>
+        <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
+          <p class="h4">BattleGrounds of the day</p>
+          <div class="score-faction-container">
+            All BattleGrounds played <?= $date ?>
+          </div>
+          <div class="bg-day-container score-container" style="border: 1px solid grey">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">BattleGround</th>
+                  <th class="text-center">End time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php // TODO ?>
+              </tbody>
+            </table>
+          </div>
+          <button id="toggle-bg-day" type="button" class="btn btn-default btn-xs">More</button>
+        </div>
+      </div>
+
+      <?php } ?>
+
       <?php } ?>
 
     </div>
@@ -276,6 +396,88 @@
              $('#bg-table-container').css("border", "1px solid " + none);
              break;
       }
+
+      <?php if ($additional_statistics > 0) { ?>
+
+      if (<?= $alliance_this_day ?> > <?= $horde_this_day ?>)
+      {
+        $('.this-day-score-container').css("border", "1px solid " + alliance);
+      }
+      else if (<?= $alliance_this_day ?> < <?= $horde_this_day ?>)
+      {
+        $('.this-day-score-container').css("border", "1px solid " + horde);
+      }
+      else
+      {
+        $('.this-day-score-container').css("border", "1px solid " + none);
+      }
+
+      if (<?= $alliance_this_month ?> > <?= $horde_this_month ?>)
+      {
+        $('.this-month-score-container').css("border", "1px solid " + alliance);
+      }
+      else if (<?= $alliance_this_month ?> < <?= $horde_this_month ?>)
+      {
+        $('.this-month-score-container').css("border", "1px solid " + horde);
+      }
+      else
+      {
+        $('.this-month-score-container').css("border", "1px solid " + none);
+      }
+
+      $('#toggle-guild-members').click(function () {
+        if ($('#toggle-guild-members').html() == "More")
+        {
+          $('.guild-members-score-container').css("max-height", "798px");
+          $('#toggle-guild-members').html("Less");
+        }
+        else
+        {
+          $('.guild-members-score-container').css("max-height", "417px");
+          $('#toggle-guild-members').html("More");
+        }
+      });
+
+      $('#toggle-this-day').click(function () {
+        if ($('#toggle-this-day').html() == "More")
+        {
+          $('.this-day-score-container').css("max-height", "798px");
+          $('#toggle-this-day').html("Less");
+        }
+        else
+        {
+          $('.this-day-score-container').css("max-height", "417px");
+          $('#toggle-this-day').html("More");
+        }
+      });
+
+      $('#toggle-this-month').click(function () {
+        if ($('#toggle-this-month').html() == "More")
+        {
+          $('.this-month-score-container').css("max-height", "798px");
+          $('#toggle-this-month').html("Less");
+        }
+        else
+        {
+          $('.this-month-score-container').css("max-height", "417px");
+          $('#toggle-this-month').html("More");
+        }
+      });
+
+      $('#toggle-bg-day').click(function () {
+        if ($('#toggle-bg-day').html() == "More")
+        {
+          $('.bg-day-score-container').css("max-height", "798px");
+          $('#toggle-bg-day').html("Less");
+        }
+        else
+        {
+          $('.bg-day-score-container').css("max-height", "417px");
+          $('#toggle-bg-day').html("More");
+        }
+      });
+
+      <?php } ?>
 
     });
 
