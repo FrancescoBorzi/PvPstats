@@ -198,12 +198,15 @@
           <div class="last7-score-container score-container">
             <table class="table table-striped">
               <thead>
-              <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Guild</th>
-                <th class="text-center">Victories</th>
-              </tr>
-              <?php getGuildsScores($last7_condition, $level_condition, $type_condition) ?>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Guild</th>
+                  <th class="text-center">Victories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getGuildsScores($last7_condition, $level_condition, $type_condition) ?>
+              </tbody>
             </table>
           </div>
         </div>
