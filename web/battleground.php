@@ -96,7 +96,7 @@
   <body>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
+      <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -180,7 +180,7 @@
           <input style="width: 50px" name="day" type="text" class="form-control" value="<?= $day ?>" placeholder="Day">
         </div>
         <div class="form-group">
-          <select id="select-month" name="month">
+          <select id="select-month" name="month" class="text-center">
             <option id="month0" value="0">All months</option>
             <option id="month1" value="1">January </option>
             <option id="month2" value="2">February</option>
@@ -200,7 +200,7 @@
           <input style="width: 65px" name="year" type="text" class="form-control" value="<?= $year ?>" placeholder="Year">
         </div>
         <div class="form-group">
-          <select id="select-type" name="type">
+          <select id="select-type" name="type" class="text-center">
             <option value="0">All types</option>
             <option value="<?= $BATTLEGROUND_AV ?>" <?= $BATTLEGROUND_AV_sel ?>>Alterac Valley</option>
             <option value="<?= $BATTLEGROUND_WS ?>" <?= $BATTLEGROUND_WS_sel ?>>Warsong Gulch</option>
@@ -217,7 +217,7 @@
           </select>
         </div>
         <div class="form-group">
-          <select id="select-level" name="level">
+          <select id="select-level" name="level" class="text-center">
             <option value="0">All levels</option>
             <?php
             if ($expansion < 3)
