@@ -59,6 +59,6 @@ Screenshots will come soon!
 
 ## Install
 
-- [How to install PvPstats system in TrinityCore](https://github.com/ShinDarth/PvPstats/blob/master/INSTALL-TrinityCore.md)
+- [How to install PvPstats system in TrinityCore](https://github.com/ShinDarth/PvPstats/blob/master/docs/INSTALL-TrinityCore.md)
 
-- [How to install PvPstats system in CMaNGOS](https://github.com/ShinDarth/PvPstats/blob/master/INSTALL-CMaNGOS.md)
+- [How to install PvPstats system in CMaNGOS](https://github.com/ShinDarth/PvPstats/blob/master/docs/INSTALL-CMaNGOS.md)

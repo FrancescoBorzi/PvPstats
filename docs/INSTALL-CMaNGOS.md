@@ -1,7 +1,7 @@
 How to install PvPstats system in CMaNGOS
 ========
 
-1) Clone the repository:
+1) Clone the repository into your web server (e.g. /var/www/):
 ```
 git clone https://github.com/ShinDarth/PvPstats.git
 ```
@@ -35,9 +35,7 @@ If one of these patches returns an error, it probably means I have to update it 
 Battleground.StoreStatistics.Enable = 1
 ```
 
-6) Open the "**web**" folder of PvPstats and copy all contents into a new folder of your web server (e.g. /var/www/PvPstats)
-
-7) Copy the file **config.php.dist** and rename the copy to **config.php**, then open and edit it properly (it's quite commented).
+6) Copy the file **config.php.dist** and rename the copy to **config.php**, then open and edit it properly (it's quite commented).
 
 Do not forget to set the parameters for database connections and your expansion.
 
