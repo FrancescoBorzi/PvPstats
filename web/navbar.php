@@ -2,7 +2,7 @@
 <li><a class="nohover hidden-xs">&#9679;</a></li>
 <?php
 
-$BATTLEGROUND_AV_sel = $BATTLEGROUND_WS_sel = $BATTLEGROUND_AB_sel = $BATTLEGROUND_EY_sel = $BATTLEGROUND_SA_sel = $BATTLEGROUND_IC_sel = "";
+$BATTLEGROUND_AV_sel = $BATTLEGROUND_WS_sel = $BATTLEGROUND_AB_sel = $BATTLEGROUND_EY_sel = $BATTLEGROUND_SA_sel = $BATTLEGROUND_IC_sel = $BATTLEGROUND_TP_sel = $BATTLEGROUND_BFG_sel = "";
 
 if (isset($_GET['type']))
 {
@@ -25,6 +25,12 @@ if (isset($_GET['type']))
       break;
     case $BATTLEGROUND_IC:
       $BATTLEGROUND_IC_sel = "selected";
+      break;
+    case $BATTLEGROUND_TP:
+      $BATTLEGROUND_TP_sel = "selected";
+      break;
+    case $BATTLEGROUND_BFG:
+      $BATTLEGROUND_BFG_sel = "selected";
       break;
   }
 }
