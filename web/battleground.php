@@ -199,6 +199,7 @@
         <div class="form-group">
           <input style="width: 65px" name="year" type="text" class="form-control" value="<?= $year ?>" placeholder="Year">
         </div>
+        <span style="color: white" class="nohover hidden-xs hidden-sm">&#9679;</span>
         <div class="form-group">
           <select id="select-type" name="type" class="text-center">
             <option value="0">All types</option>
@@ -216,6 +217,7 @@
             <?php } } } ?>
           </select>
         </div>
+        <span style="color: white" class="nohover hidden-xs hidden-sm">&#9679;</span>
         <div class="form-group">
           <select id="select-level" name="level" class="text-center">
             <option value="0">All levels</option>
@@ -269,6 +271,7 @@
             <?php } ?>
           </select>
         </div>
+        <span style="color: white" class="nohover hidden-xs hidden-sm">&#9679;</span>
         <div class="form-group">
           <input style="width: 50px" name="limit" type="text" class="form-control" value="<?= $limit ?>" placeholder="20">
         </div>
@@ -278,15 +281,15 @@
       <br>
       <div style="padding: 0 10px;">
           <p class="h4 text-center">Search results:</p>
-          <div style="border: 1px solid grey">
-            <table class="table table-hover text-center">
+          <div style="border: 1px solid grey" class="table-responsive">
+            <table class="table table-hover text-center" data-sortable>
               <thead>
                 <tr>
-                  <th class="text-center">#</th>
-                  <th class="text-center">Type</th>
-                  <th class="text-center">Level Bracket</th>
-                  <th class="text-center">End Date</th>
-                  <th class="text-center">End Time</th>
+                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">#</th>
+                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">Type</th>
+                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">Level Bracket</th>
+                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">End Date</th>
+                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">End Time</th>
                 </tr>
               </thead>
               <tbody>
@@ -677,7 +680,7 @@
     function thfocus(element)
     {
       $('.th-elem').each(function() {
-        $( this ).css("color", "#FFF");
+        $(this).css("color", "#FFF");
       });
 
       $(element).css("color", "yellow");
