@@ -120,9 +120,150 @@
 
       <div class="main-title"></div>
 
-      <?php if (!isset($id)) { ?>
+      <?php
+      if (!isset($id))
+      {
+        $day = "";
+        $year = date("Y");
+        $month = 0;
+        $level = 0;
+        $search = 0;
+        $correct = true;
 
-      <p class="lead text-center">Script under working!</p>
+        if (isset($_GET['search']) && $_GET['search'] == 1)
+        {
+          if (isset($_GET['day']) && $_GET['day'] != "")
+          {
+            if (is_numeric($_GET['day']) && $_GET['day'] > 0 && $_GET['day'] <= 31)
+              $day    = $_GET['day'];
+            else
+              $correct = false;
+          }
+          if (isset($_GET['year']) && $_GET['year'] != "")
+          {
+            if (is_numeric($_GET['year']) && $_GET['year'] > 2000 && $_GET['year'] <= date("Y"))
+              $year   = $_GET['year'];
+            else
+              $correct = false;
+          }
+          if (isset($_GET['month']) && $_GET['month'] != "")
+          {
+            if (is_numeric($_GET['month']) && $_GET['month'] > 0 && $_GET['month'] <= 12)
+              $month  = $_GET['month'];
+            else
+              $correct = false;
+          }
+          if (isset($_GET['level']) && $_GET['level'] != "")
+          {
+            if (is_numeric($_GET['level']) && $_GET['level'] >= 0)
+              $level  = $_GET['level'];
+            else
+              $correct = false;
+          }
+
+          $search = 1;
+        }
+
+      ?>
+
+      <form class="form-inline text-center" role="form" method="GET">
+        <input name="search" type="hidden" value="1">
+        <div class="form-group">
+          <input style="width: 50px" name="day" type="text" class="form-control" value="<?= $day ?>">
+        </div>
+        <div class="form-group">
+          <select id="select-month" name="month">
+            <option id="month0" value="0">All months</option>
+            <option id="month1" value="1">January </option>
+            <option id="month2" value="2">February</option>
+            <option id="month3" value="3">March</option>
+            <option id="month4" value="4">April</option>
+            <option id="month5" value="5">May </option>
+            <option id="month6" value="6">June </option>
+            <option id="month7" value="7">July</option>
+            <option id="month8" value="8">August</option>
+            <option id="month9" value="9">September</option>
+            <option id="month10" value="10">October</option>
+            <option id="month11" value="11">November</option>
+            <option id="month12" value="12">December</option>
+          </select>
+
+        </div>
+        <div class="form-group">
+          <input style="width: 65px" name="year" type="text" class="form-control" value="<?= $year ?>">
+        </div>
+        <div class="form-group">
+          <select id="select-type" name="type">
+            <option value="0">All types</option>
+            <option value="<?= $BATTLEGROUND_AV ?>" <?= $BATTLEGROUND_AV_sel ?>>Alterac Valley</option>
+            <option value="<?= $BATTLEGROUND_WS ?>" <?= $BATTLEGROUND_WS_sel ?>>Warsong Gulch</option>
+            <option value="<?= $BATTLEGROUND_AB ?>" <?= $BATTLEGROUND_AB_sel ?>>Arathi Basin</option>
+            <?php if ($expansion > 0) { ?>
+            <option value="<?= $BATTLEGROUND_EY ?>" <?= $BATTLEGROUND_EY_sel ?>>Eye of the Storm</option>
+            <?php if ($expansion > 1) { ?>
+            <option value="<?= $BATTLEGROUND_SA ?>" <?= $BATTLEGROUND_SA_sel ?>>Strand of the Ancients</option>
+            <option value="<?= $BATTLEGROUND_IC ?>" <?= $BATTLEGROUND_IC_sel ?>>Isle of Conquest</option>
+            <?php if ($expansion > 2) { ?>
+            <option value="<?= $BATTLEGROUND_TP ?>" <?= $BATTLEGROUND_TP_sel ?>>Twin Peaks</option>
+            <option value="<?= $BATTLEGROUND_BFG ?>" <?= $BATTLEGROUND_BFG_sel ?>>Battle For Gilneas</option>
+            <?php } } } ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <select id="select-level" name="level">
+            <option value="0">All levels</option>
+            <?php
+            if ($expansion < 3)
+            {
+              switch ($expansion)
+              {
+                case 0: // Classic only
+                  ?>
+            <option value="6">60</option>
+                  <?php
+                  break;
+                case 1: // TBC only
+                  ?>
+            <option value="7<?= $type_link ?>">70</a></li>
+            <option value="6"></option>60-69
+                  <?php
+                  break;
+                case 2: // WOTLK only
+                  ?>
+            <option value="8">80</option>
+            <option value="7">70-79</option>
+            <option value="6">60-69</option>
+                  <?php
+                  break;
+              }
+            ?>
+            <option value="5">50-59</option>
+            <option value="4">40-49</option>
+            <option value="3">30-39</option>
+            <option value="2">20-29</option>
+            <option value="1">10-19</option>
+            <?php } else { ?>
+            <option value="16">85</option>
+            <option value="15">80-84</option>
+            <option value="14">75-79</option>
+            <option value="13">70-74</option>
+            <option value="12">65-69</option>
+            <option value="11">60-64</option>
+            <option value="10">55-59</option>
+            <option value="9">50-54</option>
+            <option value="8">45-49</option>
+            <option value="7">40-44</option>
+            <option value="6">35-39</option>
+            <option value="5">30-34</option>
+            <option value="4">25-29</option>
+            <option value="3">20-24</option>
+            <option value="2">15-19</option>
+            <option value="1">10-14</option>
+            <?php } ?>
+          </select>
+        </div>
+        <button id="search" type="submit" class="btn btn-default">Search</button>
+      </form>
 
       <?php } else if ($result->num_rows == 0) { ?>
 
@@ -388,6 +529,12 @@
       <?php if (!isset($id) || $result->num_rows == 0) { ?>
 
       $('#detailed-scores').addClass("active");
+      $("#select-month option[value='<?= $month ?>']").attr("selected","selected");
+      $("#select-level option[value='<?= $level ?>']").attr("selected","selected");
+
+      <?php if (!$correct) { ?>
+      $('#search').click();
+      <?php } ?>
 
       <?php } else { ?>
 
