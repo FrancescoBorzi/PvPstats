@@ -20,6 +20,8 @@ body {
   }
 }
 
+.nohover:hover { color: #888 !important; }
+
 .main-title {
   padding: 20px 15px 10px;
   text-align: center;

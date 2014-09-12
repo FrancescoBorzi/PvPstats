@@ -5,7 +5,6 @@
   require_once("functions.php");
   require_once("factionScores.php");
 
-
   if (isset($_GET['id']) && is_numeric($_GET['id']))
   {
     $id = $_GET['id'];
@@ -106,6 +105,9 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-center">
+          <?php if (!isset($id) || $result->num_rows == 0) { require_once("navbar.php"); } else { ?>
+          <li><a href="battleground.php">&larr; Back</a></li>
+          <?php } ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -377,6 +379,13 @@
     <script src="js/sortable.min.js"></script>
     <script>
     $(document).ready(function () {
+
+      <?php if (!isset($id) || $result->num_rows == 0) { ?>
+
+      $('#detailed-scores').addClass("active");
+
+      <?php } else { ?>
+
       $('#killing-blows').click();
 
       var winner_faction = <?= $winner_faction ?>;
@@ -477,6 +486,7 @@
         }
       });
 
+      <?php } ?>
       <?php } ?>
 
     });
