@@ -124,9 +124,10 @@
       if (!isset($id))
       {
         $day = "";
-        $year = date("Y");
+        $year = date("Y"); // year should NEVER be null
         $month = 0;
         $level = 0;
+        $limit = 20;
         $search = 0;
         $correct = true;
 
@@ -148,7 +149,7 @@
           }
           if (isset($_GET['month']) && $_GET['month'] != "")
           {
-            if (is_numeric($_GET['month']) && $_GET['month'] > 0 && $_GET['month'] <= 12)
+            if (is_numeric($_GET['month']) && $_GET['month'] >= 0 && $_GET['month'] <= 12)
               $month  = $_GET['month'];
             else
               $correct = false;
@@ -157,6 +158,13 @@
           {
             if (is_numeric($_GET['level']) && $_GET['level'] >= 0)
               $level  = $_GET['level'];
+            else
+              $correct = false;
+          }
+          if (isset($_GET['limit']) && $_GET['limit'] != "")
+          {
+            if (is_numeric($_GET['limit']) && $_GET['limit'] > 0 && $_GET['limit'] <= $max_results_allowed)
+              $level  = $_GET['limit'];
             else
               $correct = false;
           }
@@ -169,7 +177,7 @@
       <form class="form-inline text-center" role="form" method="GET">
         <input name="search" type="hidden" value="1">
         <div class="form-group">
-          <input style="width: 50px" name="day" type="text" class="form-control" value="<?= $day ?>">
+          <input style="width: 50px" name="day" type="text" class="form-control" value="<?= $day ?>" placeholder="Day">
         </div>
         <div class="form-group">
           <select id="select-month" name="month">
@@ -187,10 +195,9 @@
             <option id="month11" value="11">November</option>
             <option id="month12" value="12">December</option>
           </select>
-
         </div>
         <div class="form-group">
-          <input style="width: 65px" name="year" type="text" class="form-control" value="<?= $year ?>">
+          <input style="width: 65px" name="year" type="text" class="form-control" value="<?= $year ?>" placeholder="Year">
         </div>
         <div class="form-group">
           <select id="select-type" name="type">
@@ -262,8 +269,32 @@
             <?php } ?>
           </select>
         </div>
+        <div class="form-group">
+          <input style="width: 50px" name="limit" type="text" class="form-control" value="<?= $limit ?>" placeholder="20">
+        </div>
         <button id="search" type="submit" class="btn btn-default">Search</button>
       </form>
+
+      <br>
+      <div style="padding: 0 10px;">
+          <p class="h4 text-center">Search results:</p>
+          <div style="border: 1px solid grey">
+            <table class="table table-hover text-center">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Type</th>
+                  <th class="text-center">Level Bracket</th>
+                  <th class="text-center">End Date</th>
+                  <th class="text-center">End Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php getBattleGrounds($day, $month, $year, $level_condition, $type_condition, $limit); ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
       <?php } else if ($result->num_rows == 0) { ?>
 

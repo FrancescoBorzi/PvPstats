@@ -37,6 +37,9 @@
   # Reference: http://php.net/manual/en/function.date.php
   $date_format = "Y-m-d";
   $time_format = "H:i:s";
+  
+  # Max number of results allowed in battleground.php search
+  $max_results_allowed = 500;
 
   # Show additional statistics in battleground.php page
   # (guild members amount, day scores, month scores, other battlegrounds of day)

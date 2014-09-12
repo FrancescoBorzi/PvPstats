@@ -336,6 +336,70 @@ function getBattleGroundsOfDay($date)
   }
 }
 
+function getBattleGrounds($day, $month, $year, $level_cond, $type_cond, $limit)
+{
+  global $db, $date_format, $time_format, $ALLIANCE, $HORDE, $alliance_color, $horde_color;
+
+  if ($year != "")
+    $year_cond = sprintf("YEAR(date) = '%s'", $year);
+  else
+    die("Function getBattleGrounds() called passing year = null");
+
+  if ($month != "" && $month != 0)
+    $month_cond = sprintf("AND MONTH(date) = '%s'", $month);
+  else
+    $month_cond = "";
+
+  if ($day != "")
+    $day_cond = sprintf("AND DAY(date) = '%s'", $day);
+  else
+    $day_cond = "";
+
+  if ($level_cond != "")
+    $level_cond = "AND " . $level_cond;
+  else
+    $level_cond = "";
+
+  if ($type_cond != "")
+    $type_cond = "AND " . $type_cond;
+  else
+    $type_cond = "";
+
+  $query = sprintf("SELECT * FROM pvpstats_battlegrounds WHERE %s %s %s %s %s ORDER BY date DESC LIMIT 0, %d;",
+                   $year_cond,
+                   $month_cond,
+                   $day_cond,
+                   $level_cond,
+                   $type_cond,
+                   $limit);
+
+  $result = $db->query($query);
+
+  if (!$result)
+    die("Error querying: " . $query);
+
+  while (($row = $result->fetch_array()) != null)
+  {
+    $datetime = new DateTime($row['date']);
+    $date = $datetime->format($date_format);
+    $time = $datetime->format($time_format);
+
+    if ($row['winner_faction'] == $ALLIANCE)
+      $color = $alliance_color;
+    else if ($row['winner_faction'] == $HORDE)
+      $color = $horde_color;
+
+    printf("<tr style=\"color: %s; font-weight: bold;\" class=\"hover-pointer\" onClick=\"location.href='battleground.php?id=%s'\"><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr></a>",
+           $color,
+           $row['id'],
+           $row['id'],
+           getBattleGroundTypeName($row['type']),
+           getLevelRangeByBracketId($row['bracket_id']),
+           $date,
+           $time);
+  }
+}
+
 function getLevelRangeByBracketId($bracket_id)
 {
   global $expansion;
