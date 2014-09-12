@@ -164,7 +164,7 @@
           if (isset($_GET['limit']) && $_GET['limit'] != "")
           {
             if (is_numeric($_GET['limit']) && $_GET['limit'] > 0 && $_GET['limit'] <= $max_results_allowed)
-              $level  = $_GET['limit'];
+              $limit  = $_GET['limit'];
             else
               $correct = false;
           }
