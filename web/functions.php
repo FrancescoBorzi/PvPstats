@@ -256,6 +256,86 @@ function getGuildsScores($time_cond, $level_cond, $type_cond)
   }
 }
 
+function getGuildsMembers($battleground_id)
+{
+  global $db, $limit_guilds, $guilds_group_and_order, $guild_amory_url;
+
+  $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE pvpstats_battlegrounds.id = %s %s",
+                   $battleground_id,
+                   $guilds_group_and_order);
+
+  $result = $db->query($query);
+
+  if (!$result)
+    die("Error querying: " . $query);
+
+  $row = $result->fetch_row();
+
+  if ($row == null)
+    return;
+
+  $position = 1;
+
+  printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
+         $position,
+         getGuildColor($row[2]),
+         $guild_amory_url,
+         $row[0],
+         $row[0],
+         $row[1]);
+
+  $prev_score = $row[1];
+
+
+  while (($row = $result->fetch_row()) != null)
+  {
+    if ($prev_score != $row[1])
+      $position++;
+
+    printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
+           $position,
+           getGuildColor($row[2]),
+           $guild_amory_url,
+           $row[0],
+           $row[0],
+           $row[1]);
+
+    $prev_score = $row[1];
+  }
+}
+
+function getBattleGroundsOfDay($date)
+{
+  global $db, $time_format, $ALLIANCE, $HORDE, $alliance_color, $horde_color;
+
+  $query = sprintf("SELECT * FROM pvpstats_battlegrounds WHERE DATE(date) = DATE('%s') ORDER BY date DESC;",
+                  $date);
+
+  $result = $db->query($query);
+
+  if (!$result)
+    die("Error querying: " . $query);
+
+  while (($row = $result->fetch_array()) != null)
+  {
+    $datetime = new DateTime($row['date']);
+    $time = $datetime->format($time_format);
+
+    if ($row['winner_faction'] == $ALLIANCE)
+      $color = $alliance_color;
+    else if ($row['winner_faction'] == $HORDE)
+      $color = $horde_color;
+
+    printf("<tr style=\"color: %s; font-weight: bold;\" class=\"hover-pointer\" onClick=\"location.href='battleground.php?id=%s'\"><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr></a>",
+           $color,
+           $row['id'],
+           $row['id'],
+           getBattleGroundTypeShortName($row['type']),
+           getLevelRangeByBracketId($row['bracket_id']),
+           $time);
+  }
+}
+
 function getLevelRangeByBracketId($bracket_id)
 {
   global $expansion;
@@ -321,6 +401,56 @@ function getLevelRangeByBracketId($bracket_id)
       case 16:
         return "85";
     }
+  }
+}
+
+function getBattleGroundTypeName($type)
+{
+  global $BATTLEGROUND_AV, $BATTLEGROUND_WS, $BATTLEGROUND_AB, $BATTLEGROUND_EY, $BATTLEGROUND_SA, $BATTLEGROUND_IC, $BATTLEGROUND_TP, $BATTLEGROUND_BFG;
+
+  switch($type)
+  {
+    case $BATTLEGROUND_AV:
+      return "Alterac Valley";
+    case $BATTLEGROUND_WS:
+      return "Warsong Gulch";
+    case $BATTLEGROUND_AB:
+      return "Arathi Basin";
+    case $BATTLEGROUND_EY:
+      return "Eye of the Storm";
+    case $BATTLEGROUND_SA:
+      return "Strand of the Ancients";
+    case $BATTLEGROUND_IC:
+      return "Isle of Conquest";
+    case $BATTLEGROUND_TP:
+      return "Twin Peaks";
+    case $BATTLEGROUND_BFG:
+      return "Battle For Gilneas";
+  }
+}
+
+function getBattleGroundTypeShortName($type)
+{
+  global $BATTLEGROUND_AV, $BATTLEGROUND_WS, $BATTLEGROUND_AB, $BATTLEGROUND_EY, $BATTLEGROUND_SA, $BATTLEGROUND_IC, $BATTLEGROUND_TP, $BATTLEGROUND_BFG;
+
+  switch($type)
+  {
+    case $BATTLEGROUND_AV:
+      return "AV";
+    case $BATTLEGROUND_WS:
+      return "WG";
+    case $BATTLEGROUND_AB:
+      return "AB";
+    case $BATTLEGROUND_EY:
+      return "EotS";
+    case $BATTLEGROUND_SA:
+      return "SotA";
+    case $BATTLEGROUND_IC:
+      return "IoC";
+    case $BATTLEGROUND_TP:
+      return "TP";
+    case $BATTLEGROUND_BFG:
+      return "BFG";
   }
 }
 

@@ -98,7 +98,8 @@ table a:not(.btn), .table a:not(.btn) {
   margin-top: 5px;
 }
 
-#bg-table th {
+#bg-table th,
+.hover-pointer {
   cursor: pointer;
 }
 

@@ -25,6 +25,7 @@
     $datetime = new DateTime($row['date']);
 
     $bracket_level_range = getLevelRangeByBracketId($bracket_id);
+    $type_name = getBattleGroundTypeName($type);
 
     $date = $datetime->format($date_format);
     $time = $datetime->format($time_format);
@@ -129,13 +130,13 @@
 
       <div class="row">
         <div class="col-xs-4">
-          <p class="lead text-left" style="color: white"><?= $bracket_level_range ?></p>
+          <p class="lead text-left"><span style="color: yellow">[<?= $bracket_level_range ?>]</span> <span style="color: white"><?= $type_name ?></span></p>
         </div>
         <div class="col-xs-4">
           <p class="lead text-center"><?= $winner_text ?></p>
         </div>
         <div class="col-xs-4">
-          <p class="lead text-right" style="color: white"><?= $date ?> <?= $time ?></p>
+          <p class="lead text-right" style="color: white"><?= $date ?> <span style="color: pink">[<?= $time ?>]</span></p>
         </div>
       </div>
 
@@ -289,14 +290,14 @@
                 </tr>
               </thead>
               <tbody>
-                <?php // TODO ?>
+                <?php getGuildsMembers($id) ?>
               </tbody>
             </table>
           </div>
           <button id="toggle-guild-members" type="button" class="btn btn-default btn-xs">More</button>
         </div>
         <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
-          <p class="h4"><?= $date ?> (<?= $bracket_level_range ?>)</p>
+          <p class="h4"><?= $date ?> <span style="color: yellow">[<?= $bracket_level_range ?>]</span></p>
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_this_day ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_this_day ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
@@ -318,7 +319,7 @@
           <button id="toggle-this-day" type="button" class="btn btn-default btn-xs">More</button>
         </div>
         <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
-          <p class="h4"><?= $month_and_year ?> (<?= $bracket_level_range ?>)</p>
+          <p class="h4"><?= $month_and_year ?> <span style="color: yellow">[<?= $bracket_level_range ?>]</span></p>
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_this_month ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_this_month ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
@@ -345,16 +346,17 @@
             All BattleGrounds played <?= $date ?>
           </div>
           <div class="bg-day-container score-container" style="border: 1px solid grey">
-            <table class="table table-striped">
+            <table class="table table-hover">
               <thead>
                 <tr>
                   <th class="text-center">#</th>
-                  <th class="text-center">BattleGround</th>
+                  <th class="text-center">Type</th>
+                  <th class="text-center">&#9679;</th>
                   <th class="text-center">End time</th>
                 </tr>
               </thead>
               <tbody>
-                <?php // TODO ?>
+                <?php getBattleGroundsOfDay($date); ?>
               </tbody>
             </table>
           </div>
