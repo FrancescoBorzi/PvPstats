@@ -16,52 +16,54 @@
 
     if (!$result)
       die("Error querying: " . $query);
-
-    $row = $result->fetch_array();
-
-    $type = $row['type'];
-    $winner_faction = $row['winner_faction'];
-    $bracket_id = $row['bracket_id'];
-    $datetime = new DateTime($row['date']);
-
-    $bracket_level_range = getLevelRangeByBracketId($bracket_id);
-    $type_name = getBattleGroundTypeName($type);
-
-    $date = $datetime->format($date_format);
-    $time = $datetime->format($time_format);
-
-    $month = $datetime->format('M');
-    $year = $datetime->format('Y');
-
-    $month_and_year = $month . " " . $year;
-
-    $this_day_condition = "DATE(date) = DATE('" . $row['date'] . "')";
-    $this_month_condition = "MONTH(date) = MONTH('" . $row['date'] . "') AND YEAR(date) = YEAR('" . $row['date'] . "')";
-    $this_level_condition = "bracket_id = " . $bracket_id;
-
-    $score_this_day = getFactionScores($this_day_condition, $this_level_condition, "");
-    $score_this_month = getFactionScores($this_month_condition, $this_level_condition, "");
-
-    $alliance_today = $score_today[0];
-    $horde_today = $score_today[1];
-
-    $alliance_this_day = $score_this_day[0];
-    $horde_this_day = $score_this_day[1];
-
-    $alliance_this_month = $score_this_month[0];
-    $horde_this_month = $score_this_month[1];
-
-    switch($winner_faction)
+    else if ($result->num_rows > 0)
     {
-      case $ALLIANCE:
-        $winner_text = "<span style=\"color: " . $alliance_color . "\">Alliance Wins</span>";
-        break;
-      case $HORDE:
-        $winner_text = "<span style=\"color: " . $horde_color . "\">Horde Wins</span>";
-        break;
-      case $NONE:
-        $winner_text = "Draw";
-        break;
+      $row = $result->fetch_array();
+
+      $type = $row['type'];
+      $winner_faction = $row['winner_faction'];
+      $bracket_id = $row['bracket_id'];
+      $datetime = new DateTime($row['date']);
+
+      $bracket_level_range = getLevelRangeByBracketId($bracket_id);
+      $type_name = getBattleGroundTypeName($type);
+
+      $date = $datetime->format($date_format);
+      $time = $datetime->format($time_format);
+
+      $month = $datetime->format('M');
+      $year = $datetime->format('Y');
+
+      $month_and_year = $month . " " . $year;
+
+      $this_day_condition = "DATE(date) = DATE('" . $row['date'] . "')";
+      $this_month_condition = "MONTH(date) = MONTH('" . $row['date'] . "') AND YEAR(date) = YEAR('" . $row['date'] . "')";
+      $this_level_condition = "bracket_id = " . $bracket_id;
+
+      $score_this_day = getFactionScores($this_day_condition, $this_level_condition, "");
+      $score_this_month = getFactionScores($this_month_condition, $this_level_condition, "");
+
+      $alliance_today = $score_today[0];
+      $horde_today = $score_today[1];
+
+      $alliance_this_day = $score_this_day[0];
+      $horde_this_day = $score_this_day[1];
+
+      $alliance_this_month = $score_this_month[0];
+      $horde_this_month = $score_this_month[1];
+
+      switch($winner_faction)
+      {
+        case $ALLIANCE:
+          $winner_text = "<span style=\"color: " . $alliance_color . "\">Alliance Wins</span>";
+          break;
+        case $HORDE:
+          $winner_text = "<span style=\"color: " . $horde_color . "\">Horde Wins</span>";
+          break;
+        case $NONE:
+          $winner_text = "Draw";
+          break;
+      }
     }
   }
 
@@ -125,6 +127,7 @@
       <?php } else if ($result->num_rows == 0) { ?>
 
       <p class="lead text-center">BattleGround having id <strong><?= $id ?></strong> not found.</p>
+      <p class="lead text-center"><a href="battleground.php">&larr; Back</a></p>
 
       <?php } else { ?>
 
