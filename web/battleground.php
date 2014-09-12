@@ -177,7 +177,7 @@
       <form class="form-inline text-center" role="form" method="GET">
         <input name="search" type="hidden" value="1">
         <div class="form-group">
-          <input style="width: 50px" name="day" type="text" class="form-control" value="<?= $day ?>" placeholder="Day">
+          <input class="form-control text-center" style="width: 50px; height: 26px; padding: 2px;" name="day" type="text" value="<?= $day ?>" placeholder="Day">
         </div>
         <div class="form-group">
           <select id="select-month" name="month" class="text-center">
@@ -197,7 +197,7 @@
           </select>
         </div>
         <div class="form-group">
-          <input style="width: 65px" name="year" type="text" class="form-control" value="<?= $year ?>" placeholder="Year">
+          <input class="form-control text-center" style="width: 65px; height: 26px; padding: 2px;" name="year" type="text" value="<?= $year ?>" placeholder="Year">
         </div>
         <span style="color: white" class="nohover hidden-xs hidden-sm">&#9679;</span>
         <div class="form-group">
@@ -273,7 +273,7 @@
         </div>
         <span style="color: white" class="nohover hidden-xs hidden-sm">&#9679;</span>
         <div class="form-group">
-          <input style="width: 50px" name="limit" type="text" class="form-control" value="<?= $limit ?>" placeholder="20">
+          Display <input class="form-control text-center" style="width: 50px; height: 26px; padding: 2px;" name="limit" type="text" value="<?= $limit ?>" placeholder="20"> results
         </div>
         <button id="search" type="submit" class="btn btn-default">Search</button>
       </form>
