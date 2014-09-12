@@ -103,6 +103,10 @@ table a:not(.btn), .table a:not(.btn) {
   cursor: pointer;
 }
 
+.form-control {
+  display: inline-block;
+}
+
 #footer {
   margin-top: 40px;
 }

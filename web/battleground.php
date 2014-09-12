@@ -173,7 +173,7 @@
         }
 
       ?>
-
+      <p class="h4 text-center">Search for detailed scores:</p>
       <form class="form-inline text-center" role="form" method="GET">
         <input name="search" type="hidden" value="1">
         <div class="form-group">
