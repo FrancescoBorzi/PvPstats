@@ -1,24 +1,25 @@
-From 1aac4d56e289edb603a6bd8d98709aed4595c9fc Mon Sep 17 00:00:00 2001
+From a74d986972a95ebc2f4d921b0ba5e9ce841a4361 Mon Sep 17 00:00:00 2001
 From: ShinDarth <borzifrancesco@gmail.com>
 Date: Mon, 1 Sep 2014 17:41:17 +0200
 Subject: [PATCH] PvPstats patch
 
+Signed-off-by: ShinDarth <borzifrancesco@gmail.com>
 ---
- src/game/BattleGround/BattleGround.cpp | 44 ++++++++++++++++++++++++++++++++++
- src/game/BattleGround/BattleGround.h   | 11 +++++++++
- src/game/BattleGround/BattleGroundAB.h |  4 ++++
- src/game/BattleGround/BattleGroundAV.h |  7 ++++++
- src/game/BattleGround/BattleGroundWS.h |  4 ++++
+ src/game/BattleGround/BattleGround.cpp | 47 ++++++++++++++++++++++++++++++++++
+ src/game/BattleGround/BattleGround.h   | 11 ++++++++
+ src/game/BattleGround/BattleGroundAB.h |  4 +++
+ src/game/BattleGround/BattleGroundAV.h |  7 +++++
+ src/game/BattleGround/BattleGroundWS.h |  4 +++
  src/game/World.cpp                     |  1 +
  src/game/World.h                       |  1 +
  src/mangosd/mangosd.conf.dist.in       |  6 +++++
- 8 files changed, 78 insertions(+)
+ 8 files changed, 81 insertions(+)
 
 diff --git a/src/game/BattleGround/BattleGround.cpp b/src/game/BattleGround/BattleGround.cpp
-index 6d948c0..a89ac20 100644
+index 6d948c0..cacb36f 100644
 --- a/src/game/BattleGround/BattleGround.cpp
 +++ b/src/game/BattleGround/BattleGround.cpp
-@@ -587,17 +587,39 @@ void BattleGround::EndBattleGround(Team winner)
+@@ -587,19 +587,44 @@ void BattleGround::EndBattleGround(Team winner)
      WorldPacket data;
      int32 winmsg_id = 0;
 
@@ -35,8 +36,8 @@ index 6d948c0..a89ac20 100644
 +
 +        if (result)
 +        {
-+        Field* fields = result->Fetch();
-+        battleground_id = fields[0].GetUInt64() + 1;
++            Field* fields = result->Fetch();
++            battleground_id = fields[0].GetUInt64() + 1;
 +        }
 +    }
 +
@@ -57,12 +58,16 @@ index 6d948c0..a89ac20 100644
 +        winner_faction = 0;
      }
 
++    if (sWorld.getConfig(CONFIG_BOOL_BATTLEGROUND_STORE_STATISTICS_ENABLE))
++        stmt.PExecute(battleground_id, winner_faction, GetMinLevel()/10, (uint8)GetTypeID());
++
      SetWinner(winner);
-@@ -638,6 +660,28 @@ void BattleGround::EndBattleGround(Team winner)
 
+     SetStatus(STATUS_WAIT_LEAVE);
+@@ -639,6 +664,28 @@ void BattleGround::EndBattleGround(Team winner)
          // this line is obsolete - team is set ALWAYS
          // if(!team) team = plr->GetTeam();
-+
+
 +        if (sWorld.getConfig(CONFIG_BOOL_BATTLEGROUND_STORE_STATISTICS_ENABLE))
 +        {
 +            BattleGroundScoreMap::iterator score = m_PlayerScores.find(itr->first);
@@ -84,9 +89,10 @@ index 6d948c0..a89ac20 100644
 +
 +            stmt.Execute();
 +        }
-
++
          if (team == winner)
          {
+             RewardMark(plr, ITEM_WINNER_COUNT);
 diff --git a/src/game/BattleGround/BattleGround.h b/src/game/BattleGround/BattleGround.h
 index 7817d2c..b3c3a76 100644
 --- a/src/game/BattleGround/BattleGround.h

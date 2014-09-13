@@ -59,7 +59,7 @@ index 9f186c9..dcfe991 100644
      }
  
 +    if (isBattleGround() && sWorld.getConfig(CONFIG_BOOL_BATTLEGROUND_STORE_STATISTICS_ENABLE))
-+        stmt.PExecute(battleground_id, winner_faction, m_BracketId + 1, (uint8)GetTypeID());
++        stmt.PExecute(battleground_id, winner_faction, GetMinLevel()/10, (uint8)GetTypeID());
 +
      SetWinner(winner);
  
