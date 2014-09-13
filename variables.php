@@ -4,6 +4,7 @@
 
 $alliance_color = "#1a67f4";
 $horde_color = "#cd0a0e";
+$none_color = "#888";
 
 // query variables
 

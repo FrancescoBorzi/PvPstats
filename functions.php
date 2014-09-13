@@ -338,7 +338,7 @@ function getBattleGroundsOfDay($date)
 
 function getBattleGrounds($day, $month, $year, $level_cond, $type_cond, $limit)
 {
-  global $db, $date_format, $time_format, $ALLIANCE, $HORDE, $alliance_color, $horde_color;
+  global $db, $date_format, $time_format, $ALLIANCE, $HORDE, $alliance_color, $horde_color, $none_color;
 
   if ($year != "")
     $year_cond = sprintf("YEAR(date) = '%s'", $year);
@@ -388,6 +388,8 @@ function getBattleGrounds($day, $month, $year, $level_cond, $type_cond, $limit)
       $color = $alliance_color;
     else if ($row['winner_faction'] == $HORDE)
       $color = $horde_color;
+    else
+      $color = $none_color;
 
     printf("<tr style=\"color: %s; font-weight: bold;\" class=\"hover-pointer\" onClick=\"location.href='battleground.php?id=%s'\"><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr></a>",
            $color,
