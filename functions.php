@@ -158,12 +158,20 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
 
   $position = 1;
 
-  printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
+  if (!(isset($armory_url)) || $armory_url == "")
+    $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                           getPlayerColor($row[0]),
+                           getPlayerName($row[0]));
+  else
+    $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                           getPlayerColor($row[0]),
+                           $armory_url,
+                           getPlayerName($row[0]),
+                           getPlayerName($row[0]));
+
+  printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
          $position,
-         getPlayerColor($row[0]),
-         $armory_url,
-         getPlayerName($row[0]),
-         getPlayerName($row[0]),
+         $player_name,
          getPlayerClass($row[0]),
          getPlayerRace($row[0]),
          getPlayerGender($row[0]),
@@ -177,12 +185,20 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
     if ($prev_score != $row[1])
       $position++;
 
-    printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
+    if (!(isset($armory_url)) || $armory_url == "")
+      $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                             getPlayerColor($row[0]),
+                             getPlayerName($row[0]));
+    else
+      $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                             getPlayerColor($row[0]),
+                             $armory_url,
+                             getPlayerName($row[0]),
+                             getPlayerName($row[0]));
+
+    printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
            $position,
-           getPlayerColor($row[0]),
-           $armory_url,
-           getPlayerName($row[0]),
-           getPlayerName($row[0]),
+           $player_name,
            getPlayerClass($row[0]),
            getPlayerRace($row[0]),
            getPlayerGender($row[0]),
@@ -194,7 +210,7 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
 
 function getGuildsScores($time_cond, $level_cond, $type_cond)
 {
-  global $db, $limit, $limit_guilds, $guilds_group_and_order, $guild_amory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
+  global $db, $limit, $limit_guilds, $guilds_group_and_order, $guild_armory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
 
   if ($time_cond != "")
     $time_cond = "AND " . $time_cond;
@@ -228,12 +244,20 @@ function getGuildsScores($time_cond, $level_cond, $type_cond)
 
   $position = 1;
 
-  printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
+  if (!(isset($guild_armory_url)) || $guild_armory_url == "")
+    $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                           getGuildColor($row[2]),
+                           $row[0]);
+  else
+    $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                           getGuildColor($row[2]),
+                           $guild_armory_url,
+                           $row[0],
+                           $row[0]);
+
+  printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
          $position,
-         getGuildColor($row[2]),
-         $guild_amory_url,
-         $row[0],
-         $row[0],
+         $guild_name,
          $row[1]);
 
   $prev_score = $row[1];
@@ -244,12 +268,20 @@ function getGuildsScores($time_cond, $level_cond, $type_cond)
     if ($prev_score != $row[1])
       $position++;
 
-    printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
+    if (!(isset($guild_armory_url)) || $guild_armory_url == "")
+      $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                             getGuildColor($row[2]),
+                             $row[0]);
+    else
+      $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                             getGuildColor($row[2]),
+                             $guild_armory_url,
+                             $row[0],
+                             $row[0]);
+
+    printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
            $position,
-           getGuildColor($row[2]),
-           $guild_amory_url,
-           $row[0],
-           $row[0],
+           $guild_name,
            $row[1]);
 
     $prev_score = $row[1];
@@ -258,7 +290,7 @@ function getGuildsScores($time_cond, $level_cond, $type_cond)
 
 function getGuildsMembers($battleground_id)
 {
-  global $db, $limit_guilds, $guilds_group_and_order, $guild_amory_url;
+  global $db, $limit_guilds, $guilds_group_and_order, $guild_armory_url;
 
   $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE pvpstats_battlegrounds.id = %s %s",
                    $battleground_id,
@@ -276,12 +308,20 @@ function getGuildsMembers($battleground_id)
 
   $position = 1;
 
-  printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
+  if (!(isset($guild_armory_url)) || $guild_armory_url == "")
+    $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                           getGuildColor($row[2]),
+                           $row[0]);
+  else
+    $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                           getGuildColor($row[2]),
+                           $guild_armory_url,
+                           $row[0],
+                           $row[0]);
+
+  printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
          $position,
-         getGuildColor($row[2]),
-         $guild_amory_url,
-         $row[0],
-         $row[0],
+         $guild_name,
          $row[1]);
 
   $prev_score = $row[1];
@@ -292,12 +332,20 @@ function getGuildsMembers($battleground_id)
     if ($prev_score != $row[1])
       $position++;
 
-    printf("<tr><td>%d</td><td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td><td>%d</td></tr>",
+    if (!(isset($guild_armory_url)) || $guild_armory_url == "")
+      $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                             getGuildColor($row[2]),
+                             $row[0]);
+    else
+      $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                             getGuildColor($row[2]),
+                             $guild_armory_url,
+                             $row[0],
+                             $row[0]);
+
+    printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
            $position,
-           getGuildColor($row[2]),
-           $guild_amory_url,
-           $row[0],
-           $row[0],
+           $guild_name,
            $row[1]);
 
     $prev_score = $row[1];
@@ -306,7 +354,7 @@ function getGuildsMembers($battleground_id)
 
 function getBattleGroundsOfDay($date)
 {
-  global $db, $time_format, $ALLIANCE, $HORDE, $alliance_color, $horde_color;
+  global $db, $time_format, $ALLIANCE, $HORDE, $alliance_color, $horde_color, $none_color;
 
   $query = sprintf("SELECT * FROM pvpstats_battlegrounds WHERE DATE(date) = DATE('%s') ORDER BY date DESC;",
                   $date);
@@ -325,6 +373,8 @@ function getBattleGroundsOfDay($date)
       $color = $alliance_color;
     else if ($row['winner_faction'] == $HORDE)
       $color = $horde_color;
+    else
+      $color = $none_color;
 
     printf("<tr style=\"color: %s; font-weight: bold;\" class=\"hover-pointer\" onClick=\"location.href='battleground.php?id=%s'\"><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr></a>",
            $color,

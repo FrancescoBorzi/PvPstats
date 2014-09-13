@@ -10,10 +10,12 @@
   $server_logo = "img/PvPstats.png";
 
   # Your server armory url including character name param
+  # (set it blank if you don't have it)
   $armory_url = "http://www.truewow.org/armory/character.php?n=";
 
   # Your server armory url including guild name param
-  $guild_amory_url = "http://www.truewow.org/armory/guild.php?n=";
+  # (set it blank if you don't have it)
+  $guild_armory_url = "http://www.truewow.org/armory/guild.php?n=";
 
   # The date PvPstats system is online from
   $online_from = "01/08/2014";

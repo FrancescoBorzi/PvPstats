@@ -402,11 +402,20 @@
               {
                 printf("<tr>");
 
-                printf("<td><a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a></td>",
-                       getPlayerColor($row['character_guid']),
-                       $armory_url,
-                       getPlayerName($row['character_guid']),
-                       getPlayerName($row['character_guid']));
+                if (!(isset($armory_url)) || $armory_url == "")
+                  $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                                         getPlayerColor($row['character_guid']),
+                                         getPlayerName($row['character_guid']));
+                else
+                  $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                                         getPlayerColor($row['character_guid']),
+                                         $armory_url,
+                                         getPlayerName($row['character_guid']),
+                                         getPlayerName($row['character_guid']));
+
+                printf("<td>%s</td>",
+                       $player_name);
+
                 printf("<td style=\"padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
                        getPlayerClass($row['character_guid']),
                        getPlayerRace($row['character_guid']),
