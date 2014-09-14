@@ -54,15 +54,21 @@ function getPlayerColor($guid)
     case 4:
     case 7:
     case 11:
+    case 22:
       $color = $alliance_color;
       break;
+
     case 2:
     case 5:
     case 6:
     case 8:
+    case 9:
     case 10:
       $color = $horde_color;
       break;
+
+    default:
+      $color = "";
   }
 
   return $color;
@@ -91,6 +97,9 @@ function getGuildName($guildid)
 function getGuildColor($guildid)
 {
   global $db;
+
+  if (!$guildid)
+    return "";
 
   $query = sprintf("SELECT leaderguid FROM guild WHERE guildid = %d", $guildid);
   $row = $db->query($query)->fetch_row();
@@ -247,9 +256,9 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
   }
 }
 
-function getGuildsScores($time_cond, $level_cond, $type_cond)
+function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
 {
-  global $db, $limit, $limit_guilds, $guilds_group_and_order, $guild_armory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
+  global $db, $limit_guilds, $guilds_group_and_order, $guild_armory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
 
   if ($time_cond != "")
     $time_cond = "AND " . $time_cond;
@@ -260,6 +269,11 @@ function getGuildsScores($time_cond, $level_cond, $type_cond)
   if ($type_cond != "")
     $type_cond = "AND " . $type_cond;
 
+  if ($top100)
+    $query_limit = "LIMIT 0, 100";
+  else
+    $query_limit = $limit_guilds;
+
   $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE ((characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d ) OR (characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d )) %s %s %s %s %s",
                    $ALLIANCE_RACES,
                    $ALLIANCE,
@@ -269,7 +283,7 @@ function getGuildsScores($time_cond, $level_cond, $type_cond)
                    $level_cond,
                    $type_cond,
                    $guilds_group_and_order,
-                   $limit_guilds);
+                   $query_limit);
 
   $result = $db->query($query);
 
@@ -523,6 +537,113 @@ function getBattleGrounds($day, $month, $year, $level_cond, $type_cond, $limit)
            getLevelRangeByBracketId($row['bracket_id']),
            $date,
            $time);
+  }
+}
+
+function getTop100Players()
+{
+  global $db, $players_group_and_order, $armory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
+
+  $query = sprintf("SELECT character_guid, count(character_guid) AS count, characters.name as character_name, characters.level as character_level FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE ((characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d ) OR (characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d )) %s LIMIT 0,100",
+                   $ALLIANCE_RACES,
+                   $ALLIANCE,
+                   $HORDE_RACES,
+                   $HORDE,
+                   $players_group_and_order);
+
+  $result = $db->query($query);
+
+  if (!$result)
+    die("Error querying: " . $query);
+
+  $row = $result->fetch_array();
+
+  if ($row == null)
+    return;
+
+  $position = 1;
+
+  if (!(isset($armory_url)) || $armory_url == "")
+    $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                           getPlayerColor($row['character_guid']),
+                           $row['character_name']);
+  else
+    $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                           getPlayerColor($row['character_guid']),
+                           $armory_url,
+                           $row['character_name'],
+                           $row['character_name']);
+
+  $player_guild = getPlayerGuild($row['character_guid']);
+
+  printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><span style=\"color: %s\">%s</span></strong></td><td>%d</td></tr>",
+         $position,
+         $player_name,
+         getPlayerClass($row['character_guid']),
+         getPlayerRace($row['character_guid']),
+         getPlayerGender($row['character_guid']),
+         $row['character_level'],
+         getGuildColor($player_guild),
+         getGuildName($player_guild),
+         $row['count']);
+
+  $prev_score = $row['count'];
+
+  if (!(isset($armory_url)) || $armory_url == "")
+  {
+    while (($row = $result->fetch_array()) != null)
+    {
+      if ($prev_score != $row['count'])
+        $position++;
+
+      $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                             getPlayerColor($row['character_guid']),
+                             $row['character_name']);
+
+      $player_guild = getPlayerGuild($row['character_guid']);
+
+      printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><span style=\"color: %s\">%s</span></strong></td><td>%d</td></tr>",
+             $position,
+             $player_name,
+             getPlayerClass($row['character_guid']),
+             getPlayerRace($row['character_guid']),
+             getPlayerGender($row['character_guid']),
+             $row['character_level'],
+             getGuildColor($player_guild),
+             getGuildName($player_guild),
+             $row['count']);
+
+      $prev_score = $row['count'];
+    }
+  }
+  else
+  {
+    while (($row = $result->fetch_array()) != null)
+    {
+      if ($prev_score != $row['count'])
+        $position++;
+
+      $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                             getPlayerColor($row['character_guid']),
+                             $armory_url,
+                             $row['character_name'],
+                             $row['character_name']);
+
+      $player_guild = getPlayerGuild($row['character_guid']);
+
+      printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><span style=\"color: %s\">%s</span></strong></td><td>%d</td></tr>",
+             $position,
+             $player_name,
+             getPlayerClass($row['character_guid']),
+             getPlayerRace($row['character_guid']),
+             getPlayerGender($row['character_guid']),
+             $row['character_level'],
+             getGuildColor($player_guild),
+             getGuildName($player_guild),
+             $row['count']);
+
+      $prev_score = $row['count'];
+    }
   }
 }
 

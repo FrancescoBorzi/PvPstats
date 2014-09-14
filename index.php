@@ -44,7 +44,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="visible-xs navbar-brand" href="#"><?= $server_name ?> PvPstats</a>
+          <a class="visible-xs visible-sm navbar-brand" href="#"><?= $server_name ?> PvPstats</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-center">

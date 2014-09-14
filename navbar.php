@@ -1,5 +1,5 @@
 <li class="link-all"><a href="index.php<?= $type_link_all ?>">All Levels</a></li>
-<li><a class="nohover hidden-xs hidden-sm">&#9679;</a></li>
+<li><a class="nohover visible-lg">&#9679;</a></li>
 <?php
 
 $BATTLEGROUND_AV_sel = $BATTLEGROUND_WS_sel = $BATTLEGROUND_AB_sel = $BATTLEGROUND_EY_sel = $BATTLEGROUND_SA_sel = $BATTLEGROUND_IC_sel = $BATTLEGROUND_TP_sel = $BATTLEGROUND_BFG_sel = "";
@@ -115,5 +115,7 @@ else
 <?php
 }
 ?>
-<li><a class="nohover hidden-xs hidden-sm">&#9679;</a></li>
+<li><a class="nohover visible-lg">&#9679;</a></li>
 <li id="detailed-scores"><a href="battleground.php">Detailed Scores</a></li>
+<li><a class="nohover visible-lg">&#9679;</a></li>
+<li id="top100"><a href="top100.php">Top100</a></li>
