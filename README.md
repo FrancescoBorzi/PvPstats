@@ -2,11 +2,6 @@ PvPstats
 ========
 # ![logo](https://raw.githubusercontent.com/ShinDarth/PvPstats/master/logo/PvPstats.png)
 
-This software **is still under development and testing phase** but feel free to use it (**keep it updated!**).
-
-[Here](http://www.wowtrilogy.com/pvp/) there is a demo.
-
-
 ## Introduction
 
 PvPstats is an utility for **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a core modification and a web application written in **PHP**. It's released under the [GNU GPL v3 License](https://github.com/ShinDarth/PvPstats/blob/master/LICENSE).
@@ -55,6 +50,10 @@ It also displays:
 - **Top100 players and guilds** (top100.php script)
 
 The web applications uses the framework [Bootstrap](https://github.com/twbs/bootstrap) which makes it fully **responsive**, supporting **different window and screen sizes** (e.g. desktop, tablet, mobile, etc..). It also uses the [jQuery](https://github.com/jquery/jquery) JavaScript Library.
+
+## Live preview
+
+Do you want to see PvPstats in action? [See who is using PvPstats](http://shinworld.altervista.org/PvPstats/).
 
 ## Screenshots
 
