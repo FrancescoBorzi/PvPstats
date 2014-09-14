@@ -179,32 +179,51 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
 
   $prev_score = $row[1];
 
-
-  while (($row = $result->fetch_row()) != null)
+  if (!(isset($armory_url)) || $armory_url == "")
   {
-    if ($prev_score != $row[1])
-      $position++;
+    while (($row = $result->fetch_row()) != null)
+    {
+      if ($prev_score != $row[1])
+        $position++;
 
-    if (!(isset($armory_url)) || $armory_url == "")
       $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
                              getPlayerColor($row[0]),
                              getPlayerName($row[0]));
-    else
+
+      printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
+             $position,
+             $player_name,
+             getPlayerClass($row[0]),
+             getPlayerRace($row[0]),
+             getPlayerGender($row[0]),
+             $row[1]);
+
+      $prev_score = $row[1];
+    }
+  }
+  else
+  {
+    while (($row = $result->fetch_row()) != null)
+    {
+      if ($prev_score != $row[1])
+        $position++;
+
       $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
                              getPlayerColor($row[0]),
                              $armory_url,
                              getPlayerName($row[0]),
                              getPlayerName($row[0]));
 
-    printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
-           $position,
-           $player_name,
-           getPlayerClass($row[0]),
-           getPlayerRace($row[0]),
-           getPlayerGender($row[0]),
-           $row[1]);
+      printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
+             $position,
+             $player_name,
+             getPlayerClass($row[0]),
+             getPlayerRace($row[0]),
+             getPlayerGender($row[0]),
+             $row[1]);
 
-    $prev_score = $row[1];
+      $prev_score = $row[1];
+    }
   }
 }
 
@@ -263,28 +282,47 @@ function getGuildsScores($time_cond, $level_cond, $type_cond)
   $prev_score = $row[1];
 
 
-  while (($row = $result->fetch_row()) != null)
+  if (!(isset($guild_armory_url)) || $guild_armory_url == "")
   {
-    if ($prev_score != $row[1])
-      $position++;
+    while (($row = $result->fetch_row()) != null)
+    {
+      if ($prev_score != $row[1])
+        $position++;
 
-    if (!(isset($guild_armory_url)) || $guild_armory_url == "")
+
       $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
                              getGuildColor($row[2]),
                              $row[0]);
-    else
+
+      printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+             $position,
+             $guild_name,
+             $row[1]);
+
+      $prev_score = $row[1];
+    }
+  }
+  else
+  {
+    while (($row = $result->fetch_row()) != null)
+    {
+      if ($prev_score != $row[1])
+        $position++;
+
+
       $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
                              getGuildColor($row[2]),
                              $guild_armory_url,
                              $row[0],
                              $row[0]);
 
-    printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
-           $position,
-           $guild_name,
-           $row[1]);
+      printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+             $position,
+             $guild_name,
+             $row[1]);
 
-    $prev_score = $row[1];
+      $prev_score = $row[1];
+    }
   }
 }
 
@@ -326,29 +364,45 @@ function getGuildsMembers($battleground_id)
 
   $prev_score = $row[1];
 
-
-  while (($row = $result->fetch_row()) != null)
+  if (!(isset($guild_armory_url)) || $guild_armory_url == "")
   {
-    if ($prev_score != $row[1])
-      $position++;
+    while (($row = $result->fetch_row()) != null)
+    {
+      if ($prev_score != $row[1])
+        $position++;
 
-    if (!(isset($guild_armory_url)) || $guild_armory_url == "")
       $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
                              getGuildColor($row[2]),
                              $row[0]);
-    else
+
+      printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+             $position,
+             $guild_name,
+             $row[1]);
+
+      $prev_score = $row[1];
+    }
+  }
+  else
+  {
+    while (($row = $result->fetch_row()) != null)
+    {
+      if ($prev_score != $row[1])
+        $position++;
+
       $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                             getGuildColor($row[2]),
-                             $guild_armory_url,
-                             $row[0],
-                             $row[0]);
+                               getGuildColor($row[2]),
+                               $guild_armory_url,
+                               $row[0],
+                               $row[0]);
 
-    printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
-           $position,
-           $guild_name,
-           $row[1]);
+      printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+             $position,
+             $guild_name,
+             $row[1]);
 
-    $prev_score = $row[1];
+      $prev_score = $row[1];
+    }
   }
 }
 

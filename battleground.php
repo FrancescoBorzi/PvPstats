@@ -398,58 +398,105 @@
               if (!$result)
                 die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_players table.");
 
-              while (($row = $result->fetch_array()) != null)
+              if (!(isset($armory_url)) || $armory_url == "")
               {
-                printf("<tr>");
+                while (($row = $result->fetch_array()) != null)
+                {
+                  printf("<tr>");
 
-                if (!(isset($armory_url)) || $armory_url == "")
                   $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
                                          getPlayerColor($row['character_guid']),
                                          getPlayerName($row['character_guid']));
-                else
-                  $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                                         getPlayerColor($row['character_guid']),
-                                         $armory_url,
-                                         getPlayerName($row['character_guid']),
-                                         getPlayerName($row['character_guid']));
 
-                printf("<td>%s</td>",
-                       $player_name);
+                  printf("<td>%s</td>",
+                         $player_name);
 
-                printf("<td style=\"padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
-                       getPlayerClass($row['character_guid']),
-                       getPlayerRace($row['character_guid']),
-                       getPlayerGender($row['character_guid']));
+                  printf("<td style=\"padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
+                         getPlayerClass($row['character_guid']),
+                         getPlayerRace($row['character_guid']),
+                         getPlayerGender($row['character_guid']));
 
-                printf("<td>%s</td>", $row['score_killing_blows']);
-                printf("<td>%s</td>", $row['score_deaths']);
-                printf("<td>%s</td>", $row['score_honorable_kills']);
-                printf("<td>%s</td>", $row['score_bonus_honor']);
-                printf("<td>%s</td>", $row['score_damage_done']);
-                printf("<td>%s</td>", $row['score_healing_done']);
+                  printf("<td>%s</td>", $row['score_killing_blows']);
+                  printf("<td>%s</td>", $row['score_deaths']);
+                  printf("<td>%s</td>", $row['score_honorable_kills']);
+                  printf("<td>%s</td>", $row['score_bonus_honor']);
+                  printf("<td>%s</td>", $row['score_damage_done']);
+                  printf("<td>%s</td>", $row['score_healing_done']);
 
-                printf("<td>%s</td>", $row['attr_1']);
+                  printf("<td>%s</td>", $row['attr_1']);
 
-                if ($attr_count > 1)
-                {
-                  printf("<td>%s</td>", $row['attr_2']);
-
-                  if ($attr_count > 2)
+                  if ($attr_count > 1)
                   {
-                    printf("<td>%s</td>", $row['attr_3']);
+                    printf("<td>%s</td>", $row['attr_2']);
 
-                    if ($attr_count > 3)
+                    if ($attr_count > 2)
                     {
-                      printf("<td>%s</td>", $row['attr_4']);
+                      printf("<td>%s</td>", $row['attr_3']);
 
-                      if ($attr_count > 4)
-                        printf("<td>%s</td>", $row['attr_5']);
+                      if ($attr_count > 3)
+                      {
+                        printf("<td>%s</td>", $row['attr_4']);
+
+                        if ($attr_count > 4)
+                          printf("<td>%s</td>", $row['attr_5']);
+                      }
                     }
+
                   }
 
+                  printf("</tr>");
                 }
+              }
+              else
+              {
+                while (($row = $result->fetch_array()) != null)
+                {
+                  printf("<tr>");
 
-                printf("</tr>");
+                  $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                                           getPlayerColor($row['character_guid']),
+                                           $armory_url,
+                                           getPlayerName($row['character_guid']),
+                                           getPlayerName($row['character_guid']));
+
+                  printf("<td>%s</td>",
+                         $player_name);
+
+                  printf("<td style=\"padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
+                         getPlayerClass($row['character_guid']),
+                         getPlayerRace($row['character_guid']),
+                         getPlayerGender($row['character_guid']));
+
+                  printf("<td>%s</td>", $row['score_killing_blows']);
+                  printf("<td>%s</td>", $row['score_deaths']);
+                  printf("<td>%s</td>", $row['score_honorable_kills']);
+                  printf("<td>%s</td>", $row['score_bonus_honor']);
+                  printf("<td>%s</td>", $row['score_damage_done']);
+                  printf("<td>%s</td>", $row['score_healing_done']);
+
+                  printf("<td>%s</td>", $row['attr_1']);
+
+                  if ($attr_count > 1)
+                  {
+                    printf("<td>%s</td>", $row['attr_2']);
+
+                    if ($attr_count > 2)
+                    {
+                      printf("<td>%s</td>", $row['attr_3']);
+
+                      if ($attr_count > 3)
+                      {
+                        printf("<td>%s</td>", $row['attr_4']);
+
+                        if ($attr_count > 4)
+                          printf("<td>%s</td>", $row['attr_5']);
+                      }
+                    }
+
+                  }
+
+                  printf("</tr>");
+                }
               }
             ?>
 
