@@ -49,7 +49,10 @@ The web application currently displays the amount of **victories** of **factions
 
 both **for all levels** and **for every level range (10-19, ... , 70-79, 80)**.
 
-*** **New features for the web application will be implemented soon!** ***
+It also displays:
+
+- **Detailed BattleGround scores informations** (battleground.php script)
+- **Top100 players and guilds** (top100.php script)
 
 The web applications uses the framework [Bootstrap](https://github.com/twbs/bootstrap) which makes it fully **responsive**, supporting **different window and screen sizes** (e.g. desktop, tablet, mobile, etc..). It also uses the [jQuery](https://github.com/jquery/jquery) JavaScript Library.
 
