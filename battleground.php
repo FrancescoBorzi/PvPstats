@@ -391,7 +391,7 @@
 
             <?php
 
-              $query = sprintf("SELECT * FROM pvpstats_players WHERE battleground_id = %d",
+              $query = sprintf("SELECT * FROM pvpstats_players WHERE battleground_id = %d ORDER BY score_killing_blows DESC",
                          $id);
 
               $result = $db->query($query);
