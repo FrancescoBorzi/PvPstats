@@ -64,6 +64,11 @@
           $winner_text = "Draw";
           break;
       }
+
+      $query_max_min = "SELECT MAX(id), MIN(id) FROM pvpstats_battlegrounds";
+      $max_min = $db->query($query_max_min)->fetch_row();
+      $max = $max_min[0];
+      $min = $max_min[1];
     }
   }
 
@@ -95,26 +100,22 @@
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="visible-xs visible-sm navbar-brand" href="#"><?= $server_name ?> PvPstats</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-center">
-          <?php if (!isset($id) || $result->num_rows == 0) { require_once("navbar.php"); } else { ?>
-          <li><a href="battleground.php">&larr; Back</a></li>
-          <?php } ?>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+
+    <?php if (!isset($id) || $result->num_rows == 0) { require_once("navbar.php"); } else { ?>
+    <div class="text-center">
+      <?php if($id != $min) { ?>
+      <a style="margin: 2px 20px;"href="battleground.php?id=<?= $id - 1 ?>"><button id="search" type="submit" class="btn btn-default">&larr; Prev</button></a>
+      <?php } else { ?>
+      <a href="#" style="margin: 2px 20px;"><button id="search" type="submit" class="btn btn-default" disabled>&larr; Prev</button>
+      <?php } ?>
+      <a style="margin: 2px 20px;"href="battleground.php"><button id="search" type="submit" class="btn btn-default">Back</button></a>
+      <?php if($id != $max) { ?>
+      <a style="margin: 2px 20px;"href="battleground.php?id=<?= $id + 1 ?>"><button id="search" type="submit" class="btn btn-default">Next &rarr;</button></a>
+      <?php } else { ?>
+      <a href="#" style="margin: 2px 20px;"><button id="search" type="submit" class="btn btn-default" disabled>Next &rarr;</button>
+      <?php } ?>
     </div>
+    <?php } ?>
 
     <div class="container">
 

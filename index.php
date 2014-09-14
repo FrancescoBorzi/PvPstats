@@ -35,24 +35,7 @@
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="visible-xs visible-sm navbar-brand" href="#"><?= $server_name ?> PvPstats</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-center">
-            <?php require_once("navbar.php"); ?>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+    <?php require_once("navbar.php"); ?>
 
     <div class="container">
 
