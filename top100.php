@@ -64,7 +64,8 @@
 
       <div class="row text-center">
         <div id="stats_info">
-          Top 100 players and guilds with the biggest amount of victories in BattleGrounds. The victories of guilds are the amount of victories of each current guild member.
+          <span>Top 100 players and guilds with the biggest amount of victories in BattleGrounds starting from <span style="color: orange;"><strong><?= $online_from ?></strong></span>.</span><br>
+          <span style="color: #888">The victories of guilds are the amount of victories of each current guild member.</span>
         </div>
         <div class="col-sm-8" style="padding: 0 10px;">
           <p class="h3">Top100 Players</p>

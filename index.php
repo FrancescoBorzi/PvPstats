@@ -87,7 +87,7 @@
             </select>
             <noscript><input type="submit" value="Submit"></noscript>
           </form>
-         &nbsp; Battlegrounds from <span style="color: orange;"><strong><?= $online_from ?></strong></span>
+         &nbsp; Battlegrounds starting from <span style="color: orange;"><strong><?= $online_from ?></strong></span>
         </div>
         <div class="col-lg-3 col-sm-6" style="padding: 0 10px;">
           <p class="h3">Today</p>
