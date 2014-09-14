@@ -94,7 +94,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_today ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_today ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="today-score-container score-container">
+          <div class="today-score-container score-container table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -116,7 +116,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_last7 ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_last7 ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="last7-score-container score-container">
+          <div class="last7-score-container score-container table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -138,7 +138,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_month ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_month ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="month-score-container score-container">
+          <div class="month-score-container score-container table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -160,7 +160,7 @@
           <div class="score-faction-container">
             <img src="img/alliance_min.png" height="100%"> <span style="color: white; font-size: 20px;"><strong>&nbsp;&nbsp;<?= $alliance_overall ?>&nbsp;&nbsp;  -&nbsp;&nbsp;<?= $horde_overall ?>&nbsp;&nbsp;</strong></span> <img src="img/horde_min.png" height="100%">
           </div>
-          <div class="overall-score-container score-container">
+          <div class="overall-score-container score-container table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
