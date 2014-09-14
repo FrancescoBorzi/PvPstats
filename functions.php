@@ -94,7 +94,6 @@ function getGuildColor($guildid)
 
   $query = sprintf("SELECT leaderguid FROM guild WHERE guildid = %d", $guildid);
   $row = $db->query($query)->fetch_row();
-  $row = $db->query($query)->fetch_row();
 
   return getPlayerColor($row[0]);
 }
