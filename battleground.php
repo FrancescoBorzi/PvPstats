@@ -112,7 +112,7 @@
       <?php if($id != $max) { ?>
       <a style="margin: 2px 20px;"href="battleground.php?id=<?= $id + 1 ?>"><button id="search" type="submit" class="btn btn-default">Next &rarr;</button></a>
       <?php } else { ?>
-      <a href="#" style="margin: 2px 20px;"><button id="search" type="submit" class="btn btn-default" disabled>Next &rarr;</button>
+        <a href="#" style="margin: 2px 20px;"><button id="search" type="submit" class="btn btn-default" disabled>Next &rarr;</button></a>
       <?php } ?>
     </div>
     <?php } ?>
