@@ -50,7 +50,7 @@ It also displays:
 - **Detailed BattleGround scores informations** (battleground.php script)
 - **Top100 players and guilds** (top100.php script)
 
-The web applications uses the framework [Bootstrap](https://github.com/twbs/bootstrap) which makes it fully **responsive**, supporting **different window and screen sizes** (e.g. desktop, tablet, mobile, etc..). It also uses the [jQuery](https://github.com/jquery/jquery) JavaScript Library.
+The web applications uses the framework [Bootstrap](https://github.com/twbs/bootstrap) which makes it fully **responsive**, supporting **different window and screen sizes** (e.g. desktop, tablet, mobile, etc..). It also uses the [jQuery](https://github.com/jquery/jquery) and [Sortable](https://github.com/HubSpot/sortable) JavaScript Libraries.
 
 ## Live preview
 
