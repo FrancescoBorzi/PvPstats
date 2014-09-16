@@ -19,7 +19,8 @@ For each Battleground it also stores player:
 - Deaths
 - Honorable Kills
 - Bonus Honor
-- Score damage done
+- Damage done
+- Healing done
 - and the other various data (like Warsong Gulch capped/returned flags, Arathi Basin assaulted/defended bases, EoS capped flags, etc...)
 
 In a nutshell, **it saves all datas you can see when the BattleGround ends in the score window**.
