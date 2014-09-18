@@ -19,7 +19,8 @@ For each Battleground it also stores player:
 - Deaths
 - Honorable Kills
 - Bonus Honor
-- Score damage done
+- Damage done
+- Healing done
 - and the other various data (like Warsong Gulch capped/returned flags, Arathi Basin assaulted/defended bases, EoS capped flags, etc...)
 
 In a nutshell, **it saves all datas you can see when the BattleGround ends in the score window**.
@@ -49,7 +50,9 @@ It also displays:
 - **Detailed BattleGround scores informations** (battleground.php script)
 - **Top100 players and guilds** (top100.php script)
 
-The web applications uses the framework [Bootstrap](https://github.com/twbs/bootstrap) which makes it fully **responsive**, supporting **different window and screen sizes** (e.g. desktop, tablet, mobile, etc..). It also uses the [jQuery](https://github.com/jquery/jquery) JavaScript Library.
+The web application uses the framework [Bootstrap](https://github.com/twbs/bootstrap) which makes it fully **responsive**, supporting **different window and screen sizes** (e.g. desktop, tablet, mobile, etc..). It also uses the [jQuery](https://github.com/jquery/jquery) and [Sortable](https://github.com/HubSpot/sortable) JavaScript Libraries.
+
+The web application is secure against SQL-Injection attacks, tested with [sqlmap](https://github.com/sqlmapproject/sqlmap).
 
 ## Live preview
 
