@@ -308,10 +308,21 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
                            $row[0],
                            $row[0]);
 
-  printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
-         $position,
-         $guild_name,
-         $row[1]);
+  if ($top100)
+  {
+    printf("<tr id=\"%s\"><td>%d</td><td>%s</td><td>%d</td></tr>",
+           $row[0],
+           $position,
+           $guild_name,
+           $row[1]);
+  }
+  else
+  {
+    printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+           $position,
+           $guild_name,
+           $row[1]);
+  }
 
   $prev_score = $row[1];
 
@@ -328,10 +339,21 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
                              getGuildColor($row[2]),
                              $row[0]);
 
-      printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
-             $position,
-             $guild_name,
-             $row[1]);
+      if ($top100)
+      {
+        printf("<tr id=\"%s\"><td>%d</td><td>%s</td><td>%d</td></tr>",
+               $row[0],
+               $position,
+               $guild_name,
+               $row[1]);
+      }
+      else
+      {
+        printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+               $position,
+               $guild_name,
+               $row[1]);
+      }
 
       $prev_score = $row[1];
     }
@@ -350,10 +372,21 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
                              $row[0],
                              $row[0]);
 
-      printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
-             $position,
-             $guild_name,
-             $row[1]);
+      if ($top100)
+      {
+        printf("<tr id=\"%s\"><td>%d</td><td>%s</td><td>%d</td></tr>",
+               $row[0],
+               $position,
+               $guild_name,
+               $row[1]);
+      }
+      else
+      {
+        printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
+               $position,
+               $guild_name,
+               $row[1]);
+      }
 
       $prev_score = $row[1];
     }
@@ -575,16 +608,18 @@ function getTop100Players()
                            $row['character_name']);
 
   $player_guild = getPlayerGuild($row['character_guid']);
+  $guild_name = getGuildName($player_guild);
 
-  printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><span style=\"color: %s\">%s</span></strong></td><td>%d</td></tr>",
+  printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
          $position,
          $player_name,
          getPlayerClass($row['character_guid']),
          getPlayerRace($row['character_guid']),
          getPlayerGender($row['character_guid']),
          $row['character_level'],
+         $guild_name,
          getGuildColor($player_guild),
-         getGuildName($player_guild),
+         $guild_name,
          $row['count']);
 
   $prev_score = $row['count'];
@@ -601,16 +636,18 @@ function getTop100Players()
                              $row['character_name']);
 
       $player_guild = getPlayerGuild($row['character_guid']);
+      $guild_name = getGuildName($player_guild);
 
-      printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><span style=\"color: %s\">%s</span></strong></td><td>%d</td></tr>",
+      printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
              $position,
              $player_name,
              getPlayerClass($row['character_guid']),
              getPlayerRace($row['character_guid']),
              getPlayerGender($row['character_guid']),
              $row['character_level'],
+             $guild_name,
              getGuildColor($player_guild),
-             getGuildName($player_guild),
+             $guild_name,
              $row['count']);
 
       $prev_score = $row['count'];
@@ -630,16 +667,18 @@ function getTop100Players()
                              $row['character_name']);
 
       $player_guild = getPlayerGuild($row['character_guid']);
+      $guild_name = getGuildName($player_guild);
 
-      printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><span style=\"color: %s\">%s</span></strong></td><td>%d</td></tr>",
+      printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
              $position,
              $player_name,
              getPlayerClass($row['character_guid']),
              getPlayerRace($row['character_guid']),
              getPlayerGender($row['character_guid']),
              $row['character_level'],
+             $guild_name,
              getGuildColor($player_guild),
-             getGuildName($player_guild),
+             $guild_name,
              $row['count']);
 
       $prev_score = $row['count'];
