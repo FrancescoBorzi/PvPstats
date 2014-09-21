@@ -104,9 +104,8 @@
     <script src="js/bootstrap.min.js"></script>
     <script>
       $(document).ready(function () {
-
-        $('#detailed-scores').addClass("active");
-      }
+        $('#top100').addClass("active");
+      });
     </script>
   </body>
 </html>
