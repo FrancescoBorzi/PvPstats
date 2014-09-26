@@ -681,12 +681,12 @@
       $('#toggle-guild-members').click(function () {
         if ($('#toggle-guild-members').html() == "More")
         {
-          $('.guild-members-score-container').css("max-height", "798px");
+          $('.guild-members-container').css("max-height", "798px");
           $('#toggle-guild-members').html("Less");
         }
         else
         {
-          $('.guild-members-score-container').css("max-height", "417px");
+          $('.guild-members-container').css("max-height", "417px");
           $('#toggle-guild-members').html("More");
         }
       });
@@ -720,12 +720,12 @@
       $('#toggle-bg-day').click(function () {
         if ($('#toggle-bg-day').html() == "More")
         {
-          $('.bg-day-score-container').css("max-height", "798px");
+          $('.bg-day-container').css("max-height", "798px");
           $('#toggle-bg-day').html("Less");
         }
         else
         {
-          $('.bg-day-score-container').css("max-height", "417px");
+          $('.bg-day-container').css("max-height", "417px");
           $('#toggle-bg-day').html("More");
         }
       });
