@@ -6,6 +6,8 @@ PvPstats
 
 PvPstats is an utility for **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a core modification and a web application written in **PHP**. It's released under the [GNU GPL v3 License](https://github.com/ShinDarth/PvPstats/blob/master/LICENSE).
 
+**Note that the core modification has been included in both [TrinityCore](https://github.com/TrinityCore/) and [CMaNGOS](https://github.com/cmangos/) official repositories, so you will need to enable it only (as explained in install instructions linked below)**.
+
 Each time a Battleground ends, PvPstats stores in the database all Battlegrounds:
 
 - Date & time
@@ -33,6 +35,7 @@ It currently supports:
 - [CMaNGOS with WOTLK (3.x.x game version)](https://github.com/CMaNGOS/mangos-wotlk)
 - [CMaNGOS with TBC     (2.x.x game version)](https://github.com/CMaNGOS/mangos-tbc)
 - [CMaNGOS with Classic   (1.x.x game version)](https://github.com/CMaNGOS/mangos-classic)
+- All other server applications based on those listed above (if they are updated).
 
 But since this is a free and open source project, you are more than welcome to fork it and adapt to different emulator or game version.
 
