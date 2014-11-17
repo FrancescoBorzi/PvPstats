@@ -412,7 +412,7 @@
                   printf("<td>%s</td>",
                          $player_name);
 
-                  printf("<td style=\"padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
+                  printf("<td style=\"min-width: 49px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
                          getPlayerClass($row['character_guid']),
                          getPlayerRace($row['character_guid']),
                          getPlayerGender($row['character_guid']));
@@ -463,7 +463,7 @@
                   printf("<td>%s</td>",
                          $player_name);
 
-                  printf("<td style=\"padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
+                  printf("<td style=\"min-width: 49px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
                          getPlayerClass($row['character_guid']),
                          getPlayerRace($row['character_guid']),
                          getPlayerGender($row['character_guid']));
