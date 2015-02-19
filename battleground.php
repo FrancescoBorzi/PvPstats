@@ -137,28 +137,28 @@
           if (isset($_GET['day']) && $_GET['day'] != "")
           {
             if (is_numeric($_GET['day']) && $_GET['day'] > 0 && $_GET['day'] <= 31)
-              $day    = $_GET['day'];
+              $day    = mysqli_real_escape_string($db, $_GET['day']);
             else
               $correct = false;
           }
           if (isset($_GET['year']) && $_GET['year'] != "")
           {
             if (is_numeric($_GET['year']) && $_GET['year'] > 2000 && $_GET['year'] <= date("Y"))
-              $year   = $_GET['year'];
+              $year   = mysqli_real_escape_string($db, $_GET['year']);
             else
               $correct = false;
           }
           if (isset($_GET['month']) && $_GET['month'] != "")
           {
             if (is_numeric($_GET['month']) && $_GET['month'] >= 0 && $_GET['month'] <= 12)
-              $month  = $_GET['month'];
+              $month  = mysqli_real_escape_string($db, $_GET['month']);
             else
               $correct = false;
           }
           if (isset($_GET['level']) && $_GET['level'] != "")
           {
             if (is_numeric($_GET['level']) && $_GET['level'] >= 0)
-              $level  = $_GET['level'];
+              $level  = mysqli_real_escape_string($db, $_GET['level']);
             else
               $correct = false;
           }
