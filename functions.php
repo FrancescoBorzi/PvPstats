@@ -164,11 +164,8 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
     $type_cond = "AND " . $type_cond;
 
 
-  $query = sprintf("SELECT character_guid, count(character_guid) AS count, characters.name as character_name FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE ((characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d ) OR (characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d )) %s %s %s %s %s",
-                   $ALLIANCE_RACES,
-                   $ALLIANCE,
-                   $HORDE_RACES,
-                   $HORDE,
+  $query = sprintf("SELECT character_guid, count(character_guid) AS count, characters.name as character_name FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE pvpstats_players.winner = 1 %s %s %s %s %s",
+
                    $time_cond,
                    $level_cond,
                    $type_cond,
@@ -274,11 +271,7 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
   else
     $query_limit = $limit_guilds;
 
-  $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE ((characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d ) OR (characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d )) %s %s %s %s %s",
-                   $ALLIANCE_RACES,
-                   $ALLIANCE,
-                   $HORDE_RACES,
-                   $HORDE,
+  $query = sprintf("SELECT guild.name, COUNT(guild.name), guild.guildid FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid INNER JOIN guild ON guild_member.guildid = guild.guildid INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE pvpstats_players.winner = 1 %s %s %s %s %s",
                    $time_cond,
                    $level_cond,
                    $type_cond,
@@ -577,11 +570,7 @@ function getTop100Players()
 {
   global $db, $players_group_and_order, $armory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
 
-  $query = sprintf("SELECT character_guid, count(character_guid) AS count, characters.name as character_name, characters.level as character_level FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE ((characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d ) OR (characters.race IN (%s) AND pvpstats_battlegrounds.winner_faction = %d )) %s LIMIT 0,100",
-                   $ALLIANCE_RACES,
-                   $ALLIANCE,
-                   $HORDE_RACES,
-                   $HORDE,
+  $query = sprintf("SELECT character_guid, count(character_guid) AS count, characters.name as character_name, characters.level as character_level FROM pvpstats_players INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id INNER JOIN characters ON pvpstats_players.character_guid = characters.guid WHERE pvpstats_players.winner = 1 %s LIMIT 0,100",
                    $players_group_and_order);
 
   $result = $db->query($query);
