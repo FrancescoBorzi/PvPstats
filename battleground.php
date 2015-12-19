@@ -106,7 +106,7 @@
       <?php if($id != $min) { ?>
       <a style="margin: 2px 20px;"href="battleground.php?id=<?= $id - 1 ?>"><button id="search" type="submit" class="btn btn-default">&larr; Prev</button></a>
       <?php } else { ?>
-      <a href="#" style="margin: 2px 20px;"><button id="search" type="submit" class="btn btn-default" disabled>&larr; Prev</button>
+      <a href="#" style="margin: 2px 20px;"><button id="search" type="submit" class="btn btn-default" disabled>&larr; Prev</button></a>
       <?php } ?>
       <a style="margin: 2px 20px;"href="battleground.php"><button id="search" type="submit" class="btn btn-default">Back</button></a>
       <?php if($id != $max) { ?>
@@ -234,7 +234,7 @@
                   break;
                 case 1: // TBC only
                   ?>
-            <option value="7<?= $type_link ?>">70</a></li>
+            <option value="7<?= $type_link ?>">70</option>
             <option value="6"></option>60-69
                   <?php
                   break;
