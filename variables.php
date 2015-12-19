@@ -84,6 +84,6 @@ if (isset($_GET['type']))
   $type_link_all  = "?type=" . mysqli_real_escape_string($db, $_GET['type']);
 }
 else
-    $type_link_all = $type_link = $type_condition = "";
+  $type_link_all = $type_link = $type_condition = "";
 
 ?>

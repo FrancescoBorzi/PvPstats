@@ -1,77 +1,77 @@
 <?php
 
-  # Your server name
-  $server_name = "TrinityCore";
+# Your server name
+$server_name = "TrinityCore";
 
-  # Your server url
-  $server_url = "http://www.trinitycore.org/";
+# Your server url
+$server_url = "http://www.trinitycore.org/";
 
-  # Your server logo img url (optional)
-  $server_logo = "img/PvPstats.png";
+# Your server logo img url (optional)
+$server_logo = "img/PvPstats.png";
 
-  # Your server armory url including character name param
-  # (set it blank if you don't have it)
-  $armory_url = "http://www.truewow.org/armory/character.php?n=";
+# Your server armory url including character name param
+# (set it blank if you don't have it)
+$armory_url = "http://www.yourserver.org/armory/character.php?n=";
 
-  # Your server armory url including guild name param
-  # (set it blank if you don't have it)
-  $guild_armory_url = "http://www.truewow.org/armory/guild.php?n=";
+# Your server armory url including guild name param
+# (set it blank if you don't have it)
+$guild_armory_url = "http://www.yourserver.org/armory/guild.php?n=";
 
-  # The date PvPstats system is online from
-  $online_from = "01/08/2014";
+# The date PvPstats system is online from
+$online_from = "01/08/2014";
 
-  # Show guilds
-  # 0 = don't show
-  # 1 = show
-  $show_guilds = 1;
+# Show guilds
+# 0 = don't show
+# 1 = show
+$show_guilds = 1;
 
-  # Your server expansion
-  #   0 = Classic
-  #   1 = The Burning Crusade
-  #   2 = Wrath of The Lich King
-  #   3 = Cataclysm
-  $expansion = 2;
+# Your server expansion
+#   0 = Classic
+#   1 = The Burning Crusade
+#   2 = Wrath of The Lich King
+#   3 = Cataclysm
+$expansion = 2;
 
-  # Connection to the database of characters (address, username, password, database)
-  $db = new mysqli("localhost","root","password","characters");
+# Connection to the database of characters (address, username, password, database)
+$db = new mysqli("localhost","root","password","characters");
 
-  # Charset (you can set it blank if you want to maintain your default charset)
-  $charset = "utf8";
+# Charset (you can set it blank if you want to maintain your default charset)
+$charset = "utf8";
 
-  # Dates and times format
-  # Reference: http://php.net/manual/en/function.date.php
-  $date_format = "Y-m-d";
-  $time_format = "H:i:s";
-  
-  # Max number of results allowed in battleground.php search
-  $max_results_allowed = 500;
+# Dates and times format
+# Reference: http://php.net/manual/en/function.date.php
+$date_format = "Y-m-d";
+$time_format = "H:i:s";
 
-  # Show additional statistics in battleground.php page
-  # (guild members amount, day scores, month scores, other battlegrounds of day)
-  #   0 = don't show
-  #   1 = show
-  $additional_statistics = 1;
+# Max number of results allowed in battleground.php search
+$max_results_allowed = 500;
 
-  # Debug
-  #   0 = Debug mode disabled
-  #   1 = Debug mode enabled
-  $debug = 0;
+# Show additional statistics in battleground.php page
+# (guild members amount, day scores, month scores, other battlegrounds of day)
+#   0 = don't show
+#   1 = show
+$additional_statistics = 1;
 
-  if (mysqli_connect_error())
-    die('Connect Error (' . mysqli_connect_errno() . ') '
-        . mysqli_connect_error());
+# Debug
+#   0 = Debug mode disabled
+#   1 = Debug mode enabled
+$debug = 0;
 
-  if (isset($charset) || $charset == "")
-    $db->set_charset($charset);
+if (mysqli_connect_error())
+  die('Connect Error (' . mysqli_connect_errno() . ') '
+      . mysqli_connect_error());
 
-  if ($expansion < 0 || $expansion > 2)
-    die("Wrong value provided for expansion parameter. Please config your expansion.");
+if (isset($charset) || $charset == "")
+  $db->set_charset($charset);
 
-  if ($debug != 0)
-  {
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(-1);
-  }
+if ($expansion < 0 || $expansion > 2)
+  die("Wrong value provided for expansion parameter. Please config your expansion.");
+
+if ($debug != 0)
+{
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(-1);
+}
 
 ?>

@@ -292,14 +292,14 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
 
   if (!(isset($guild_armory_url)) || $guild_armory_url == "")
     $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                           getGuildColor($row[2]),
-                           $row[0]);
+                          getGuildColor($row[2]),
+                          $row[0]);
   else
     $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                           getGuildColor($row[2]),
-                           $guild_armory_url,
-                           $row[0],
-                           $row[0]);
+                          getGuildColor($row[2]),
+                          $guild_armory_url,
+                          $row[0],
+                          $row[0]);
 
   if ($top100)
   {
@@ -329,8 +329,8 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
 
 
       $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                             getGuildColor($row[2]),
-                             $row[0]);
+                            getGuildColor($row[2]),
+                            $row[0]);
 
       if ($top100)
       {
@@ -360,10 +360,10 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
 
 
       $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                             getGuildColor($row[2]),
-                             $guild_armory_url,
-                             $row[0],
-                             $row[0]);
+                            getGuildColor($row[2]),
+                            $guild_armory_url,
+                            $row[0],
+                            $row[0]);
 
       if ($top100)
       {
@@ -408,14 +408,14 @@ function getGuildsMembers($battleground_id)
 
   if (!(isset($guild_armory_url)) || $guild_armory_url == "")
     $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                           getGuildColor($row[2]),
-                           $row[0]);
+                          getGuildColor($row[2]),
+                          $row[0]);
   else
     $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                           getGuildColor($row[2]),
-                           $guild_armory_url,
-                           $row[0],
-                           $row[0]);
+                          getGuildColor($row[2]),
+                          $guild_armory_url,
+                          $row[0],
+                          $row[0]);
 
   printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
          $position,
@@ -432,8 +432,8 @@ function getGuildsMembers($battleground_id)
         $position++;
 
       $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                             getGuildColor($row[2]),
-                             $row[0]);
+                            getGuildColor($row[2]),
+                            $row[0]);
 
       printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
              $position,
@@ -451,10 +451,10 @@ function getGuildsMembers($battleground_id)
         $position++;
 
       $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                               getGuildColor($row[2]),
-                               $guild_armory_url,
-                               $row[0],
-                               $row[0]);
+                            getGuildColor($row[2]),
+                            $guild_armory_url,
+                            $row[0],
+                            $row[0]);
 
       printf("<tr><td>%d</td><td>%s</td><td>%d</td></tr>",
              $position,
@@ -471,7 +471,7 @@ function getBattleGroundsOfDay($date)
   global $db, $time_format, $ALLIANCE, $HORDE, $alliance_color, $horde_color, $none_color;
 
   $query = sprintf("SELECT * FROM pvpstats_battlegrounds WHERE DATE(date) = DATE('%s') ORDER BY date DESC;",
-                  $date);
+                   $date);
 
   $result = $db->query($query);
 

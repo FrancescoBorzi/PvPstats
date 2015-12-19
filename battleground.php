@@ -1,76 +1,76 @@
 <?php
 
-  require_once("config.php");
-  require_once("variables.php");
-  require_once("functions.php");
-  require_once("factionScores.php");
+require_once("config.php");
+require_once("variables.php");
+require_once("functions.php");
+require_once("factionScores.php");
 
-  if (isset($_GET['id']) && is_numeric($_GET['id']))
+if (isset($_GET['id']) && is_numeric($_GET['id']))
+{
+  $id = $_GET['id'];
+
+  $query = sprintf("SELECT * FROM pvpstats_battlegrounds WHERE id = %d",
+                   $id);
+
+  $result = $db->query($query);
+
+  if (!$result)
+    die("Error querying: " . $query);
+  else if ($result->num_rows > 0)
   {
-    $id = $_GET['id'];
+    $row = $result->fetch_array();
 
-    $query = sprintf("SELECT * FROM pvpstats_battlegrounds WHERE id = %d",
-                     $id);
+    $type = $row['type'];
+    $winner_faction = $row['winner_faction'];
+    $bracket_id = $row['bracket_id'];
+    $datetime = new DateTime($row['date']);
 
-    $result = $db->query($query);
+    $bracket_level_range = getLevelRangeByBracketId($bracket_id);
+    $type_name = getBattleGroundTypeName($type);
 
-    if (!$result)
-      die("Error querying: " . $query);
-    else if ($result->num_rows > 0)
+    $date = $datetime->format($date_format);
+    $time = $datetime->format($time_format);
+
+    $month = $datetime->format('M');
+    $year = $datetime->format('Y');
+
+    $month_and_year = $month . " " . $year;
+
+    $this_day_condition = "DATE(date) = DATE('" . $row['date'] . "')";
+    $this_month_condition = "MONTH(date) = MONTH('" . $row['date'] . "') AND YEAR(date) = YEAR('" . $row['date'] . "')";
+    $this_level_condition = "bracket_id = " . $bracket_id;
+
+    $score_this_day = getFactionScores($this_day_condition, $this_level_condition, "");
+    $score_this_month = getFactionScores($this_month_condition, $this_level_condition, "");
+
+    $alliance_today = $score_today[0];
+    $horde_today = $score_today[1];
+
+    $alliance_this_day = $score_this_day[0];
+    $horde_this_day = $score_this_day[1];
+
+    $alliance_this_month = $score_this_month[0];
+    $horde_this_month = $score_this_month[1];
+
+    switch($winner_faction)
     {
-      $row = $result->fetch_array();
-
-      $type = $row['type'];
-      $winner_faction = $row['winner_faction'];
-      $bracket_id = $row['bracket_id'];
-      $datetime = new DateTime($row['date']);
-
-      $bracket_level_range = getLevelRangeByBracketId($bracket_id);
-      $type_name = getBattleGroundTypeName($type);
-
-      $date = $datetime->format($date_format);
-      $time = $datetime->format($time_format);
-
-      $month = $datetime->format('M');
-      $year = $datetime->format('Y');
-
-      $month_and_year = $month . " " . $year;
-
-      $this_day_condition = "DATE(date) = DATE('" . $row['date'] . "')";
-      $this_month_condition = "MONTH(date) = MONTH('" . $row['date'] . "') AND YEAR(date) = YEAR('" . $row['date'] . "')";
-      $this_level_condition = "bracket_id = " . $bracket_id;
-
-      $score_this_day = getFactionScores($this_day_condition, $this_level_condition, "");
-      $score_this_month = getFactionScores($this_month_condition, $this_level_condition, "");
-
-      $alliance_today = $score_today[0];
-      $horde_today = $score_today[1];
-
-      $alliance_this_day = $score_this_day[0];
-      $horde_this_day = $score_this_day[1];
-
-      $alliance_this_month = $score_this_month[0];
-      $horde_this_month = $score_this_month[1];
-
-      switch($winner_faction)
-      {
-        case $ALLIANCE:
-          $winner_text = "<span style=\"color: " . $alliance_color . "\">Alliance Wins</span>";
-          break;
-        case $HORDE:
-          $winner_text = "<span style=\"color: " . $horde_color . "\">Horde Wins</span>";
-          break;
-        case $NONE:
-          $winner_text = "Draw";
-          break;
-      }
-
-      $query_max_min = "SELECT MAX(id), MIN(id) FROM pvpstats_battlegrounds";
-      $max_min = $db->query($query_max_min)->fetch_row();
-      $max = $max_min[0];
-      $min = $max_min[1];
+      case $ALLIANCE:
+        $winner_text = "<span style=\"color: " . $alliance_color . "\">Alliance Wins</span>";
+        break;
+      case $HORDE:
+        $winner_text = "<span style=\"color: " . $horde_color . "\">Horde Wins</span>";
+        break;
+      case $NONE:
+        $winner_text = "Draw";
+        break;
     }
+
+    $query_max_min = "SELECT MAX(id), MIN(id) FROM pvpstats_battlegrounds";
+    $max_min = $db->query($query_max_min)->fetch_row();
+    $max = $max_min[0];
+    $min = $max_min[1];
   }
+}
 
 ?>
 
@@ -95,7 +95,7 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <![endif]-->
   </head>
 
   <body>
@@ -112,7 +112,7 @@
       <?php if($id != $max) { ?>
       <a style="margin: 2px 20px;"href="battleground.php?id=<?= $id + 1 ?>"><button id="search" type="submit" class="btn btn-default">Next &rarr;</button></a>
       <?php } else { ?>
-        <a href="#" style="margin: 2px 20px;"><button id="search" type="submit" class="btn btn-default" disabled>Next &rarr;</button></a>
+      <a href="#" style="margin: 2px 20px;"><button id="search" type="submit" class="btn btn-default" disabled>Next &rarr;</button></a>
       <?php } ?>
     </div>
     <?php } ?>
@@ -223,29 +223,29 @@
           <select id="select-level" name="level" class="text-center">
             <option value="0">All levels</option>
             <?php
-            if ($expansion < 3)
-            {
-              switch ($expansion)
-              {
-                case 0: // Classic only
-                  ?>
+        if ($expansion < 3)
+        {
+          switch ($expansion)
+          {
+            case 0: // Classic only
+            ?>
             <option value="6">60</option>
-                  <?php
-                  break;
-                case 1: // TBC only
-                  ?>
+            <?php
+              break;
+            case 1: // TBC only
+            ?>
             <option value="7<?= $type_link ?>">70</option>
             <option value="6"></option>60-69
-                  <?php
-                  break;
-                case 2: // WOTLK only
-                  ?>
+            <?php
+              break;
+            case 2: // WOTLK only
+            ?>
             <option value="8">80</option>
             <option value="7">70-79</option>
             <option value="6">60-69</option>
-                  <?php
-                  break;
-              }
+            <?php
+              break;
+          }
             ?>
             <option value="5">50-59</option>
             <option value="4">40-49</option>
@@ -281,31 +281,33 @@
 
       <br>
       <div style="padding: 0 10px;">
-          <p class="h4 text-center">Search results:</p>
-          <div style="border: 1px solid grey" class="table-responsive">
-            <table class="table table-hover text-center" data-sortable>
-              <thead>
-                <tr>
-                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">#</th>
-                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">Type</th>
-                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">Level Bracket</th>
-                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">End Date</th>
-                  <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">End Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php getBattleGrounds($day, $month, $year, $level_condition, $type_condition, $limit); ?>
-              </tbody>
-            </table>
-          </div>
+        <p class="h4 text-center">Search results:</p>
+        <div style="border: 1px solid grey" class="table-responsive">
+          <table class="table table-hover text-center" data-sortable>
+            <thead>
+              <tr>
+                <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">#</th>
+                <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">Type</th>
+                <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">Level Bracket</th>
+                <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">End Date</th>
+                <th class="text-center th-elem hover-pointer" onClick="thfocus(this)">End Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php getBattleGrounds($day, $month, $year, $level_condition, $type_condition, $limit); ?>
+            </tbody>
+          </table>
         </div>
+      </div>
 
       <?php } else if ($result->num_rows == 0) { ?>
 
       <p class="lead text-center">BattleGround having id <strong><?= $id ?></strong> not found.</p>
       <p class="lead text-center"><a href="battleground.php">&larr; Back</a></p>
 
-      <?php } else { ?>
+      <?php } else {
+        // this line is needed to fix an indentation bug
+      ?>
 
       <div class="row">
         <div class="col-xs-4">
@@ -335,53 +337,53 @@
 
               <?php
 
-              switch($type)
-              {
-                case $BATTLEGROUND_AV:
-                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Graveyards Assaulted</th>'
-                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Graveyards Defended</th>'
-                         . '<th id="attr3" class="th-elem text-center" onClick="thfocus(this)">Towers Assaulted</th>'
-                         . '<th id="attr4" class="th-elem text-center" onClick="thfocus(this)">Towers Defended</th>'
-                         . '<th id="attr5" class="th-elem text-center" onClick="thfocus(this)">Mines Captured</th>';
-                  $attr_count = 5;
-                  break;
+        switch($type)
+        {
+          case $BATTLEGROUND_AV:
+            $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Graveyards Assaulted</th>'
+              . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Graveyards Defended</th>'
+              . '<th id="attr3" class="th-elem text-center" onClick="thfocus(this)">Towers Assaulted</th>'
+              . '<th id="attr4" class="th-elem text-center" onClick="thfocus(this)">Towers Defended</th>'
+              . '<th id="attr5" class="th-elem text-center" onClick="thfocus(this)">Mines Captured</th>';
+            $attr_count = 5;
+            break;
 
-                case $BATTLEGROUND_WS:
-                case $BATTLEGROUND_TP:
-                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>'
-                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Flags Returned</th>';
-                  $attr_count = 2;
-                  break;
+          case $BATTLEGROUND_WS:
+          case $BATTLEGROUND_TP:
+            $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>'
+              . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Flags Returned</th>';
+            $attr_count = 2;
+            break;
 
-                case $BATTLEGROUND_AB:
-                case $BATTLEGROUND_IC:
-                case $BATTLEGROUND_BFG:
-                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Bases Assaulted</th>'
-                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Bases Defended</th>';
-                  $attr_count = 2;
-                  break;
+          case $BATTLEGROUND_AB:
+          case $BATTLEGROUND_IC:
+          case $BATTLEGROUND_BFG:
+            $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Bases Assaulted</th>'
+              . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Bases Defended</th>';
+            $attr_count = 2;
+            break;
 
-                case $BATTLEGROUND_EY:
-                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>';
-                  $attr_count = 1;
-                  break;
+          case $BATTLEGROUND_EY:
+            $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Flags Captured</th>';
+            $attr_count = 1;
+            break;
 
-                case $BATTLEGROUND_SA:
-                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Demolishers Destroyed</th>'
-                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Gates Destroyed</th>';
-                  $attr_count = 2;
-                  break;
+          case $BATTLEGROUND_SA:
+            $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Demolishers Destroyed</th>'
+              . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Gates Destroyed</th>';
+            $attr_count = 2;
+            break;
 
-                default:
-                  $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Attr1</th>'
-                         . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Attr2</th>'
-                         . '<th id="attr3" class="th-elem text-center" onClick="thfocus(this)">Attr3</th>'
-                         . '<th id="attr4" class="th-elem text-center" onClick="thfocus(this)">Attr4</th>'
-                         . '<th id="attr5" class="th-elem text-center" onClick="thfocus(this)">Attr5</th>';
-                  $attr_count = 5;
-              }
+          default:
+            $attrs = '<th id="attr1" class="th-elem text-center" onClick="thfocus(this)">Attr1</th>'
+              . '<th id="attr2" class="th-elem text-center" onClick="thfocus(this)">Attr2</th>'
+              . '<th id="attr3" class="th-elem text-center" onClick="thfocus(this)">Attr3</th>'
+              . '<th id="attr4" class="th-elem text-center" onClick="thfocus(this)">Attr4</th>'
+              . '<th id="attr5" class="th-elem text-center" onClick="thfocus(this)">Attr5</th>';
+            $attr_count = 5;
+        }
 
-              echo $attrs;
+        echo $attrs;
 
               ?>
             </tr>
@@ -391,114 +393,114 @@
 
             <?php
 
-              $query = sprintf("SELECT * FROM pvpstats_players WHERE battleground_id = %d ORDER BY score_killing_blows DESC",
+        $query = sprintf("SELECT * FROM pvpstats_players WHERE battleground_id = %d ORDER BY score_killing_blows DESC",
                          $id);
 
-              $result = $db->query($query);
+        $result = $db->query($query);
 
-              if (!$result)
-                die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_players table.");
+        if (!$result)
+          die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_players table.");
 
-              if (!(isset($armory_url)) || $armory_url == "")
+        if (!(isset($armory_url)) || $armory_url == "")
+        {
+          while (($row = $result->fetch_array()) != null)
+          {
+            printf("<tr>");
+
+            $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                                   getPlayerColor($row['character_guid']),
+                                   getPlayerName($row['character_guid']));
+
+            printf("<td>%s</td>",
+                   $player_name);
+
+            printf("<td style=\"min-width: 49px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
+                   getPlayerClass($row['character_guid']),
+                   getPlayerRace($row['character_guid']),
+                   getPlayerGender($row['character_guid']));
+
+            printf("<td>%s</td>", $row['score_killing_blows']);
+            printf("<td>%s</td>", $row['score_deaths']);
+            printf("<td>%s</td>", $row['score_honorable_kills']);
+            printf("<td>%s</td>", $row['score_bonus_honor']);
+            printf("<td>%s</td>", $row['score_damage_done']);
+            printf("<td>%s</td>", $row['score_healing_done']);
+
+            printf("<td>%s</td>", $row['attr_1']);
+
+            if ($attr_count > 1)
+            {
+              printf("<td>%s</td>", $row['attr_2']);
+
+              if ($attr_count > 2)
               {
-                while (($row = $result->fetch_array()) != null)
+                printf("<td>%s</td>", $row['attr_3']);
+
+                if ($attr_count > 3)
                 {
-                  printf("<tr>");
+                  printf("<td>%s</td>", $row['attr_4']);
 
-                  $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                                         getPlayerColor($row['character_guid']),
-                                         getPlayerName($row['character_guid']));
-
-                  printf("<td>%s</td>",
-                         $player_name);
-
-                  printf("<td style=\"min-width: 49px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
-                         getPlayerClass($row['character_guid']),
-                         getPlayerRace($row['character_guid']),
-                         getPlayerGender($row['character_guid']));
-
-                  printf("<td>%s</td>", $row['score_killing_blows']);
-                  printf("<td>%s</td>", $row['score_deaths']);
-                  printf("<td>%s</td>", $row['score_honorable_kills']);
-                  printf("<td>%s</td>", $row['score_bonus_honor']);
-                  printf("<td>%s</td>", $row['score_damage_done']);
-                  printf("<td>%s</td>", $row['score_healing_done']);
-
-                  printf("<td>%s</td>", $row['attr_1']);
-
-                  if ($attr_count > 1)
-                  {
-                    printf("<td>%s</td>", $row['attr_2']);
-
-                    if ($attr_count > 2)
-                    {
-                      printf("<td>%s</td>", $row['attr_3']);
-
-                      if ($attr_count > 3)
-                      {
-                        printf("<td>%s</td>", $row['attr_4']);
-
-                        if ($attr_count > 4)
-                          printf("<td>%s</td>", $row['attr_5']);
-                      }
-                    }
-
-                  }
-
-                  printf("</tr>");
+                  if ($attr_count > 4)
+                    printf("<td>%s</td>", $row['attr_5']);
                 }
               }
-              else
+
+            }
+
+            printf("</tr>");
+          }
+        }
+        else
+        {
+          while (($row = $result->fetch_array()) != null)
+          {
+            printf("<tr>");
+
+            $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                                   getPlayerColor($row['character_guid']),
+                                   $armory_url,
+                                   getPlayerName($row['character_guid']),
+                                   getPlayerName($row['character_guid']));
+
+            printf("<td>%s</td>",
+                   $player_name);
+
+            printf("<td style=\"min-width: 49px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
+                   getPlayerClass($row['character_guid']),
+                   getPlayerRace($row['character_guid']),
+                   getPlayerGender($row['character_guid']));
+
+            printf("<td>%s</td>", $row['score_killing_blows']);
+            printf("<td>%s</td>", $row['score_deaths']);
+            printf("<td>%s</td>", $row['score_honorable_kills']);
+            printf("<td>%s</td>", $row['score_bonus_honor']);
+            printf("<td>%s</td>", $row['score_damage_done']);
+            printf("<td>%s</td>", $row['score_healing_done']);
+
+            printf("<td>%s</td>", $row['attr_1']);
+
+            if ($attr_count > 1)
+            {
+              printf("<td>%s</td>", $row['attr_2']);
+
+              if ($attr_count > 2)
               {
-                while (($row = $result->fetch_array()) != null)
+                printf("<td>%s</td>", $row['attr_3']);
+
+                if ($attr_count > 3)
                 {
-                  printf("<tr>");
+                  printf("<td>%s</td>", $row['attr_4']);
 
-                  $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                                           getPlayerColor($row['character_guid']),
-                                           $armory_url,
-                                           getPlayerName($row['character_guid']),
-                                           getPlayerName($row['character_guid']));
-
-                  printf("<td>%s</td>",
-                         $player_name);
-
-                  printf("<td style=\"min-width: 49px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
-                         getPlayerClass($row['character_guid']),
-                         getPlayerRace($row['character_guid']),
-                         getPlayerGender($row['character_guid']));
-
-                  printf("<td>%s</td>", $row['score_killing_blows']);
-                  printf("<td>%s</td>", $row['score_deaths']);
-                  printf("<td>%s</td>", $row['score_honorable_kills']);
-                  printf("<td>%s</td>", $row['score_bonus_honor']);
-                  printf("<td>%s</td>", $row['score_damage_done']);
-                  printf("<td>%s</td>", $row['score_healing_done']);
-
-                  printf("<td>%s</td>", $row['attr_1']);
-
-                  if ($attr_count > 1)
-                  {
-                    printf("<td>%s</td>", $row['attr_2']);
-
-                    if ($attr_count > 2)
-                    {
-                      printf("<td>%s</td>", $row['attr_3']);
-
-                      if ($attr_count > 3)
-                      {
-                        printf("<td>%s</td>", $row['attr_4']);
-
-                        if ($attr_count > 4)
-                          printf("<td>%s</td>", $row['attr_5']);
-                      }
-                    }
-
-                  }
-
-                  printf("</tr>");
+                  if ($attr_count > 4)
+                    printf("<td>%s</td>", $row['attr_5']);
                 }
               }
+
+            }
+
+            printf("</tr>");
+          }
+        }
             ?>
 
           </tbody>
@@ -616,133 +618,133 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sortable.min.js"></script>
     <script>
-    $(document).ready(function () {
+      $(document).ready(function () {
 
-      <?php if (!isset($id) || $result->num_rows == 0) { ?>
+        <?php if (!isset($id) || $result->num_rows == 0) { ?>
 
-      $('#detailed-scores').addClass("active");
-      $("#select-month option[value='<?= $month ?>']").attr("selected","selected");
-      $("#select-level option[value='<?= $level ?>']").attr("selected","selected");
+        $('#detailed-scores').addClass("active");
+        $("#select-month option[value='<?= $month ?>']").attr("selected","selected");
+        $("#select-level option[value='<?= $level ?>']").attr("selected","selected");
 
-      <?php if (!$correct) { ?>
-      $('#search').click();
-      <?php } ?>
+        <?php if (!$correct) { ?>
+        $('#search').click();
+        <?php } ?>
 
-      <?php } else { ?>
+        <?php } else { ?>
 
-      $('#killing-blows').click();
+        $('#killing-blows').click();
 
-      var winner_faction = <?= $winner_faction ?>;
-      var alliance = "blue";
-      var horde = "red";
-      var none = "grey";
+        var winner_faction = <?= $winner_faction ?>;
+        var alliance = "blue";
+        var horde = "red";
+        var none = "grey";
 
-      switch (winner_faction)
-      {
+        switch (winner_faction)
+        {
           case <?= $ALLIANCE ?>:
             $('#bg-table-container').css("border", "1px solid " + alliance);
             break;
           case <?= $HORDE ?>:
-             $('#bg-table-container').css("border", "1px solid " + horde);
-             break;
+            $('#bg-table-container').css("border", "1px solid " + horde);
+            break;
           case <?= $NONE ?>:
-             $('#bg-table-container').css("border", "1px solid " + none);
-             break;
-      }
-
-      <?php if ($additional_statistics > 0) { ?>
-
-      if (<?= $alliance_this_day ?> > <?= $horde_this_day ?>)
-      {
-        $('.this-day-score-container').css("border", "1px solid " + alliance);
-      }
-      else if (<?= $alliance_this_day ?> < <?= $horde_this_day ?>)
-      {
-        $('.this-day-score-container').css("border", "1px solid " + horde);
-      }
-      else
-      {
-        $('.this-day-score-container').css("border", "1px solid " + none);
-      }
-
-      if (<?= $alliance_this_month ?> > <?= $horde_this_month ?>)
-      {
-        $('.this-month-score-container').css("border", "1px solid " + alliance);
-      }
-      else if (<?= $alliance_this_month ?> < <?= $horde_this_month ?>)
-      {
-        $('.this-month-score-container').css("border", "1px solid " + horde);
-      }
-      else
-      {
-        $('.this-month-score-container').css("border", "1px solid " + none);
-      }
-
-      $('#toggle-guild-members').click(function () {
-        if ($('#toggle-guild-members').html() == "More")
-        {
-          $('.guild-members-container').css("max-height", "798px");
-          $('#toggle-guild-members').html("Less");
+            $('#bg-table-container').css("border", "1px solid " + none);
+            break;
         }
-        else
-        {
-          $('.guild-members-container').css("max-height", "417px");
-          $('#toggle-guild-members').html("More");
-        }
-      });
 
-      $('#toggle-this-day').click(function () {
-        if ($('#toggle-this-day').html() == "More")
-        {
-          $('.this-day-score-container').css("max-height", "798px");
-          $('#toggle-this-day').html("Less");
-        }
-        else
-        {
-          $('.this-day-score-container').css("max-height", "417px");
-          $('#toggle-this-day').html("More");
-        }
-      });
+            <?php if ($additional_statistics > 0) { ?>
 
-      $('#toggle-this-month').click(function () {
-        if ($('#toggle-this-month').html() == "More")
-        {
-          $('.this-month-score-container').css("max-height", "798px");
-          $('#toggle-this-month').html("Less");
+            if (<?= $alliance_this_day ?> > <?= $horde_this_day ?>)
+            {
+            $('.this-day-score-container').css("border", "1px solid " + alliance);
         }
-        else
-        {
-          $('.this-month-score-container').css("max-height", "417px");
-          $('#toggle-this-month').html("More");
+            else if (<?= $alliance_this_day ?> < <?= $horde_this_day ?>)
+            {
+            $('.this-day-score-container').css("border", "1px solid " + horde);
         }
-      });
-
-      $('#toggle-bg-day').click(function () {
-        if ($('#toggle-bg-day').html() == "More")
-        {
-          $('.bg-day-container').css("max-height", "798px");
-          $('#toggle-bg-day').html("Less");
+            else
+            {
+            $('.this-day-score-container').css("border", "1px solid " + none);
         }
-        else
-        {
-          $('.bg-day-container').css("max-height", "417px");
-          $('#toggle-bg-day').html("More");
+
+            if (<?= $alliance_this_month ?> > <?= $horde_this_month ?>)
+            {
+            $('.this-month-score-container').css("border", "1px solid " + alliance);
         }
-      });
+            else if (<?= $alliance_this_month ?> < <?= $horde_this_month ?>)
+            {
+            $('.this-month-score-container').css("border", "1px solid " + horde);
+        }
+            else
+            {
+            $('.this-month-score-container').css("border", "1px solid " + none);
+        }
 
-      <?php } ?>
-      <?php } ?>
+            $('#toggle-guild-members').click(function () {
+            if ($('#toggle-guild-members').html() == "More")
+            {
+            $('.guild-members-container').css("max-height", "798px");
+            $('#toggle-guild-members').html("Less");
+        }
+            else
+            {
+            $('.guild-members-container').css("max-height", "417px");
+            $('#toggle-guild-members').html("More");
+        }
+        });
 
-    });
+            $('#toggle-this-day').click(function () {
+            if ($('#toggle-this-day').html() == "More")
+            {
+            $('.this-day-score-container').css("max-height", "798px");
+            $('#toggle-this-day').html("Less");
+        }
+            else
+            {
+            $('.this-day-score-container').css("max-height", "417px");
+            $('#toggle-this-day').html("More");
+        }
+        });
 
-    function thfocus(element)
-    {
-      $('.th-elem').each(function() {
-        $(this).css("color", "#FFF");
-      });
+            $('#toggle-this-month').click(function () {
+            if ($('#toggle-this-month').html() == "More")
+            {
+            $('.this-month-score-container').css("max-height", "798px");
+            $('#toggle-this-month').html("Less");
+        }
+            else
+            {
+            $('.this-month-score-container').css("max-height", "417px");
+            $('#toggle-this-month').html("More");
+        }
+        });
 
-      $(element).css("color", "yellow");
-    }
+            $('#toggle-bg-day').click(function () {
+            if ($('#toggle-bg-day').html() == "More")
+            {
+            $('.bg-day-container').css("max-height", "798px");
+            $('#toggle-bg-day').html("Less");
+        }
+            else
+            {
+            $('.bg-day-container').css("max-height", "417px");
+            $('#toggle-bg-day').html("More");
+        }
+        });
+
+            <?php } ?>
+            <?php } ?>
+
+        });
+
+            function thfocus(element)
+            {
+            $('.th-elem').each(function() {
+            $(this).css("color", "#FFF");
+        });
+
+            $(element).css("color", "yellow");
+        }
     </script>
 
   </body>
