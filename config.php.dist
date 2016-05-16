@@ -64,7 +64,7 @@ if (mysqli_connect_error())
 if (isset($charset) || $charset == "")
   $db->set_charset($charset);
 
-if ($expansion < 0 || $expansion > 2)
+if ($expansion < 0 || $expansion > 3)
   die("Wrong value provided for expansion parameter. Please config your expansion.");
 
 if ($debug != 0)
