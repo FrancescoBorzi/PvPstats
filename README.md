@@ -4,9 +4,9 @@ PvPstats
 
 ## Introduction
 
-PvPstats is an utility for **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a core modification and a web application written in **PHP**. It's released under the [GNU AGPL v3 License](https://github.com/ShinDarth/PvPstats/blob/master/LICENSE).
+PvPstats is an utility for **AzerothCore**, **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a core modification and a web application written in **PHP**. It's released under the [GNU AGPL v3 License](https://github.com/ShinDarth/PvPstats/blob/master/LICENSE).
 
-**Note that the core modification has been included in both [TrinityCore](https://github.com/TrinityCore/) and [CMaNGOS](https://github.com/cmangos/) official repositories, so you will need to enable it only (as explained in install instructions linked below)**.
+**Note that the core modification has been included in the [AzerothCore](https://github.com/AzerothCore/), [TrinityCore](https://github.com/TrinityCore/) and [CMaNGOS](https://github.com/cmangos/) official repositories, so you will need to enable it only (as explained in install instructions linked below)**.
 
 Each time a Battleground ends, PvPstats stores in the database all Battlegrounds:
 
@@ -30,6 +30,7 @@ In a nutshell, **it saves all datas you can see when the BattleGround ends in th
 
 It currently supports:
 
+- [AzerothCore with WOTLK (3.x.x game version)](https://github.com/azerothcore/azerothcore-wotlk)
 - [TrinityCore with Cataclysm (4.x.x game version)](https://github.com/TrinityCore/TrinityCore/tree/4.3.4)
 - [TrinityCore with WOTLK (3.x.x game version)](https://github.com/TrinityCore/TrinityCore/tree/3.3.5)
 - [CMaNGOS with WOTLK (3.x.x game version)](https://github.com/CMaNGOS/mangos-wotlk)
@@ -59,7 +60,7 @@ The web application is secure against SQL-Injection attacks, tested with [sqlmap
 
 ## Install
 
-- [How to install PvPstats system in TrinityCore](https://github.com/ShinDarth/PvPstats/blob/master/docs/INSTALL-TrinityCore.md)
+- [How to install PvPstats system in TrinityCore or AzerothCore](https://github.com/ShinDarth/PvPstats/blob/master/docs/INSTALL-TrinityCore.md)
 
 - [How to install PvPstats system in CMaNGOS](https://github.com/ShinDarth/PvPstats/blob/master/docs/INSTALL-CMaNGOS.md)
 
