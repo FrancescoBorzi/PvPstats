@@ -31,7 +31,7 @@ In a nutshell, **it saves all datas you can see when the BattleGround ends in th
 It currently supports:
 
 - [AzerothCore with WOTLK (3.x.x game version)](https://github.com/azerothcore/azerothcore-wotlk)
-- [TrinityCore with Cataclysm (4.x.x game version)](https://github.com/TrinityCore/TrinityCore/tree/4.3.4)
+- [TrinityCore with Cataclysm (4.x.x game version)](https://gitlab.com/trinitycore/TrinityCore_434/)
 - [TrinityCore with WOTLK (3.x.x game version)](https://github.com/TrinityCore/TrinityCore/tree/3.3.5)
 - [CMaNGOS with WOTLK (3.x.x game version)](https://github.com/CMaNGOS/mangos-wotlk)
 - [CMaNGOS with TBC     (2.x.x game version)](https://github.com/CMaNGOS/mangos-tbc)
