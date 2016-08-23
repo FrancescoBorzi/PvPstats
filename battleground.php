@@ -408,7 +408,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id']))
             printf("<tr>");
 
             $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                                   getPlayerColor($row['character_guid']),
+                                   getPlayerColorInBG($row['winner'], $winner_faction, $row['character_guid']),
                                    getPlayerName($row['character_guid']));
 
             printf("<td>%s</td>",
@@ -457,7 +457,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id']))
             printf("<tr>");
 
             $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                                   getPlayerColor($row['character_guid']),
+                                   getPlayerColorInBG($row['winner'], $winner_faction, $row['character_guid']),
                                    $armory_url,
                                    getPlayerName($row['character_guid']),
                                    getPlayerName($row['character_guid']));

@@ -74,6 +74,35 @@ function getPlayerColor($guid)
   return $color;
 }
 
+// TODO: this method does not work when there is no winner faction (rare case)
+function getPlayerColorInBG($is_winner, $winner_faction, $guid)
+{
+  global $alliance_color, $horde_color, $ALLIANCE, $HORDE;
+
+
+  if ($winner_faction == $ALLIANCE)
+  {
+    if ($is_winner)
+      return $alliance_color;
+    else
+      return $horde_color;
+  }
+  else if ($winner_faction == $HORDE)
+  {
+    if ($is_winner)
+      return $horde_color;
+    else
+      return $alliance_color;
+  }
+  else
+  {
+    // Fallback in case of draw
+    // it will work properly only if there is no crossfaction
+    // and no character has changed its faction
+    return getPlayerColor($guid);
+  }
+}
+
 function getPlayerGuild($guid)
 {
   global $db;
