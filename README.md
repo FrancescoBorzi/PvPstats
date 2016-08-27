@@ -64,6 +64,15 @@ The web application is secure against SQL-Injection attacks, tested with [sqlmap
 
 - [How to install PvPstats system in CMaNGOS](https://github.com/ShinDarth/PvPstats/blob/master/docs/INSTALL-CMaNGOS.md)
 
+### Contribute
+
+You can help us [opening a new issue](https://github.com/ShinDarth/PvPstats/issues/new) to report a bug or a suggestion
+
+or you can donate to support us
+
+[![Donate](https://www.paypal.com/en_GB/i/btn/btn_donateCC_LG.gif "Donate")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=52AZFFD86N39Q)
+
+
 ## Live preview
 
 Do you want to see PvPstats in action? [See who is using PvPstats](http://shinworld.altervista.org/PvPstats/).
