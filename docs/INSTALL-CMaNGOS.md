@@ -10,7 +10,7 @@ Battleground.StoreStatistics.Enable = 1
 
 3) Clone the repository into your web server (e.g. /var/www/):
 ```
-git clone https://github.com/ShinDarth/PvPstats.git
+git clone https://github.com/FrancescoBorzi/PvPstats.git
 ```
 
 4) Copy the file **config.php.dist** and rename the copy to **config.php**, then open and edit it properly (it's quite commented).

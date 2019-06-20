@@ -1,10 +1,10 @@
 PvPstats
 ========
-# ![logo](https://raw.githubusercontent.com/ShinDarth/PvPstats/master/logo/PvPstats.png)
+# ![logo](https://raw.githubusercontent.com/FrancescoBorzi/PvPstats/master/logo/PvPstats.png)
 
 ## Introduction
 
-PvPstats is an utility for **AzerothCore**, **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a core modification and a web application written in **PHP**. It's released under the [GNU AGPL v3 License](https://github.com/ShinDarth/PvPstats/blob/master/LICENSE).
+PvPstats is an utility for **AzerothCore**, **TrinityCore** and **CMaNGOS** that allows to store and display data about **Battleground scores**. It consists in a core modification and a web application written in **PHP**. It's released under the [GNU AGPL v3 License](https://github.com/FrancescoBorzi/PvPstats/blob/master/LICENSE).
 
 **Note that the core modification has been included in the [AzerothCore](https://github.com/AzerothCore/), [TrinityCore](https://github.com/TrinityCore/) and [CMaNGOS](https://github.com/cmangos/) official repositories, so you will need to enable it only (as explained in install instructions linked below)**.
 
@@ -60,17 +60,15 @@ The web application is secure against SQL-Injection attacks, tested with [sqlmap
 
 ## Install
 
-- [How to install PvPstats system in TrinityCore or AzerothCore](https://github.com/ShinDarth/PvPstats/blob/master/docs/INSTALL-TrinityCore.md)
+- [How to install PvPstats system in TrinityCore or AzerothCore](https://github.com/FrancescoBorzi/PvPstats/blob/master/docs/INSTALL-TrinityCore.md)
 
-- [How to install PvPstats system in CMaNGOS](https://github.com/ShinDarth/PvPstats/blob/master/docs/INSTALL-CMaNGOS.md)
+- [How to install PvPstats system in CMaNGOS](https://github.com/FrancescoBorzi/PvPstats/blob/master/docs/INSTALL-CMaNGOS.md)
 
 ### Contribute
 
-You can help us [opening a new issue](https://github.com/ShinDarth/PvPstats/issues/new) to report a bug or a suggestion
+You can help us [opening a new issue](https://github.com/FrancescoBorzi/PvPstats/issues/new) to report a bug or a suggestion
 
-or you can donate to support us
-
-[![Donate](https://www.paypal.com/en_GB/i/btn/btn_donateCC_LG.gif "Donate")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=52AZFFD86N39Q)
+or you can [donate](https://www.paypal.me/francesco92dev) to support us.
 
 
 ## Live preview
