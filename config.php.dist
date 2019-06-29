@@ -1,10 +1,10 @@
 <?php
 
 # Your server name
-$server_name = "TrinityCore";
+$server_name = "AzerothCore";
 
 # Your server url
-$server_url = "http://www.trinitycore.org/";
+$server_url = "http://www.azerothcore.org/";
 
 # Your server logo img url (optional)
 $server_logo = "img/PvPstats.png";
