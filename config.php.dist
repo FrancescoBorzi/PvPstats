@@ -1,10 +1,10 @@
 <?php
 
 # Your server name
-$server_name = "TrinityCore";
+$server_name = "AzerothCore";
 
 # Your server url
-$server_url = "http://www.trinitycore.org/";
+$server_url = "http://www.azerothcore.org/";
 
 # Your server logo img url (optional)
 $server_logo = "img/PvPstats.png";
@@ -32,8 +32,8 @@ $show_guilds = 1;
 #   3 = Cataclysm
 $expansion = 2;
 
-# Connection to the database of characters (address, username, password, database)
-$db = new mysqli("localhost","root","password","characters");
+# Connection to the database of characters (address, username, password, database, port)
+$db = new mysqli("localhost","root","password","characters", 3306);
 
 # Charset (you can set it blank if you want to maintain your default charset)
 $charset = "utf8";
