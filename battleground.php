@@ -7,7 +7,7 @@ require_once("factionScores.php");
 
 if (isset($_GET['id']) && is_numeric($_GET['id']))
 {
-  $id = $_GET['id'];
+  $id = intval($_GET['id']);
 
   $query = sprintf("SELECT * FROM pvpstats_battlegrounds WHERE id = %d",
                    $id);
@@ -137,35 +137,35 @@ if (isset($_GET['id']) && is_numeric($_GET['id']))
           if (isset($_GET['day']) && $_GET['day'] != "")
           {
             if (is_numeric($_GET['day']) && $_GET['day'] > 0 && $_GET['day'] <= 31)
-              $day    = mysqli_real_escape_string($db, $_GET['day']);
+              $day    = intval(mysqli_real_escape_string($db, $_GET['day']));
             else
               $correct = false;
           }
           if (isset($_GET['year']) && $_GET['year'] != "")
           {
             if (is_numeric($_GET['year']) && $_GET['year'] > 2000 && $_GET['year'] <= date("Y"))
-              $year   = mysqli_real_escape_string($db, $_GET['year']);
+              $year   = intval(mysqli_real_escape_string($db, $_GET['year']));
             else
               $correct = false;
           }
           if (isset($_GET['month']) && $_GET['month'] != "")
           {
             if (is_numeric($_GET['month']) && $_GET['month'] >= 0 && $_GET['month'] <= 12)
-              $month  = mysqli_real_escape_string($db, $_GET['month']);
+              $month  = intval(mysqli_real_escape_string($db, $_GET['month']));
             else
               $correct = false;
           }
           if (isset($_GET['level']) && $_GET['level'] != "")
           {
             if (is_numeric($_GET['level']) && $_GET['level'] >= 0)
-              $level  = mysqli_real_escape_string($db, $_GET['level']);
+              $level  = intval(mysqli_real_escape_string($db, $_GET['level']));
             else
               $correct = false;
           }
           if (isset($_GET['limit']) && $_GET['limit'] != "")
           {
             if (is_numeric($_GET['limit']) && $_GET['limit'] > 0 && $_GET['limit'] <= $max_results_allowed)
-              $limit  = $_GET['limit'];
+              $limit  = intval($_GET['limit']);
             else
               $correct = false;
           }

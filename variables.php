@@ -54,8 +54,8 @@ switch ($expansion)
 
 if (isset($_GET['level']) && $_GET['level'] <= $MAX_BRACKET_ID && $_GET['level'] > 0 && is_numeric($_GET['level']))
 {
-  $level_condition = "bracket_id = " . mysqli_real_escape_string($db, $_GET['level']);
-  $level = mysqli_real_escape_string($db, $_GET['level']);
+  $level = intval(mysqli_real_escape_string($db, $_GET['level']));
+  $level_condition = "bracket_id = " . $level;
 }
 else
 {
@@ -73,15 +73,16 @@ if (isset($_GET['type']))
     case $BATTLEGROUND_EY:
     case $BATTLEGROUND_SA:
     case $BATTLEGROUND_IC:
-      $type_condition = "type = " . mysqli_real_escape_string($db, $_GET['type']);
+      $type = intval(mysqli_real_escape_string($db, $_GET['type']));
       break;
 
     default:
       $type_condition = "";
   }
 
-  $type_link      = "&type=" . mysqli_real_escape_string($db, $_GET['type']);
-  $type_link_all  = "?type=" . mysqli_real_escape_string($db, $_GET['type']);
+  $type_condition = "type = " . $type;
+  $type_link      = "&" . $type;
+  $type_link_all  = "?" . $type;
 }
 else
   $type_link_all = $type_link = $type_condition = "";
