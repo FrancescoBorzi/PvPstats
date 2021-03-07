@@ -33,7 +33,8 @@ $show_guilds = 1;
 $expansion = 2;
 
 # Connection to the database of characters (address, username, password, database, port)
-$db = new mysqli("localhost","root","password","characters", 3306);
+# if using Docker on macOS or Windows, replace "127.0.0.1" with "host.docker.internal"
+$db = new mysqli("127.0.0.1","root","password","characters", 3306);
 
 # Charset (you can set it blank if you want to maintain your default charset)
 $charset = "utf8";
