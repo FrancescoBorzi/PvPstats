@@ -74,13 +74,13 @@ if (isset($_GET['type']))
     case $BATTLEGROUND_SA:
     case $BATTLEGROUND_IC:
       $type = intval(mysqli_real_escape_string($db, $_GET['type']));
+      $type_condition = "type = " . $type;
       break;
 
     default:
       $type_condition = "";
   }
 
-  $type_condition = "type = " . $type;
   $type_link      = "&" . $type;
   $type_link_all  = "?" . $type;
 }
