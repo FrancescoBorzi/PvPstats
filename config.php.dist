@@ -13,9 +13,9 @@ $server_logo = "img/PvPstats.png";
 # (set it blank if you don't have it)
 $armory_url = "http://www.yourserver.org/armory/character.php?n=";
 
-# Your server armory url including guild name param
-# (set it blank if you don't have it)
-$guild_armory_url = "http://www.yourserver.org/armory/guild.php?n=";
+# (Optional) your server armory url including guild id param
+# you can also keep "guild.php?id=" to show the PvPstats guild score, or set it blank if you don't want any link
+$guild_armory_url = "guild.php?id=";
 
 # The date PvPstats system is online from
 $online_from = "01/08/2014";
