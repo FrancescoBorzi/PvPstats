@@ -40,14 +40,11 @@ function getPlayerName($guid)
   return $row['name'];
 }
 
-function getPlayerColor($guid)
+function getPlayerColorByRace(int $race): string
 {
-  global $db, $alliance_color, $horde_color;
+  global  $alliance_color, $horde_color;
 
-  $query = sprintf("SELECT race FROM characters WHERE guid = %d", $guid);
-  $row = $db->query($query)->fetch_row();
-
-  switch ($row[0])
+  switch ($race)
   {
     case 1:
     case 3:
@@ -72,6 +69,15 @@ function getPlayerColor($guid)
   }
 
   return $color;
+}
+
+function getPlayerColorByGuid(int $guid): string
+{
+  global $db;
+
+  $query = sprintf("SELECT race FROM characters WHERE guid = %d", $guid);
+  $row = $db->query($query)->fetch_row();
+  return getPlayerColorByRace($row[0]);
 }
 
 // TODO: this method does not work when there is no winner faction (rare case)
@@ -99,7 +105,7 @@ function getPlayerColorInBG($is_winner, $winner_faction, $guid)
     // Fallback in case of draw
     // it will work properly only if there is no crossfaction
     // and no character has changed its faction
-    return getPlayerColor($guid);
+    return getPlayerColorByGuid($guid);
   }
 }
 
@@ -133,7 +139,7 @@ function getGuildColor($guildid)
   $query = sprintf("SELECT leaderguid FROM guild WHERE guildid = %d", $guildid);
   $row = $db->query($query)->fetch_row();
 
-  return getPlayerColor($row[0]);
+  return getPlayerColorByGuid($row[0]);
 }
 
 function getFactionScores($time_cond, $level_cond, $type_cond)
@@ -215,11 +221,11 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
 
   if (!(isset($armory_url)) || $armory_url == "")
     $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                           getPlayerColor($row['character_guid']),
+                           getPlayerColorByGuid($row['character_guid']),
                            $row['character_name']);
   else
     $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                           getPlayerColor($row['character_guid']),
+                           getPlayerColorByGuid($row['character_guid']),
                            $armory_url,
                            $row['character_name'],
                            $row['character_name']);
@@ -242,7 +248,7 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
         $position++;
 
       $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                             getPlayerColor($row['character_guid']),
+                             getPlayerColorByGuid($row['character_guid']),
                              $row['character_name']);
 
       printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
@@ -264,7 +270,7 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
         $position++;
 
       $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                             getPlayerColor($row['character_guid']),
+                             getPlayerColorByGuid($row['character_guid']),
                              $armory_url,
                              $row['character_name'],
                              $row['character_name']);
@@ -324,10 +330,10 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
                           getGuildColor($row[2]),
                           $row[0]);
   else
-    $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+    $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%d\"><strong>%s</strong></a>",
                           getGuildColor($row[2]),
                           $guild_armory_url,
-                          $row[0],
+                          $row[2],
                           $row[0]);
 
   if ($top100)
@@ -388,10 +394,10 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
         $position++;
 
 
-      $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+      $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%d\"><strong>%s</strong></a>",
                             getGuildColor($row[2]),
                             $guild_armory_url,
-                            $row[0],
+                            $row[2],
                             $row[0]);
 
       if ($top100)
@@ -616,11 +622,11 @@ function getTop100Players()
 
   if (!(isset($armory_url)) || $armory_url == "")
     $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                           getPlayerColor($row['character_guid']),
+                           getPlayerColorByGuid($row['character_guid']),
                            $row['character_name']);
   else
     $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                           getPlayerColor($row['character_guid']),
+                           getPlayerColorByGuid($row['character_guid']),
                            $armory_url,
                            $row['character_name'],
                            $row['character_name']);
@@ -628,6 +634,7 @@ function getTop100Players()
   $player_guild = getPlayerGuild($row['character_guid']);
   $guild_name = getGuildName($player_guild);
 
+  // TODO: optimise query
   printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
          $position,
          $player_name,
@@ -650,12 +657,13 @@ function getTop100Players()
         $position++;
 
       $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                             getPlayerColor($row['character_guid']),
+                             getPlayerColorByGuid($row['character_guid']),
                              $row['character_name']);
 
       $player_guild = getPlayerGuild($row['character_guid']);
       $guild_name = getGuildName($player_guild);
 
+      // TODO: optimise query
       printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
              $position,
              $player_name,
@@ -679,7 +687,7 @@ function getTop100Players()
         $position++;
 
       $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                             getPlayerColor($row['character_guid']),
+                             getPlayerColorByGuid($row['character_guid']),
                              $armory_url,
                              $row['character_name'],
                              $row['character_name']);
