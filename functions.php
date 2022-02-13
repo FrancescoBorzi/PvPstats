@@ -40,7 +40,7 @@ function getPlayerName($guid)
   return $row['name'];
 }
 
-function getPlayerColorByRace($race)
+function getPlayerColorByRace(int $race): string
 {
   global  $alliance_color, $horde_color;
 
@@ -71,7 +71,7 @@ function getPlayerColorByRace($race)
   return $color;
 }
 
-function getPlayerColorByGuid($guid)
+function getPlayerColorByGuid(int $guid): string
 {
   global $db;
 

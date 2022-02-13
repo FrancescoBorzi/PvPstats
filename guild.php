@@ -34,27 +34,27 @@ function getGuildPlayers()
                     characters.level AS character_level,
                     characters.totalKills AS character_totalKills
                     FROM pvpstats_players 
-                    INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id 
-                    INNER JOIN characters ON pvpstats_players.character_guid = characters.guid
-                    INNER JOIN guild_member ON guild_member.guid = characters.guid 
-                    WHERE characters.deleteDate IS NULL 
-                    AND pvpstats_players.winner = 1 
-                    AND guild_member.guildid = %d %s LIMIT 0,100",
+                    INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id AND pvpstats_players.winner = 1 
+                    INNER JOIN characters ON pvpstats_players.character_guid = characters.guid AND characters.deleteDate IS NULL 
+                    INNER JOIN guild_member ON guild_member.guid = characters.guid AND guild_member.guildid = %d
+                    %s LIMIT 0,100",
         $guildId,
         $players_group_and_order);
 
     $result = $db->query($query);
 
-    if (!$result)
+    if (!$result) {
         die("Error querying: " . $query);
+    }
 
     $position = 0;
     $prev_score = 0;
 
     while (($row = $result->fetch_array()) != null)
     {
-        if ($prev_score != $row['count'])
+        if ($prev_score != $row['count']) {
             $position++;
+        }
 
         $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
             getPlayerColorByRace($row['character_race']),
@@ -125,7 +125,7 @@ function getGuildPlayers()
                 </tr>
               </thead>
               <tbody>
-                <?php getGuildPlayers(3); ?>
+                <?php getGuildPlayers(); ?>
               </tbody>
             </table>
           </div>
