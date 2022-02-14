@@ -27,12 +27,12 @@ function getGuildPlayers()
     $query = sprintf("SELECT 
                         character_guid, 
                         count(character_guid) AS `count`, 
-                        characters.name AS character_name,
-                        characters.class AS character_class,
-                        characters.race AS character_race,
-                        characters.gender AS character_gender,
-                        characters.level AS character_level,
-                        characters.totalKills AS character_totalKills
+                        characters.name AS `character_name`,
+                        characters.class AS `character_class`,
+                        characters.race AS `character_race`,
+                        characters.gender AS `character_gender`,
+                        characters.level AS `character_level`,
+                        characters.totalKills AS `character_totalKills`
                     FROM pvpstats_players 
                     INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id AND pvpstats_players.winner = 1 
                     INNER JOIN characters ON pvpstats_players.character_guid = characters.guid AND characters.deleteDate IS NULL 

@@ -206,10 +206,10 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
     SELECT
       character_guid,
       count(character_guid) AS `count`,
-      characters.name as character_name,
-      characters.gender as character_gender,
-      characters.class as character_class,
-      characters.race AS character_race
+      characters.name AS `character_name`,
+      characters.gender AS `character_gender`,
+      characters.class AS `character_class`,
+      characters.race AS `character_race`
     FROM pvpstats_players 
     INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id 
     INNER JOIN characters ON pvpstats_players.character_guid = characters.guid 
@@ -640,10 +640,10 @@ function getTop100Players()
     SELECT
         character_guid,
         count(character_guid) AS `count`,
-        characters.name as character_name,
-        characters.class as character_class,
-        characters.race as character_race,
-        characters.gender as character_gender,
+        characters.name AS `character_name`,
+        characters.class AS `character_class`,
+        characters.race AS `character_race`,
+        characters.gender AS `character_gender`,
         characters.level as character_level
     FROM pvpstats_players
     INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id
