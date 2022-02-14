@@ -26,7 +26,7 @@ function getGuildPlayers()
 
     $query = sprintf("SELECT 
                         character_guid, 
-                        count(character_guid) AS count, 
+                        count(character_guid) AS `count`, 
                         characters.name AS character_name,
                         characters.class AS character_class,
                         characters.race AS character_race,

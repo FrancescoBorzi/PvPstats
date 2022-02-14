@@ -205,7 +205,7 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
   $query = sprintf("
     SELECT
       character_guid,
-      count(character_guid) AS count,
+      count(character_guid) AS `count`,
       characters.name as character_name,
       characters.gender as character_gender,
       characters.class as character_class,
@@ -639,7 +639,7 @@ function getTop100Players()
   $query = sprintf("
     SELECT
         character_guid,
-        count(character_guid) AS count,
+        count(character_guid) AS `count`,
         characters.name as character_name,
         characters.class as character_class,
         characters.race as character_race,
