@@ -85,7 +85,6 @@ function getPlayerColorInBG($is_winner, $winner_faction, $guid)
 {
   global $alliance_color, $horde_color, $ALLIANCE, $HORDE;
 
-
   if ($winner_faction == $ALLIANCE)
   {
     if ($is_winner)
@@ -204,7 +203,13 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
 
 
   $query = sprintf("
-    SELECT character_guid, count(character_guid) AS count, characters.name as character_name 
+    SELECT
+      character_guid,
+      count(character_guid) AS `count`,
+      characters.name AS `character_name`,
+      characters.gender AS `character_gender`,
+      characters.class AS `character_class`,
+      characters.race AS `character_race`
     FROM pvpstats_players 
     INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id 
     INNER JOIN characters ON pvpstats_players.character_guid = characters.guid 
@@ -231,11 +236,11 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
 
   if (!(isset($armory_url)) || $armory_url == "")
     $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                           getPlayerColorByGuid($row['character_guid']),
+                           getPlayerColorByRace($row['character_race']),
                            $row['character_name']);
   else
     $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                           getPlayerColorByGuid($row['character_guid']),
+                           getPlayerColorByRace($row['character_race']),
                            $armory_url,
                            $row['character_name'],
                            $row['character_name']);
@@ -243,9 +248,9 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
   printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
          $position,
          $player_name,
-         getPlayerClass($row['character_guid']),
-         getPlayerRace($row['character_guid']),
-         getPlayerGender($row['character_guid']),
+         $row['character_class'],
+         $row['character_race'],
+         $row['character_gender'],
          $row['count']);
 
   $prev_score = $row['count'];
@@ -258,15 +263,15 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
         $position++;
 
       $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                             getPlayerColorByGuid($row['character_guid']),
+                             getPlayerColorByRace($row['character_race']),
                              $row['character_name']);
 
       printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
              $position,
              $player_name,
-             getPlayerClass($row['character_guid']),
-             getPlayerRace($row['character_guid']),
-             getPlayerGender($row['character_guid']),
+             $row['character_class'],
+             $row['character_race'],
+             $row['character_gender'],
              $row['count']);
 
       $prev_score = $row['count'];
@@ -280,7 +285,7 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
         $position++;
 
       $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                             getPlayerColorByGuid($row['character_guid']),
+                             getPlayerColorByRace($row['character_race']),
                              $armory_url,
                              $row['character_name'],
                              $row['character_name']);
@@ -288,9 +293,9 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
       printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%d</td></tr>",
              $position,
              $player_name,
-             getPlayerClass($row['character_guid']),
-             getPlayerRace($row['character_guid']),
-             getPlayerGender($row['character_guid']),
+             $row['character_class'],
+             $row['character_race'],
+             $row['character_gender'],
              $row['count']);
 
       $prev_score = $row['count'];
@@ -632,7 +637,14 @@ function getTop100Players()
   global $db, $players_group_and_order, $armory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
 
   $query = sprintf("
-    SELECT character_guid, count(character_guid) AS count, characters.name as character_name, characters.level as character_level 
+    SELECT
+        character_guid,
+        count(character_guid) AS `count`,
+        characters.name AS `character_name`,
+        characters.class AS `character_class`,
+        characters.race AS `character_race`,
+        characters.gender AS `character_gender`,
+        characters.level as character_level
     FROM pvpstats_players
     INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id
     INNER JOIN characters ON pvpstats_players.character_guid = characters.guid 
@@ -654,11 +666,11 @@ function getTop100Players()
 
   if (!(isset($armory_url)) || $armory_url == "")
     $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                           getPlayerColorByGuid($row['character_guid']),
+                           getPlayerColorByRace($row['character_race']),
                            $row['character_name']);
   else
     $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                           getPlayerColorByGuid($row['character_guid']),
+                           getPlayerColorByRace($row['character_race']),
                            $armory_url,
                            $row['character_name'],
                            $row['character_name']);
@@ -670,9 +682,9 @@ function getTop100Players()
   printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
          $position,
          $player_name,
-         getPlayerClass($row['character_guid']),
-         getPlayerRace($row['character_guid']),
-         getPlayerGender($row['character_guid']),
+         $row['character_class'],
+         $row['character_race'],
+         $row['character_gender'],
          $row['character_level'],
          $guild_name,
          getGuildColor($player_guild),
@@ -689,7 +701,7 @@ function getTop100Players()
         $position++;
 
       $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                             getPlayerColorByGuid($row['character_guid']),
+                             getPlayerColorByRace($row['character_race']),
                              $row['character_name']);
 
       $player_guild = getPlayerGuild($row['character_guid']);
@@ -699,9 +711,9 @@ function getTop100Players()
       printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
              $position,
              $player_name,
-             getPlayerClass($row['character_guid']),
-             getPlayerRace($row['character_guid']),
-             getPlayerGender($row['character_guid']),
+             $row['character_class'],
+             $row['character_race'],
+             $row['character_gender'],
              $row['character_level'],
              $guild_name,
              getGuildColor($player_guild),
@@ -719,7 +731,7 @@ function getTop100Players()
         $position++;
 
       $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                             getPlayerColorByGuid($row['character_guid']),
+                             getPlayerColorByRace($row['character_race']),
                              $armory_url,
                              $row['character_name'],
                              $row['character_name']);
@@ -730,9 +742,9 @@ function getTop100Players()
       printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
              $position,
              $player_name,
-             getPlayerClass($row['character_guid']),
-             getPlayerRace($row['character_guid']),
-             getPlayerGender($row['character_guid']),
+             $row['character_class'],
+             $row['character_race'],
+             $row['character_gender'],
              $row['character_level'],
              $guild_name,
              getGuildColor($player_guild),
