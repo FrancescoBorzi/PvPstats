@@ -44,7 +44,7 @@ function getGuildPlayers()
     $result = $db->query($query);
 
     if (!$result) {
-        die("Error querying: " . $query);
+        die(mysqli_error($db));
     }
 
     $position = 0;
