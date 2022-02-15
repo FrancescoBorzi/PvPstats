@@ -401,15 +401,22 @@ if (isset($_GET['id']) && is_numeric($_GET['id']))
         if (!$result)
           die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_players table.");
 
-        if (!(isset($armory_url)) || $armory_url == "")
-        {
+
           while (($row = $result->fetch_array()) != null)
           {
             printf("<tr>");
 
-            $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                                   getPlayerColorInBG($row['winner'], $winner_faction, $row['character_guid']),
-                                   getPlayerName($row['character_guid']));
+            if (!(isset($armory_url)) || $armory_url == "") {
+              $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+                getPlayerColorInBG($row['winner'], $winner_faction, $row['character_guid']),
+                getPlayerName($row['character_guid']));
+            } else {
+              $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+                getPlayerColorInBG($row['winner'], $winner_faction, $row['character_guid']),
+                $armory_url,
+                getPlayerName($row['character_guid']),
+                getPlayerName($row['character_guid']));
+            }
 
             printf("<td>%s</td>",
                    $player_name);
@@ -449,58 +456,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id']))
 
             printf("</tr>");
           }
-        }
-        else
-        {
-          while (($row = $result->fetch_array()) != null)
-          {
-            printf("<tr>");
-
-            $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                                   getPlayerColorInBG($row['winner'], $winner_faction, $row['character_guid']),
-                                   $armory_url,
-                                   getPlayerName($row['character_guid']),
-                                   getPlayerName($row['character_guid']));
-
-            printf("<td>%s</td>",
-                   $player_name);
-
-            printf("<td style=\"min-width: 49px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
-                   getPlayerClass($row['character_guid']),
-                   getPlayerRace($row['character_guid']),
-                   getPlayerGender($row['character_guid']));
-
-            printf("<td>%s</td>", $row['score_killing_blows']);
-            printf("<td>%s</td>", $row['score_deaths']);
-            printf("<td>%s</td>", $row['score_honorable_kills']);
-            printf("<td>%s</td>", $row['score_bonus_honor']);
-            printf("<td>%s</td>", $row['score_damage_done']);
-            printf("<td>%s</td>", $row['score_healing_done']);
-
-            printf("<td>%s</td>", $row['attr_1']);
-
-            if ($attr_count > 1)
-            {
-              printf("<td>%s</td>", $row['attr_2']);
-
-              if ($attr_count > 2)
-              {
-                printf("<td>%s</td>", $row['attr_3']);
-
-                if ($attr_count > 3)
-                {
-                  printf("<td>%s</td>", $row['attr_4']);
-
-                  if ($attr_count > 4)
-                    printf("<td>%s</td>", $row['attr_5']);
-                }
-              }
-
-            }
-
-            printf("</tr>");
-          }
-        }
             ?>
 
           </tbody>
