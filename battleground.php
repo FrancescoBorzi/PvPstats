@@ -393,14 +393,35 @@ if (isset($_GET['id']) && is_numeric($_GET['id']))
 
             <?php
 
-        $query = sprintf("SELECT * FROM pvpstats_players WHERE battleground_id = %d ORDER BY score_killing_blows DESC",
+        $query = sprintf("
+            SELECT
+                   pvpstats_players.winner,
+                   pvpstats_players.score_killing_blows,
+                   pvpstats_players.score_deaths,
+                   pvpstats_players.score_honorable_kills,
+                   pvpstats_players.score_bonus_honor,
+                   pvpstats_players.score_damage_done,
+                   pvpstats_players.score_healing_done,
+                   pvpstats_players.attr_1,
+                   pvpstats_players.attr_2,
+                   pvpstats_players.attr_3,
+                   pvpstats_players.attr_4,
+                   pvpstats_players.attr_5,
+                   pvpstats_players.character_guid,
+                   characters.name AS `character_name`,
+                   characters.gender AS `character_gender`,
+                   characters.class AS `character_class`,
+                   characters.race AS `character_race`
+            FROM pvpstats_players 
+            INNER JOIN characters ON characters.guid = pvpstats_players.character_guid
+            AND battleground_id = %d 
+            ORDER BY score_killing_blows DESC",
                          $id);
 
         $result = $db->query($query);
 
         if (!$result)
-          die("Cannot find battleground with id <strong>" . $id . "</strong> in pvpstats_players table.");
-
+          die(mysqli_error($db));
 
           while (($row = $result->fetch_array()) != null)
           {
@@ -409,22 +430,25 @@ if (isset($_GET['id']) && is_numeric($_GET['id']))
             if (!(isset($armory_url)) || $armory_url == "") {
               $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
                 getPlayerColorInBG($row['winner'], $winner_faction, $row['character_guid']),
-                getPlayerName($row['character_guid']));
+                $row['character_name']
+              );
             } else {
               $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
                 getPlayerColorInBG($row['winner'], $winner_faction, $row['character_guid']),
                 $armory_url,
-                getPlayerName($row['character_guid']),
-                getPlayerName($row['character_guid']));
+                $row['character_name'],
+                $row['character_name']
+              );
             }
 
             printf("<td>%s</td>",
                    $player_name);
 
             printf("<td style=\"min-width: 49px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>",
-                   getPlayerClass($row['character_guid']),
-                   getPlayerRace($row['character_guid']),
-                   getPlayerGender($row['character_guid']));
+                   $row['character_class'],
+                   $row['character_race'],
+                   $row['character_gender']
+            );
 
             printf("<td>%s</td>", $row['score_killing_blows']);
             printf("<td>%s</td>", $row['score_deaths']);

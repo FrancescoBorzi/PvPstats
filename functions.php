@@ -1,45 +1,5 @@
 <?php
 
-function getPlayerGender($guid)
-{
-  global $db;
-
-  $query = sprintf("SELECT gender FROM characters WHERE guid = %d;", $guid);
-  $row = $db->query($query)->fetch_array();
-
-  return $row['gender'];
-}
-
-function getPlayerRace($guid)
-{
-  global $db;
-
-  $query = sprintf("SELECT race FROM characters WHERE guid = %d;", $guid);
-  $row = $db->query($query)->fetch_array();
-
-  return $row['race'];
-}
-
-function getPlayerClass($guid)
-{
-  global $db;
-
-  $query = sprintf("SELECT class FROM characters WHERE guid = %d;", $guid);
-  $row = $db->query($query)->fetch_array();
-
-  return $row['class'];
-}
-
-function getPlayerName($guid)
-{
-  global $db;
-
-  $query = sprintf("SELECT name FROM characters WHERE guid = %d;", $guid);
-  $row = $db->query($query)->fetch_array();
-
-  return $row['name'];
-}
-
 function getPlayerColorByRace(int $race): string
 {
   global  $alliance_color, $horde_color;
