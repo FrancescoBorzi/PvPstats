@@ -325,11 +325,12 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
     SELECT guild.name, COUNT(guild.name), guild.guildid 
     FROM pvpstats_players 
     INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id 
+    AND pvpstats_players.winner = 1
     INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid 
     INNER JOIN guild ON guild_member.guildid = guild.guildid
     INNER JOIN characters ON pvpstats_players.character_guid = characters.guid 
-    WHERE characters.deleteDate IS NULL 
-    AND pvpstats_players.winner = 1 %s %s %s %s %s",
+    AND characters.deleteDate IS NULL 
+    %s %s %s %s %s",
                    $time_cond,
                    $level_cond,
                    $type_cond,
@@ -446,17 +447,18 @@ function getGuildsScores($time_cond, $level_cond, $type_cond, $top100 = false)
 
 function getGuildsMembers($battleground_id)
 {
-  global $db, $limit_guilds, $guilds_group_and_order, $guild_armory_url;
+  global $db, $guilds_group_and_order, $guild_armory_url;
 
   $query = sprintf("
     SELECT guild.name, COUNT(guild.name), guild.guildid 
     FROM pvpstats_players 
     INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id 
+    AND pvpstats_battlegrounds.id = %s 
     INNER JOIN guild_member ON guild_member.guid = pvpstats_players.character_guid 
     INNER JOIN guild ON guild_member.guildid = guild.guildid 
     INNER JOIN characters ON pvpstats_players.character_guid = characters.guid 
-    WHERE characters.deleteDate IS NULL 
-    AND pvpstats_battlegrounds.id = %s %s",
+    AND characters.deleteDate IS NULL 
+    %s",
                    $battleground_id,
                    $guilds_group_and_order);
 
