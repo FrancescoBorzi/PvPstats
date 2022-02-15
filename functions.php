@@ -577,7 +577,7 @@ function getBattleGrounds($day, $month, $year, $level_cond, $type_cond, $limit)
 
 function getTop100Players()
 {
-  global $db, $players_group_and_order, $armory_url, $ALLIANCE, $HORDE, $ALLIANCE_RACES, $HORDE_RACES;
+  global $db, $players_group_and_order, $armory_url, $guild_armory_url;
 
   $query = sprintf("
     SELECT
@@ -587,7 +587,8 @@ function getTop100Players()
         characters.class AS `character_class`,
         characters.race AS `character_race`,
         characters.gender AS `character_gender`,
-        characters.level as character_level,
+        characters.level AS character_level,
+        guild.guildid AS guild_id,
         guild.name AS guild_name
     FROM pvpstats_players
     INNER JOIN pvpstats_battlegrounds ON pvpstats_players.battleground_id = pvpstats_battlegrounds.id
@@ -603,39 +604,8 @@ function getTop100Players()
   if (!$result)
     die(mysqli_error($db));
 
-  $row = $result->fetch_array();
-
-  if ($row == null)
-    return;
-
-  $position = 1;
-
-  if (!(isset($armory_url)) || $armory_url == "")
-    $player_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
-                           getPlayerColorByRace($row['character_race']),
-                           $row['character_name']);
-  else
-    $player_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
-                           getPlayerColorByRace($row['character_race']),
-                           $armory_url,
-                           $row['character_name'],
-                           $row['character_name']);
-
-  // TODO: optimise query
-  printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
-         $position,
-         $player_name,
-         $row['character_class'],
-         $row['character_race'],
-         $row['character_gender'],
-         $row['character_level'],
-         $row['guild_name'],
-         getPlayerColorByRace($row['character_race']),
-      $row['guild_name'],
-         $row['count']);
-
-  $prev_score = $row['count'];
-
+  $position = 0;
+  $prev_score = -1;
 
     while (($row = $result->fetch_array()) != null)
     {
@@ -654,18 +624,35 @@ function getTop100Players()
           $row['character_name']);
       }
 
-      // TODO: optimise query
-      printf("<tr><td>%d</td><td>%s</td><td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td><td>%s</td><td><strong><a href=\"#%s\"><span style=\"color: %s\">%s</span></a></strong></td><td>%d</td></tr>",
-             $position,
-             $player_name,
-             $row['character_class'],
-             $row['character_race'],
-             $row['character_gender'],
-             $row['character_level'],
-             $row['guild_name'],
-             getPlayerColorByRace($row['character_race']),
-             $row['guild_name'],
-             $row['count']);
+      if (!(isset($guild_armory_url)) || $guild_armory_url == "") {
+        $guild_name = sprintf("<span style=\"color: %s; \"><strong>%s</strong></a>",
+          getPlayerColorByRace($row['character_race']),
+          $row['guild_name']);
+      } else {
+        $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
+          getPlayerColorByRace($row['character_race']),
+          $guild_armory_url,
+          $row['guild_id'],
+          $row['guild_name']);
+      }
+
+      printf("
+        <tr>
+            <td>%d</td>
+            <td>%s</td>
+            <td style=\"min-width: 46px; padding-left: 0; padding-right: 0;\"><img src=\"img/class/%d.gif\"> <img src=\"img/race/%d-%d.gif\"></td>
+            <td>%s</td>
+            <td>%s</td>
+            <td>%d</td>
+        </tr>",
+        $position,
+        $player_name,
+        $row['character_class'],
+        $row['character_race'],
+        $row['character_gender'],
+        $row['character_level'],
+        $guild_name,
+        $row['count']);
 
       $prev_score = $row['count'];
     }
