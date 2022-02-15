@@ -15,7 +15,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id']))
   $result = $db->query($query);
 
   if (!$result)
-    die("Error querying: " . $query);
+    die(mysqli_error($db));
   else if ($result->num_rows > 0)
   {
     $row = $result->fetch_array();
