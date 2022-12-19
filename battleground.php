@@ -408,7 +408,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id']))
                    pvpstats_players.attr_4,
                    pvpstats_players.attr_5,
                    pvpstats_players.character_guid,
-                   characters.name AS `character_name`,
+                   COALESCE(NULLIF(characters.name,''), characters.deleteInfos_Name) AS `character_name`,
                    characters.gender AS `character_gender`,
                    characters.class AS `character_class`,
                    characters.race AS `character_race`

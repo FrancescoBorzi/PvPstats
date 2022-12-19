@@ -142,7 +142,7 @@ function getPlayersScores($time_cond, $level_cond, $type_cond)
     SELECT
       character_guid,
       count(character_guid) AS `count`,
-      characters.name AS `character_name`,
+      COALESCE(NULLIF(characters.name,''), characters.deleteInfos_Name) AS `character_name`,
       characters.gender AS `character_gender`,
       characters.class AS `character_class`,
       characters.race AS `character_race`
@@ -443,7 +443,7 @@ function getTop100Players()
     SELECT
         character_guid,
         count(character_guid) AS `count`,
-        characters.name AS `character_name`,
+        COALESCE(NULLIF(characters.name,''), characters.deleteInfos_Name) AS `character_name`,
         characters.class AS `character_class`,
         characters.race AS `character_race`,
         characters.gender AS `character_gender`,
