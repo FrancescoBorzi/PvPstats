@@ -322,7 +322,7 @@ function getGuildsMembers($battleground_id)
       $guild_name = sprintf("<a style=\"color: %s; \" target=\"_blank\" href=\"%s%s\"><strong>%s</strong></a>",
         getPlayerColorByRace($row['leader_race']),
         $guild_armory_url,
-        $row[0],
+        $row[2],
         $row[0]);
     }
 
