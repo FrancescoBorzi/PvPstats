@@ -27,7 +27,7 @@ function getGuildPlayers()
     $query = sprintf("SELECT 
                         character_guid, 
                         count(character_guid) AS `count`, 
-                        COALESCE(NULLIF(characters.name,''), characters.deleteInfos_Name) AS `character_name`
+                        COALESCE(NULLIF(characters.name,''), characters.deleteInfos_Name) AS `character_name`,
                         characters.class AS `character_class`,
                         characters.race AS `character_race`,
                         characters.gender AS `character_gender`,
